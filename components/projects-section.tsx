@@ -10,23 +10,32 @@ import {
   ChevronRight,
   ArrowRight,
   FileText,
+  Maximize2,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
-const mockupImages = [
+/* All lightbox-able images: summary first, then mockups */
+const allImages = [
   {
-    src: "/images/explainable-1.jpg",
-    label: "High Confidence Suggestion (87%)",
+    src: "/images/explainable-summary.jpg",
+    label: "Project One-Pager",
+  },
+  {
+    src: "/images/explainable-3.jpg",
+    label: "Explainable Reasoning Panel",
   },
   {
     src: "/images/explainable-2.jpg",
     label: "Low Confidence Warning (42%)",
   },
   {
-    src: "/images/explainable-3.jpg",
-    label: "Explainable Reasoning Panel",
+    src: "/images/explainable-1.jpg",
+    label: "High Confidence Suggestion (87%)",
   },
 ];
+
+/* Mockup images for the modal gallery (swap: panel first, then low, then high) */
+const mockupImages = allImages.slice(1);
 
 export function ProjectsSection() {
   const [ref, isVisible] = useScrollAnimation<HTMLElement>(0.05);
@@ -39,12 +48,21 @@ export function ProjectsSection() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  /* Modal controls */
+  /* Which image array is the lightbox using? */
+  const [lightboxSource, setLightboxSource] = useState<"all" | "mockups">(
+    "all"
+  );
+  const currentImages = lightboxSource === "all" ? allImages : mockupImages;
+
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  /* Lightbox controls */
-  const openLightbox = (idx: number) => {
+  /* Lightbox: can be opened from card (summary = allImages[0]) or from modal (mockups) */
+  const openLightbox = (
+    idx: number,
+    source: "all" | "mockups" = "mockups"
+  ) => {
+    setLightboxSource(source);
     setLightboxIdx(idx);
     setLightboxOpen(true);
     setZoom(1);
@@ -55,19 +73,18 @@ export function ProjectsSection() {
     setZoom(1);
     setPosition({ x: 0, y: 0 });
   };
-  const goNext = useCallback(
-    () => setLightboxIdx((i) => (i + 1) % mockupImages.length),
-    []
-  );
-  const goPrev = useCallback(
-    () =>
-      setLightboxIdx(
-        (i) => (i - 1 + mockupImages.length) % mockupImages.length
-      ),
-    []
-  );
+  const goNext = useCallback(() => {
+    setLightboxIdx((i) => (i + 1) % currentImages.length);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentImages.length]);
+  const goPrev = useCallback(() => {
+    setLightboxIdx((i) => (i - 1 + currentImages.length) % currentImages.length);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentImages.length]);
 
-  /* Zoom/pan */
+  /* Zoom / Pan */
   const handleZoomIn = () => {
     setZoom((z) => Math.min(z + 0.5, 4));
     setPosition({ x: 0, y: 0 });
@@ -95,7 +112,7 @@ export function ProjectsSection() {
   };
   const handleMouseUp = () => setIsDragging(false);
 
-  /* Keyboard & scroll lock */
+  /* Keyboard + scroll lock */
   useEffect(() => {
     if (!modalOpen && !lightboxOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -132,45 +149,75 @@ export function ProjectsSection() {
         </div>
 
         {/* ---- PROJECT CARD (homepage) ---- */}
-        <button
-          type="button"
-          onClick={openModal}
-          className="glass-card group block w-full cursor-pointer overflow-hidden rounded-2xl text-left transition-all duration-700 delay-100 hover:scale-[1.01] hover:shadow-xl hover:shadow-primary/5"
+        <div
+          className="glass-card overflow-hidden rounded-2xl transition-all duration-700 delay-100"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(30px)",
           }}
         >
-          <div className="flex flex-col md:flex-row">
-            {/* Thumbnail */}
-            <div className="relative w-full flex-shrink-0 overflow-hidden md:w-80 lg:w-96">
+          <div className="flex flex-col lg:flex-row">
+            {/* Left: Summary image -- clicks open lightbox */}
+            <button
+              type="button"
+              onClick={() => openLightbox(0, "all")}
+              className="group relative w-full flex-shrink-0 cursor-pointer overflow-hidden lg:w-[340px] xl:w-[400px]"
+            >
               <Image
                 src="/images/explainable-summary.jpg"
-                alt="Explainable AI Coding Assistant"
+                alt="Explainable AI Coding Assistant one-pager"
                 width={600}
                 height={800}
-                className="h-56 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 md:h-full"
+                className="h-60 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 lg:h-full"
               />
-            </div>
-            {/* Card text */}
-            <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
+              {/* Fullscreen icon -- top right, small */}
+              <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                <Maximize2 className="h-3.5 w-3.5" />
+              </div>
+            </button>
+
+            {/* Right: Problem + Solution + CTA */}
+            <div className="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
               <h3 className="mb-1 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
                 Explainable AI Coding Assistant
               </h3>
-              <p className="mb-3 text-sm font-medium text-primary">
+              <p className="mb-5 text-sm font-medium text-primary">
                 Trust Through Transparency
               </p>
-              <p className="mb-6 leading-relaxed text-muted-foreground">
-                Product strategy for AI coding tools that builds developer trust
-                through calibrated confidence and explainable reasoning.
-              </p>
-              <span className="inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all group-hover:brightness-110">
+
+              {/* Problem */}
+              <div className="mb-4">
+                <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  The Problem
+                </p>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  {"Developers waste hours verifying AI suggestions because tools optimize for speed, not trust\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
+                </p>
+              </div>
+
+              {/* Solution */}
+              <div className="mb-6">
+                <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  The Solution
+                </p>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  Calibrated confidence scores + explainable reasoning.
+                  Show developers WHY a suggestion works and WHEN to be
+                  skeptical.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={openModal}
+                className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+              >
                 View Project
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+              </button>
             </div>
           </div>
-        </button>
+        </div>
       </div>
 
       {/* ---- PROJECT MODAL ---- */}
@@ -181,13 +228,11 @@ export function ProjectsSection() {
           aria-modal="true"
           aria-label="Project details"
         >
-          {/* Overlay */}
           <div
             className="absolute inset-0 bg-background/70 backdrop-blur-sm"
             onClick={closeModal}
           />
 
-          {/* Slide-in panel */}
           <div className="relative z-10 flex h-full w-full max-w-3xl flex-col overflow-y-auto bg-card shadow-2xl shadow-background/80 animate-in slide-in-from-right duration-300 md:border-l md:border-border/50">
             {/* Header */}
             <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-card/95 px-6 py-4 backdrop-blur-sm">
@@ -206,17 +251,24 @@ export function ProjectsSection() {
 
             {/* Scrollable content */}
             <div className="flex-1 px-6 py-8 md:px-10">
-              {/* Full one-pager image */}
-              <div className="mb-10 overflow-hidden rounded-xl border border-border/30">
+              {/* Summary image -- clickable to lightbox */}
+              <button
+                type="button"
+                onClick={() => openLightbox(0, "all")}
+                className="group relative mb-10 block w-full overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/30"
+              >
                 <Image
                   src="/images/explainable-summary.jpg"
                   alt="Explainable AI Coding Assistant one-pager"
                   width={1200}
                   height={1600}
-                  className="w-full"
+                  className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                   priority
                 />
-              </div>
+                <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                  <Maximize2 className="h-3.5 w-3.5" />
+                </div>
+              </button>
 
               {/* THE PROBLEM */}
               <div className="mb-8">
@@ -224,9 +276,7 @@ export function ProjectsSection() {
                   The Problem
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {
-                    "Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review\u2014creating a \u201Ctrust tax\u201D that blocks adoption."
-                  }
+                  {"Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
                 </p>
               </div>
 
@@ -236,9 +286,7 @@ export function ProjectsSection() {
                   The Solution
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {
-                    "Calibrated confidence scores + explainable reasoning = reduced verification overhead. Instead of hiding uncertainty, surface it. Show developers WHY a suggestion makes sense and WHEN to be skeptical."
-                  }
+                  {"Calibrated confidence scores + explainable reasoning = reduced verification overhead. Instead of hiding uncertainty, surface it. Show developers WHY a suggestion makes sense and WHEN to be skeptical."}
                 </p>
               </div>
 
@@ -248,9 +296,7 @@ export function ProjectsSection() {
                   Key Insight
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {
-                    "Trust isn\u2019t about being right more often\u2014it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones."
-                  }
+                  {"Trust isn\u2019t about being right more often\u2014it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones."}
                 </p>
               </div>
 
@@ -263,8 +309,7 @@ export function ProjectsSection() {
                   <li className="flex gap-3">
                     <span className="mt-1.5 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
                     <span className="leading-relaxed">
-                      Explicit confidence calibration (not just autocomplete
-                      speed)
+                      Explicit confidence calibration (not just autocomplete speed)
                     </span>
                   </li>
                   <li className="flex gap-3">
@@ -288,21 +333,22 @@ export function ProjectsSection() {
                   Prototype Mockups
                 </h3>
 
-                {/* Main display */}
+                {/* Main display -- clicking anywhere opens lightbox */}
                 <button
                   type="button"
-                  onClick={() => openLightbox(activeThumb)}
-                  className="group relative mb-4 block w-full overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/40"
+                  onClick={() => openLightbox(activeThumb, "mockups")}
+                  className="group relative mb-4 block w-full cursor-pointer overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/40"
                 >
                   <Image
                     src={mockupImages[activeThumb].src}
                     alt={mockupImages[activeThumb].label}
                     width={1200}
                     height={800}
-                    className="w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/0 transition-colors group-hover:bg-background/20">
-                    <ZoomIn className="h-8 w-8 text-foreground opacity-0 transition-opacity group-hover:opacity-80" />
+                  {/* Small fullscreen icon -- top right only */}
+                  <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                    <Maximize2 className="h-3.5 w-3.5" />
                   </div>
                 </button>
 
@@ -357,7 +403,7 @@ export function ProjectsSection() {
         </div>
       )}
 
-      {/* ---- LIGHTBOX (over modal) ---- */}
+      {/* ---- LIGHTBOX (over everything) ---- */}
       {lightboxOpen && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-lg"
@@ -380,10 +426,7 @@ export function ProjectsSection() {
           <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleZoomOut();
-              }}
+              onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
               aria-label="Zoom out"
             >
@@ -394,10 +437,7 @@ export function ProjectsSection() {
             </span>
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleZoomIn();
-              }}
+              onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
               aria-label="Zoom in"
             >
@@ -405,59 +445,55 @@ export function ProjectsSection() {
             </button>
           </div>
 
-          {/* Prev / Next arrows */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-              setZoom(1);
-              setPosition({ x: 0, y: 0 });
-            }}
-            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-              setZoom(1);
-              setPosition({ x: 0, y: 0 });
-            }}
-            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-            aria-label="Next image"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
+          {/* Prev / Next */}
+          {currentImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </>
+          )}
 
-          {/* Image caption & dots */}
+          {/* Caption & dots */}
           <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3">
             <p className="rounded-full bg-secondary/80 px-4 py-1.5 text-xs font-medium text-foreground">
-              {mockupImages[lightboxIdx].label}
+              {currentImages[lightboxIdx]?.label}
             </p>
-            <div className="flex gap-2">
-              {mockupImages.map((_, i) => (
-                <button
-                  key={`dot-${mockupImages[i].src}`}
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setLightboxIdx(i);
-                    setZoom(1);
-                    setPosition({ x: 0, y: 0 });
-                  }}
-                  className={`h-2 w-2 rounded-full transition-all ${
-                    lightboxIdx === i
-                      ? "scale-125 bg-primary"
-                      : "bg-muted-foreground/40 hover:bg-muted-foreground"
-                  }`}
-                  aria-label={`Go to image ${i + 1}`}
-                />
-              ))}
-            </div>
+            {currentImages.length > 1 && (
+              <div className="flex gap-2">
+                {currentImages.map((_, i) => (
+                  <button
+                    key={`dot-${currentImages[i].src}`}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIdx(i);
+                      setZoom(1);
+                      setPosition({ x: 0, y: 0 });
+                    }}
+                    className={`h-2 w-2 rounded-full transition-all ${
+                      lightboxIdx === i
+                        ? "scale-125 bg-primary"
+                        : "bg-muted-foreground/40 hover:bg-muted-foreground"
+                    }`}
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Zoomable image */}
@@ -469,8 +505,7 @@ export function ProjectsSection() {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             style={{
-              cursor:
-                zoom > 1 ? (isDragging ? "grabbing" : "grab") : "default",
+              cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "default",
             }}
           >
             <div
@@ -480,8 +515,8 @@ export function ProjectsSection() {
               }}
             >
               <Image
-                src={mockupImages[lightboxIdx].src}
-                alt={mockupImages[lightboxIdx].label}
+                src={currentImages[lightboxIdx]?.src ?? "/placeholder.jpg"}
+                alt={currentImages[lightboxIdx]?.label ?? ""}
                 width={1400}
                 height={900}
                 className="max-h-[85vh] w-auto rounded-lg object-contain"
