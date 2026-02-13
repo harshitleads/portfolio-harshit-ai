@@ -127,7 +127,12 @@ export function ProjectsSection() {
           <div className="relative">
             <button
               type="button"
-              onClick={() => openLightbox(activeThumb)}
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/Explainable_Coding_Assistant.pdf";
+                link.download = "Explainable_Coding_Assistant.pdf";
+                link.click();
+              }}
               className="group relative block w-full cursor-pointer overflow-hidden"
             >
               <div className="relative aspect-[16/9] w-full">
@@ -214,7 +219,7 @@ export function ProjectsSection() {
             {/* Action buttons */}
             <div className="mb-8 flex flex-wrap gap-3">
               <a
-                href="/Explainable_Coding_Assistant_Analysis.pdf"
+                href="/Explainable_Coding_Assistant.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
@@ -226,8 +231,8 @@ export function ProjectsSection() {
                 type="button"
                 onClick={() => {
                   const link = document.createElement("a");
-                  link.href = "/Explainable_Coding_Assistant_Analysis.pdf";
-                  link.download = "Explainable_Coding_Assistant_Analysis.pdf";
+                  link.href = "/Explainable_Coding_Assistant.pdf";
+                  link.download = "Explainable_Coding_Assistant.pdf";
                   link.click();
                 }}
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-transparent px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
