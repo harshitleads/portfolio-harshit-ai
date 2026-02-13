@@ -17,7 +17,7 @@ const highlights = [
   {
     icon: Cpu,
     title: "Frontier AI Focus",
-    desc: "Targeting OpenAI, Anthropic & leading AI startups",
+    desc: "Building products at leading AI companies",
   },
 ];
 
@@ -62,10 +62,7 @@ export function AboutSection() {
               <p>
                 {"Currently completing my "}
                 <span className="font-medium text-foreground">MEng at UC Berkeley (IEOR)</span>
-                {", I'm targeting PM roles at frontier AI companies like "}
-                <span className="text-primary">OpenAI</span>{", "}
-                <span className="text-primary">Anthropic</span>
-                {", and leading AI startups."}
+                {", I'm targeting PM roles at frontier AI companies."}
               </p>
               <p>
                 {"I bring "}
