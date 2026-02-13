@@ -44,7 +44,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="/Explainable_Coding_Assistant.pdf"
+            href="/Resume_Harshit_Sharma.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
