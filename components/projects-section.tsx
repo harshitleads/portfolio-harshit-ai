@@ -3,89 +3,125 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
-  ArrowUpRight,
-  FileText,
+  X,
+  ZoomIn,
+  ZoomOut,
   ChevronLeft,
   ChevronRight,
-  X,
-  Expand,
-  Download,
+  ArrowRight,
+  FileText,
+  Maximize2,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
-const galleryImages = [
+/* All lightbox-able images: summary first, then mockups */
+const allImages = [
   {
     src: "/images/explainable-summary.jpg",
-    label: "Project Overview",
-    alt: "Explainable AI Coding Assistant one-pager summary",
+    label: "Project One-Pager",
   },
   {
     src: "/images/explainable-3.jpg",
-    label: "87% High Confidence",
-    alt: "High confidence inline suggestion in the code editor",
-  },
-  {
-    src: "/images/explainable-4.jpg",
-    label: "AI Reasoning Panel",
-    alt: "AI Reasoning side panel showing confidence score and explanations",
+    label: "Explainable Reasoning Panel",
   },
   {
     src: "/images/explainable-2.jpg",
-    label: "42% Low Confidence",
-    alt: "Low confidence suggestion with warning indicators",
+    label: "Low Confidence Warning (42%)",
+  },
+  {
+    src: "/images/explainable-1.jpg",
+    label: "High Confidence Suggestion (87%)",
   },
 ];
 
-const tags = [
-  "AI/ML",
-  "Developer Tools",
-  "Explainability",
-  "Trust Systems",
-  "UX Research",
-];
-
-const insights = [
-  {
-    title: "Calibrated Confidence",
-    desc: "Reduces blind trust and speeds adoption",
-  },
-  {
-    title: "Codebase Intelligence",
-    desc: "Beyond naive RAG for repo-specific reasoning",
-  },
-  {
-    title: "Legible Correctness",
-    desc: "Visible during coding, not just in post-review",
-  },
-];
+/* Mockup images for the modal gallery (swap: panel first, then low, then high) */
+const mockupImages = allImages.slice(1);
 
 export function ProjectsSection() {
   const [ref, isVisible] = useScrollAnimation<HTMLElement>(0.05);
-  const [activeThumb, setActiveThumb] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxIdx, setLightboxIdx] = useState(0);
+  const [activeThumb, setActiveThumb] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index);
+  /* Which image array is the lightbox using? */
+  const [lightboxSource, setLightboxSource] = useState<"all" | "mockups">(
+    "all"
+  );
+  const currentImages = lightboxSource === "all" ? allImages : mockupImages;
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  /* Lightbox: can be opened from card (summary = allImages[0]) or from modal (mockups) */
+  const openLightbox = (
+    idx: number,
+    source: "all" | "mockups" = "mockups"
+  ) => {
+    setLightboxSource(source);
+    setLightboxIdx(idx);
     setLightboxOpen(true);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
   };
-
-  const closeLightbox = () => setLightboxOpen(false);
-
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
   const goNext = useCallback(() => {
-    setLightboxIndex((i) => (i + 1) % galleryImages.length);
-  }, []);
-
+    setLightboxIdx((i) => (i + 1) % currentImages.length);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentImages.length]);
   const goPrev = useCallback(() => {
-    setLightboxIndex((i) => (i - 1 + galleryImages.length) % galleryImages.length);
-  }, []);
+    setLightboxIdx((i) => (i - 1 + currentImages.length) % currentImages.length);
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentImages.length]);
 
+  /* Zoom / Pan */
+  const handleZoomIn = () => {
+    setZoom((z) => Math.min(z + 0.5, 4));
+    setPosition({ x: 0, y: 0 });
+  };
+  const handleZoomOut = () => {
+    setZoom((z) => {
+      const next = Math.max(z - 0.5, 0.5);
+      if (next <= 1) setPosition({ x: 0, y: 0 });
+      return next;
+    });
+  };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    }
+  };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y,
+      });
+    }
+  };
+  const handleMouseUp = () => setIsDragging(false);
+
+  /* Keyboard + scroll lock */
   useEffect(() => {
-    if (!lightboxOpen) return;
+    if (!modalOpen && !lightboxOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") goNext();
-      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "Escape") {
+        if (lightboxOpen) closeLightbox();
+        else closeModal();
+      }
+      if (lightboxOpen && e.key === "ArrowRight") goNext();
+      if (lightboxOpen && e.key === "ArrowLeft") goPrev();
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -93,14 +129,7 @@ export function ProjectsSection() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [lightboxOpen, goNext, goPrev]);
-
-  const handleSummaryClick = () => {
-    const link = document.createElement("a");
-    link.href = "/Explainable_Coding_Assistant.pdf";
-    link.download = "Explainable_Coding_Assistant.pdf";
-    link.click();
-  };
+  }, [modalOpen, lightboxOpen, goNext, goPrev]);
 
   return (
     <section id="projects" ref={ref} className="relative px-6 py-20 md:py-24">
@@ -117,12 +146,9 @@ export function ProjectsSection() {
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
             Selected Work
           </p>
-          <h2 className="mb-10 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Explainable AI Coding Assistant
-          </h2>
         </div>
 
-        {/* Main project card */}
+        {/* ---- PROJECT CARD (homepage) ---- */}
         <div
           className="glass-card overflow-hidden rounded-2xl transition-all duration-700 delay-100"
           style={{
@@ -130,140 +156,258 @@ export function ProjectsSection() {
             transform: isVisible ? "translateY(0)" : "translateY(30px)",
           }}
         >
-          {/* Featured preview image */}
-          <div className="relative">
+          <div className="flex flex-col lg:flex-row">
+            {/* Left: Summary image -- clicks open lightbox */}
             <button
               type="button"
-              onClick={() => openLightbox(activeThumb)}
-              className="group relative block w-full cursor-pointer overflow-hidden"
+              onClick={() => openLightbox(0, "all")}
+              className="group relative w-full flex-shrink-0 cursor-pointer overflow-hidden lg:w-[340px] xl:w-[400px]"
             >
-              <div className="relative aspect-[16/9] w-full">
-                <Image
-                  src={galleryImages[activeThumb].src || "/placeholder.svg"}
-                  alt={galleryImages[activeThumb].alt}
-                  fill
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 100vw, 1200px"
-                  priority={activeThumb === 0}
-                />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center bg-background/0 transition-colors group-hover:bg-background/30">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-background/80 opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-                  <Expand className="h-5 w-5 text-foreground" />
-                </div>
+              <Image
+                src="/images/explainable-summary.jpg"
+                alt="Explainable AI Coding Assistant one-pager"
+                width={600}
+                height={800}
+                className="h-60 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 lg:h-full"
+              />
+              {/* Fullscreen icon -- top right, small */}
+              <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                <Maximize2 className="h-3.5 w-3.5" />
               </div>
             </button>
-          </div>
 
-          {/* Thumbnail strip */}
-          <div className="flex gap-2 overflow-x-auto border-t border-border/50 bg-background/30 p-3">
-            {galleryImages.map((img, i) => (
+            {/* Right: Problem + Solution + CTA */}
+            <div className="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
+              <h3 className="mb-1 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                Explainable AI Coding Assistant
+              </h3>
+              <p className="mb-5 text-sm font-medium text-primary">
+                Trust Through Transparency
+              </p>
+
+              {/* Problem */}
+              <div className="mb-4">
+                <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  The Problem
+                </p>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  {"Developers waste hours verifying AI suggestions because tools optimize for speed, not trust\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
+                </p>
+              </div>
+
+              {/* Solution */}
+              <div className="mb-6">
+                <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  The Solution
+                </p>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  Calibrated confidence scores + explainable reasoning.
+                  Show developers WHY a suggestion works and WHEN to be
+                  skeptical.
+                </p>
+              </div>
+
               <button
                 type="button"
-                key={img.src}
-                onClick={() => setActiveThumb(i)}
-                className={`group relative flex-shrink-0 overflow-hidden rounded-lg transition-all ${
-                  activeThumb === i
-                    ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
-                    : "opacity-60 hover:opacity-100"
-                }`}
+                onClick={openModal}
+                className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
               >
-                <div className="relative h-16 w-24 md:h-20 md:w-32">
-                  <Image
-                    src={img.src || "/placeholder.svg"}
-                    alt={img.alt}
-                    fill
-                    className="object-cover object-top"
-                    sizes="128px"
-                  />
-                </div>
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/80 to-transparent px-1.5 pb-1 pt-4">
-                  <span className="text-[10px] font-medium leading-tight text-foreground">
-                    {img.label}
-                  </span>
-                </div>
+                View Project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
               </button>
-            ))}
-          </div>
-
-          {/* Content area */}
-          <div className="p-6 md:p-8">
-            {/* Tags */}
-            <div className="mb-4 flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border/50 bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Description */}
-            <p className="mb-4 text-base leading-relaxed text-muted-foreground">
-              An AI-powered code completion tool featuring calibrated confidence
-              scores and explainable reasoning. Tackles the critical &ldquo;trust
-              tax&rdquo; in AI coding assistants by showing developers{" "}
-              <span className="text-foreground">why</span> a suggestion was made
-              and <span className="text-foreground">how confident</span> the
-              model is, reducing blind acceptance and manual verification overhead.
-            </p>
-
-            <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-              The $3B+ AI coding assistant market faces a core adoption barrier:
-              developers don&apos;t trust AI-generated code. This prototype solves
-              that with a confidence-calibrated system that surfaces reasoning
-              inline, letting developers make informed accept/reject decisions at
-              a glance.
-            </p>
-
-            {/* Action buttons */}
-            <div className="mb-8 flex flex-wrap gap-3">
-              <a
-                href="/Explainable_Coding_Assistant.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-              >
-                <FileText className="h-4 w-4" />
-                View Full Analysis
-              </a>
-              <button
-                type="button"
-                onClick={handleSummaryClick}
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-transparent px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-              >
-                <Download className="h-4 w-4" />
-                Download PDF
-              </button>
-            </div>
-
-            {/* Key Insights */}
-            <div className="grid gap-4 md:grid-cols-3">
-              {insights.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-xl border border-border/30 bg-secondary/30 p-4"
-                >
-                  <div className="mb-1 flex items-center gap-2">
-                    <ArrowUpRight className="h-3.5 w-3.5 text-primary" />
-                    <h4 className="text-sm font-semibold text-foreground">{item.title}</h4>
-                  </div>
-                  <p className="text-xs leading-relaxed text-muted-foreground">{item.desc}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Lightbox modal */}
+      {/* ---- PROJECT MODAL ---- */}
+      {modalOpen && (
+        <div
+          className="fixed inset-0 z-[80] flex justify-end overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Project details"
+        >
+          <div
+            className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          <div className="relative z-10 flex h-full w-full max-w-3xl flex-col overflow-y-auto bg-card shadow-2xl shadow-background/80 animate-in slide-in-from-right duration-300 md:border-l md:border-border/50">
+            {/* Header */}
+            <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-card/95 px-6 py-4 backdrop-blur-sm">
+              <h2 className="text-lg font-bold text-foreground">
+                Explainable AI Coding Assistant
+              </h2>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-secondary"
+                aria-label="Close modal"
+              >
+                <X className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </div>
+
+            {/* Scrollable content */}
+            <div className="flex-1 px-6 py-8 md:px-10">
+              {/* Summary image -- clickable to lightbox */}
+              <button
+                type="button"
+                onClick={() => openLightbox(0, "all")}
+                className="group relative mb-10 block w-full overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/30"
+              >
+                <Image
+                  src="/images/explainable-summary.jpg"
+                  alt="Explainable AI Coding Assistant one-pager"
+                  width={1200}
+                  height={1600}
+                  className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                  priority
+                />
+                <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                  <Maximize2 className="h-3.5 w-3.5" />
+                </div>
+              </button>
+
+              {/* THE PROBLEM */}
+              <div className="mb-8">
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                  The Problem
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  {"Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
+                </p>
+              </div>
+
+              {/* THE SOLUTION */}
+              <div className="mb-8">
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                  The Solution
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  {"Calibrated confidence scores + explainable reasoning = reduced verification overhead. Instead of hiding uncertainty, surface it. Show developers WHY a suggestion makes sense and WHEN to be skeptical."}
+                </p>
+              </div>
+
+              {/* KEY INSIGHT */}
+              <div className="mb-8">
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                  Key Insight
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  {"Trust isn\u2019t about being right more often\u2014it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones."}
+                </p>
+              </div>
+
+              {/* DIFFERENTIATION */}
+              <div className="mb-10">
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+                  Differentiation
+                </h3>
+                <ul className="space-y-2.5 text-muted-foreground">
+                  <li className="flex gap-3">
+                    <span className="mt-1.5 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    <span className="leading-relaxed">
+                      Explicit confidence calibration (not just autocomplete speed)
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1.5 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    <span className="leading-relaxed">
+                      Codebase-aware reasoning (beyond generic RAG)
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1.5 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    <span className="leading-relaxed">
+                      Legible correctness during development (not post-review)
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* ---- MOCKUP GALLERY ---- */}
+              <div className="mb-10">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
+                  Prototype Mockups
+                </h3>
+
+                {/* Main display -- clicking anywhere opens lightbox */}
+                <button
+                  type="button"
+                  onClick={() => openLightbox(activeThumb, "mockups")}
+                  className="group relative mb-4 block w-full cursor-pointer overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/40"
+                >
+                  <Image
+                    src={mockupImages[activeThumb].src}
+                    alt={mockupImages[activeThumb].label}
+                    width={1200}
+                    height={800}
+                    className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                  />
+                  {/* Small fullscreen icon -- top right only */}
+                  <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                    <Maximize2 className="h-3.5 w-3.5" />
+                  </div>
+                </button>
+
+                {/* Thumbnails row */}
+                <div className="grid grid-cols-3 gap-3">
+                  {mockupImages.map((img, i) => (
+                    <button
+                      key={img.src}
+                      type="button"
+                      onClick={() => setActiveThumb(i)}
+                      className={`group overflow-hidden rounded-lg border-2 transition-all ${
+                        activeThumb === i
+                          ? "border-primary shadow-lg shadow-primary/10"
+                          : "border-border/30 hover:border-muted-foreground/40"
+                      }`}
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.label}
+                        width={400}
+                        height={260}
+                        className="w-full"
+                      />
+                      <p
+                        className={`px-2 py-1.5 text-center text-[10px] font-medium leading-tight md:text-xs ${
+                          activeThumb === i
+                            ? "text-primary"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {img.label}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* View Full Analysis */}
+              <div className="flex justify-center">
+                <a
+                  href="/Explainable_Coding_Assistant.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Full Analysis
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---- LIGHTBOX (over everything) ---- */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-lg"
           onClick={closeLightbox}
-          onKeyDown={(e) => e.key === "Escape" && closeLightbox()}
           role="dialog"
           aria-modal="true"
           aria-label="Image lightbox"
@@ -278,62 +422,107 @@ export function ProjectsSection() {
             <X className="h-5 w-5" />
           </button>
 
-          {/* Prev */}
-          <button
-            type="button"
-            onClick={(e) => { e.stopPropagation(); goPrev(); }}
-            className="absolute left-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-
-          {/* Image */}
-          <div
-            className="relative mx-16 max-h-[85vh] max-w-[90vw]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={galleryImages[lightboxIndex].src || "/placeholder.svg"}
-              alt={galleryImages[lightboxIndex].alt}
-              width={1400}
-              height={900}
-              className="max-h-[85vh] w-auto rounded-lg object-contain"
-              sizes="90vw"
-            />
-            <div className="mt-3 text-center">
-              <p className="text-sm font-medium text-foreground">
-                {galleryImages[lightboxIndex].label}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {lightboxIndex + 1} / {galleryImages.length}
-              </p>
-            </div>
+          {/* Zoom controls */}
+          <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+              aria-label="Zoom out"
+            >
+              <ZoomOut className="h-5 w-5" />
+            </button>
+            <span className="rounded-full bg-secondary/80 px-3 py-1.5 text-xs font-medium text-foreground">
+              {Math.round(zoom * 100)}%
+            </span>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+              aria-label="Zoom in"
+            >
+              <ZoomIn className="h-5 w-5" />
+            </button>
           </div>
 
-          {/* Next */}
-          <button
-            type="button"
-            onClick={(e) => { e.stopPropagation(); goNext(); }}
-            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-            aria-label="Next image"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-
-          {/* Dots */}
-          <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
-            {galleryImages.map((_, i) => (
+          {/* Prev / Next */}
+          {currentImages.length > 1 && (
+            <>
               <button
                 type="button"
-                key={`dot-${galleryImages[i].src}`}
-                onClick={(e) => { e.stopPropagation(); setLightboxIndex(i); }}
-                className={`h-2 w-2 rounded-full transition-all ${
-                  i === lightboxIndex ? "bg-primary w-6" : "bg-muted-foreground/40"
-                }`}
-                aria-label={`Go to image ${i + 1}`}
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </>
+          )}
+
+          {/* Caption & dots */}
+          <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3">
+            <p className="rounded-full bg-secondary/80 px-4 py-1.5 text-xs font-medium text-foreground">
+              {currentImages[lightboxIdx]?.label}
+            </p>
+            {currentImages.length > 1 && (
+              <div className="flex gap-2">
+                {currentImages.map((_, i) => (
+                  <button
+                    key={`dot-${currentImages[i].src}`}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightboxIdx(i);
+                      setZoom(1);
+                      setPosition({ x: 0, y: 0 });
+                    }}
+                    className={`h-2 w-2 rounded-full transition-all ${
+                      lightboxIdx === i
+                        ? "scale-125 bg-primary"
+                        : "bg-muted-foreground/40 hover:bg-muted-foreground"
+                    }`}
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Zoomable image */}
+          <div
+            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            style={{
+              cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "default",
+            }}
+          >
+            <div
+              style={{
+                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                transition: isDragging ? "none" : "transform 0.2s ease-out",
+              }}
+            >
+              <Image
+                src={currentImages[lightboxIdx]?.src ?? "/placeholder.jpg"}
+                alt={currentImages[lightboxIdx]?.label ?? ""}
+                width={1400}
+                height={900}
+                className="max-h-[85vh] w-auto rounded-lg object-contain"
+                draggable={false}
               />
-            ))}
+            </div>
           </div>
         </div>
       )}
