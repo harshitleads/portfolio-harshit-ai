@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 222 60% 7%;
+    --foreground: 210 40% 92%;
+    --card: 222 45% 10%;
+    --card-foreground: 210 40% 92%;
+    --popover: 222 45% 10%;
+    --popover-foreground: 210 40% 92%;
+    --primary: 160 70% 50%;
+    --primary-foreground: 222 60% 7%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 30% 80%;
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 200 80% 55%;
+    --accent-foreground: 222 60% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 30% 18%;
+    --input: 220 30% 18%;
+    --ring: 160 70% 50%;
+    --chart-1: 160 70% 50%;
+    --chart-2: 200 80% 55%;
+    --chart-3: 222 45% 30%;
+    --chart-4: 180 60% 45%;
+    --chart-5: 140 50% 40%;
+    --radius: 0.75rem;
+    --sidebar-background: 222 50% 8%;
+    --sidebar-foreground: 210 40% 92%;
+    --sidebar-primary: 160 70% 50%;
+    --sidebar-primary-foreground: 222 60% 7%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 92%;
+    --sidebar-border: 220 30% 18%;
+    --sidebar-ring: 160 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(222 60% 7%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(220 30% 18%);
+  border-radius: 3px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-card {
+  background: linear-gradient(135deg, hsla(222,45%,12%,0.7), hsla(222,45%,8%,0.5));
+  backdrop-filter: blur(20px);
+  border: 1px solid hsla(220,30%,25%,0.4);
+  transition: border-color 0.3s, background 0.3s;
+}
+.glass-card:hover {
+  border-color: hsla(160,70%,50%,0.3);
+  background: linear-gradient(135deg, hsla(222,45%,14%,0.8), hsla(222,45%,10%,0.6));
+}
