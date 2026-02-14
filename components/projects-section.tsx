@@ -25,7 +25,7 @@ const allImages = [
     label: "Explainable Reasoning Panel",
   },
   {
-    src: "/images/explainable-4.jpg",
+    src: "/images/explainable-4.jpeg",
     label: "Low Confidence Warning (42%)",
   },
   {
