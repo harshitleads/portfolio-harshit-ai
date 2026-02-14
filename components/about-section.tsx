@@ -96,7 +96,7 @@ export function AboutSection() {
               <p>
                 {"Now at "}
                 <span className="font-medium text-foreground">Berkeley (MEng, IEOR)</span>
-                {", I\u2019m combining both backgrounds\u2014technical depth in ML/deep learning/RL, plus hands-on experience with AI evals productization\u2014to transition into AI Product Management."}
+                {", I\u2019m combining both backgrounds, technical depth in ML/deep learning/RL, plus hands-on experience with AI evals productization, to transition into AI Product Management."}
               </p>
               <p>
                 {"I\u2019m a daily AI power user: I code with Claude, build agents for automation, and live in the products I want to help build."}
@@ -177,27 +177,27 @@ export function AboutSection() {
 
             <div className="space-y-5 text-base leading-[1.7] text-muted-foreground md:text-lg">
               <p>
-                {"I started my career in electrical engineering, designing power systems where a design flaw doesn\u2019t just crash an app\u2014it causes fires, explosions, and casualties."}
+                {"I started my career in electrical engineering, designing power systems where a design flaw doesn\u2019t just crash an app, it causes fires, explosions, and casualties."}
               </p>
               <p>
                 {"Early in my time at GE Vernova, I worked as a system engineer on power electronics and critical infrastructure. When you\u2019re designing equipment that sits in hospitals, data centers, and industrial facilities, you learn to think through failure modes obsessively. What breaks? When does it fail silently? How will users misuse it? What are the second-order effects?"}
               </p>
               <p>
-                {"I then transitioned into building B2B SaaS products at GE\u2014PLM systems, data operations platforms, and revenue enablement tools supporting a $150M+ sales pipeline. I learned how to ship complex enterprise software at scale, manage stakeholders across global engineering teams, and drive adoption in risk-averse organizations."}
+                {"I then transitioned into building B2B SaaS products at GE: PLM systems, data operations platforms, and revenue enablement tools supporting a $150M+ sales pipeline. I learned how to ship complex enterprise software at scale, manage stakeholders across global engineering teams, and drive adoption in risk-averse organizations."}
               </p>
               <p>
-                {"That combination\u2014safety-critical thinking from electrical engineering plus enterprise software experience\u2014gives me a "}
+                {"This combination, safety-critical thinking from electrical engineering plus enterprise software experience, gives me a "}
                 <span className="font-medium text-foreground">unique lens on AI products</span>
                 {". AI systems fail in unpredictable ways. They hallucinate confidently. They work in demos but break in production. Users trust them blindly until something goes catastrophically wrong. The companies that win will be the ones who design for failure modes from day one."}
               </p>
               <p>
-                {"At Berkeley (MEng), I\u2019m building technical depth in ML, deep learning, and reinforcement learning. My capstone on productizing AI evals is teaching me how frontier models are calibrated for commercial deployment. I\u2019m not trying to become a research scientist\u2014I\u2019m learning the technical foundations to make better product decisions."}
+                {"At Berkeley (MEng), I\u2019m building technical depth in ML, deep learning, and reinforcement learning. My capstone on productizing AI evals is teaching me how frontier models are calibrated for commercial deployment. I\u2019m not trying to become a research scientist; I\u2019m learning the technical foundations to make better product decisions."}
               </p>
               <p>
-                {"I\u2019m also a power user. I use AI to code, build agents for workflow automation, and 10x my productivity daily. I don\u2019t just theorize about AI adoption\u2014I live it."}
+                {"I\u2019m also a power user. I use AI to code, build agents for workflow automation, and 10x my productivity daily. I don\u2019t just theorize about AI adoption; I live it."}
               </p>
               <p>
-                {"Here\u2019s my perspective on where AI products are headed: many teams focus primarily on capabilities\u2014bigger context windows, faster inference, more complex reasoning. Those advances matter. But I believe if multi-agent coordination is a path to AGI, the next critical step is equally important: "}
+                {"Here\u2019s my perspective on where AI products are headed: many teams focus primarily on capabilities, viz. bigger context windows, faster inference, more complex reasoning. Those advances matter. But I believe if multi-agent coordination is a path to AGI, the next critical step is equally important: "}
                 <span className="font-medium text-primary">building agents that fail predictably and gracefully</span>
                 {"."}
               </p>
@@ -207,10 +207,10 @@ export function AboutSection() {
               <p>
                 {"This is where "}
                 <span className="font-medium text-foreground">evals stop being a testing function and become core product strategy</span>
-                {". Calibrated confidence, failure mode mapping, graceful degradation\u2014these aren\u2019t nice-to-haves. They\u2019re what separates demos from products people actually deploy at scale."}
+                {". Calibrated confidence, failure mode mapping, graceful degradation; these aren\u2019t nice-to-haves. They\u2019re what separates demos from products people actually deploy at scale."}
               </p>
               <p>
-                {"I\u2019m not positioning myself as an evals specialist or AI test engineer. I understand the full scope of AI product development\u2014from model capabilities to UX to go-to-market. But I know that commercial-scale AI products live or die on their reliability architecture, and that\u2019s where my background gives me an edge most PMs don\u2019t have."}
+                {"I\u2019m not positioning myself as an evals specialist or AI test engineer. I understand the full scope of AI product development, from model capabilities to UX to go-to-market. But I know that commercial-scale AI products live or die on their reliability architecture, and that\u2019s where my background gives me an edge most PMs don\u2019t have."}
               </p>
               <p className="font-medium text-foreground">
                 {"What I bring: safety-critical thinking from electrical engineering, B2B SaaS shipping experience, obsessive attention to failure modes, hands-on AI expertise, and five years of building complex products at scale."}
