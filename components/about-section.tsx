@@ -210,7 +210,7 @@ export function AboutSection() {
                 {". Calibrated confidence, failure mode mapping, graceful degradation; these aren\u2019t nice-to-haves. They\u2019re what separates demos from products people actually deploy at scale."}
               </p>
                 <p>
-                  {"This is where I see the opportunity: most PMs treat evals as a testing function. I see them as core product strategy. The companies building reliable AI at scale\u2014the ones that will actually ship AGI\u2014need PMs who think about failure modes as early as they think about features."}
+                  {"This is where I see the opportunity: most PMs treat evals as a testing function. I see them as core product strategy. The companies building reliable AI at scale, the ones that will actually ship AGI, need PMs who think about failure modes as early as they think about features."}
                 </p>
                 <p className="font-medium text-foreground">
                   {"What I bring to AI product development: Systems thinking from safety-critical infrastructure, enterprise SaaS experience, obsessive failure-mode analysis, hands-on expertise with frontier models, and a track record of shipping complex products at scale."}
