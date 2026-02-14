@@ -359,11 +359,10 @@ export function ProjectsSection() {
                       key={img.src}
                       type="button"
                       onClick={() => setActiveThumb(i)}
-                      className={`group overflow-hidden rounded-lg border-2 transition-all ${
-                        activeThumb === i
+                      className={`group overflow-hidden rounded-lg border-2 transition-all ${activeThumb === i
                           ? "border-primary shadow-lg shadow-primary/10"
                           : "border-border/30 hover:border-muted-foreground/40"
-                      }`}
+                        }`}
                     >
                       <Image
                         src={img.src}
@@ -373,11 +372,10 @@ export function ProjectsSection() {
                         className="w-full"
                       />
                       <p
-                        className={`px-2 py-1.5 text-center text-[10px] font-medium leading-tight md:text-xs ${
-                          activeThumb === i
+                        className={`px-2 py-1.5 text-center text-[10px] font-medium leading-tight md:text-xs ${activeThumb === i
                             ? "text-primary"
                             : "text-muted-foreground"
-                        }`}
+                          }`}
                       >
                         {img.label}
                       </p>
@@ -469,11 +467,10 @@ export function ProjectsSection() {
                         setZoom(1);
                         setPosition({ x: 0, y: 0 });
                       }}
-                      className={`h-2 w-2 rounded-full transition-all ${
-                        lightboxIdx === i
+                      className={`h-2 w-2 rounded-full transition-all ${lightboxIdx === i
                           ? "scale-125 bg-primary"
                           : "bg-white/30 hover:bg-white/60"
-                      }`}
+                        }`}
                       aria-label={`Go to image ${i + 1}`}
                     />
                   ))}
