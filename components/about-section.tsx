@@ -95,7 +95,7 @@ export function AboutSection() {
               </p>
               <p>
                 {"Now at "}
-                <span className="font-medium text-foreground">Berkeley (MEng, IEOR)</span>
+                <span className="font-medium text-foreground">Berkeley (M. Eng.)</span>
                 {", I\u2019m combining both backgrounds, technical depth in ML/deep learning/RL, plus hands-on experience with AI evals productization, to transition into AI Product Management."}
               </p>
               <p>
