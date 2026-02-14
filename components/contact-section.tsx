@@ -71,7 +71,7 @@ export function ContactSection() {
                 <item.icon className="h-5 w-5 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-base font-semibold text-foreground">
+                <p className="text-xs font-semibold tracking-wider text-muted-foreground">
                   {item.label}
                 </p>
                 <p className="truncate text-sm font-medium text-foreground">{item.value}</p>
