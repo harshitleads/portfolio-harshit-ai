@@ -209,12 +209,12 @@ export function AboutSection() {
                 <span className="font-medium text-foreground">evals stop being a testing function and become core product strategy</span>
                 {". Calibrated confidence, failure mode mapping, graceful degradation; these aren\u2019t nice-to-haves. They\u2019re what separates demos from products people actually deploy at scale."}
               </p>
-              <p>
-                {"I\u2019m not positioning myself as an evals specialist or AI test engineer. I understand the full scope of AI product development, from model capabilities to UX to go-to-market. But I know that commercial-scale AI products live or die on their reliability architecture, and that\u2019s where my background gives me an edge most PMs don\u2019t have."}
-              </p>
-              <p className="font-medium text-foreground">
-                {"What I bring: safety-critical thinking from electrical engineering, B2B SaaS shipping experience, obsessive attention to failure modes, hands-on AI expertise, and five years of building complex products at scale."}
-              </p>
+            <p>
+  {"Evals are my entry point into AI product strategy, not my ceiling. I\u2019m focused on the full product lifecycle\u2014from model capabilities to UX to go-to-market. But where I differentiate is understanding that reliability architecture isn\u2019t a post-launch problem. It\u2019s a product decision from day one."}
+</p>
+<p className="font-medium text-foreground">
+  {"What I bring to AI product development: Systems thinking from safety-critical infrastructure, enterprise SaaS experience, obsessive failure-mode analysis, hands-on expertise with frontier models, and a track record of shipping complex products at scale."}
+</p>
             </div>
           </div>
         </div>
