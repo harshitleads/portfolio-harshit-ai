@@ -23,17 +23,30 @@ export function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
 
   const initNodes = useCallback((w: number, h: number) => {
-    const count = Math.min(Math.floor((w * h) / 8000), 140);
-    nodesRef.current = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      radius: Math.random() * 2.5 + 1,
-      baseOpacity: Math.random() * 0.5 + 0.4,
-      hue: Math.random(),
-      pulseOffset: Math.random() * Math.PI * 2,
-    }));
+    /* Grid-based seeding: divide viewport into cells, place one node per cell
+       with random jitter. This ensures even, dense coverage with no clumping. */
+    const cellSize = 55; // smaller = denser
+    const cols = Math.ceil(w / cellSize);
+    const rows = Math.ceil(h / cellSize);
+    const nodes: Node[] = [];
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        /* ~85% fill rate so it doesn't look perfectly gridded */
+        if (Math.random() > 0.85) continue;
+        nodes.push({
+          x: col * cellSize + Math.random() * cellSize,
+          y: row * cellSize + Math.random() * cellSize,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 2 + 1,
+          baseOpacity: Math.random() * 0.4 + 0.4,
+          hue: Math.random(),
+          pulseOffset: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+    nodesRef.current = nodes;
   }, []);
 
   useEffect(() => {
@@ -102,8 +115,8 @@ export function HeroSection() {
         }
       }
 
-      /* Draw connections */
-      const maxDist = 180;
+      /* Draw connections -- slightly larger than cell size for a dense mesh */
+      const maxDist = 120;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;

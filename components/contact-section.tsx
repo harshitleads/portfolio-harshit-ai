@@ -1,26 +1,27 @@
 "use client";
 
-import { Mail, Linkedin, Globe, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, FileText, ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const contacts = [
   {
     icon: Mail,
-    label: "Email",
+    label: "Email me!",
     value: "harshitleads@gmail.com",
     href: "mailto:harshitleads@gmail.com",
   },
   {
     icon: Linkedin,
-    label: "LinkedIn",
+    label: "Connect with me on LinkedIn!",
     value: "/in/harryleads",
     href: "https://linkedin.com/in/harryleads",
   },
   {
-    icon: Globe,
-    label: "Website",
-    value: "harshit.ai",
-    href: "https://harshit.ai",
+    icon: FileText,
+    label: "Grab my resume!",
+    value: "Resume_Harshit_Sharma.pdf",
+    href: "/Resume_Harshit_Sharma.pdf",
+    download: true
   },
 ];
 
@@ -43,10 +44,12 @@ export function ContactSection() {
             Connect
           </p>
           <h2 className="mb-4 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            {"Let's Build Something"}
+            {"Let's Connect!"}
           </h2>
           <p className="mb-10 max-w-lg text-base leading-relaxed text-muted-foreground">
-            Interested in discussing AI product opportunities, collaborating on research, or just want to talk shop.
+            Interested in AI product strategy? Building something cool? Just want to chat about agents and reliability? I'm easy to reach.
+            <br /><br />
+            Currently: Trying to resurrect my chess game, playing too much table tennis, and planning my next trip to Japan (vegetarian ramen research in progress).
           </p>
         </div>
 
@@ -68,7 +71,7 @@ export function ContactSection() {
                 <item.icon className="h-5 w-5 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="text-base font-semibold tracking-wider text-muted-foreground">
                   {item.label}
                 </p>
                 <p className="truncate text-sm font-medium text-foreground">{item.value}</p>
