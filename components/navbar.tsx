@@ -45,7 +45,7 @@ export function Navbar() {
           ))}
           <a
             href="/Resume_Harshit_Sharma.pdf"
-            download="Resume_Harshit_Sharma.pdf"
+            //download="Resume_Harshit_Sharma.pdf"
             className="rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
           >
             Resume
