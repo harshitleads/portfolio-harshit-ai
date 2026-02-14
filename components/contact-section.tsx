@@ -69,7 +69,7 @@ export function ContactSection() {
                 <item.icon className="h-5 w-5 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="text-xs font-medium tracking-wider text-muted-foreground">
                   {item.label}
                 </p>
                 <p className="truncate text-sm font-medium text-foreground">{item.value}</p>
