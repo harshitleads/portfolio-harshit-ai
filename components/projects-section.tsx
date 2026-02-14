@@ -406,8 +406,14 @@ export function ProjectsSection() {
       {/* ---- LIGHTBOX (over everything) ---- */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-lg"
-          onClick={closeLightbox}
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.95)" }}
+          onClick={() => { if (zoom <= 1) closeLightbox(); }}
+          onWheel={(e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) setZoom((z) => Math.min(z + 0.25, 5));
+            else setZoom((z) => { const n = Math.max(z - 0.25, 0.5); if (n <= 1) setPosition({ x: 0, y: 0 }); return n; });
+          }}
           role="dialog"
           aria-modal="true"
           aria-label="Image lightbox"
@@ -415,35 +421,12 @@ export function ProjectsSection() {
           {/* Close */}
           <button
             type="button"
-            onClick={closeLightbox}
-            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
             aria-label="Close lightbox"
           >
             <X className="h-5 w-5" />
           </button>
-
-          {/* Zoom controls */}
-          <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-              aria-label="Zoom out"
-            >
-              <ZoomOut className="h-5 w-5" />
-            </button>
-            <span className="rounded-full bg-secondary/80 px-3 py-1.5 text-xs font-medium text-foreground">
-              {Math.round(zoom * 100)}%
-            </span>
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
-              aria-label="Zoom in"
-            >
-              <ZoomIn className="h-5 w-5" />
-            </button>
-          </div>
 
           {/* Prev / Next */}
           {currentImages.length > 1 && (
@@ -451,54 +434,89 @@ export function ProjectsSection() {
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                 aria-label="Previous image"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-6 w-6" />
               </button>
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
-                className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-secondary/80 text-foreground transition-colors hover:bg-secondary"
+                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                 aria-label="Next image"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-6 w-6" />
               </button>
             </>
           )}
 
-          {/* Caption & dots */}
-          <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3">
-            <p className="rounded-full bg-secondary/80 px-4 py-1.5 text-xs font-medium text-foreground">
-              {currentImages[lightboxIdx]?.label}
-            </p>
-            {currentImages.length > 1 && (
-              <div className="flex gap-2">
-                {currentImages.map((_, i) => (
-                  <button
-                    key={`dot-${currentImages[i].src}`}
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLightboxIdx(i);
-                      setZoom(1);
-                      setPosition({ x: 0, y: 0 });
-                    }}
-                    className={`h-2 w-2 rounded-full transition-all ${
-                      lightboxIdx === i
-                        ? "scale-125 bg-primary"
-                        : "bg-muted-foreground/40 hover:bg-muted-foreground"
-                    }`}
-                    aria-label={`Go to image ${i + 1}`}
-                  />
-                ))}
-              </div>
-            )}
+          {/* Bottom bar: dots + label + zoom controls */}
+          <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3">
+            {/* Caption + dots */}
+            <div className="flex flex-col items-center gap-2">
+              <p className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm">
+                {currentImages[lightboxIdx]?.label}
+              </p>
+              {currentImages.length > 1 && (
+                <div className="flex gap-2">
+                  {currentImages.map((_, i) => (
+                    <button
+                      key={`dot-${currentImages[i].src}`}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLightboxIdx(i);
+                        setZoom(1);
+                        setPosition({ x: 0, y: 0 });
+                      }}
+                      className={`h-2 w-2 rounded-full transition-all ${
+                        lightboxIdx === i
+                          ? "scale-125 bg-primary"
+                          : "bg-white/30 hover:bg-white/60"
+                      }`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Zoom controls */}
+            <div className="flex items-center gap-2 rounded-full bg-white/10 px-2 py-1 backdrop-blur-sm">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                aria-label="Zoom out"
+              >
+                <ZoomOut className="h-4 w-4" />
+              </button>
+              <span className="min-w-[48px] text-center text-xs font-medium text-white/80">
+                {Math.round(zoom * 100)}%
+              </span>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                aria-label="Zoom in"
+              >
+                <ZoomIn className="h-4 w-4" />
+              </button>
+              {zoom > 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); setZoom(1); setPosition({ x: 0, y: 0 }); }}
+                  className="ml-1 rounded-full px-2 py-0.5 text-[10px] font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Zoomable image */}
+          {/* Zoomable image -- fills viewport */}
           <div
-            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden"
+            className="flex h-[90vh] w-[95vw] items-center justify-center"
             onClick={(e) => e.stopPropagation()}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -511,16 +529,18 @@ export function ProjectsSection() {
             <div
               style={{
                 transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-                transition: isDragging ? "none" : "transform 0.2s ease-out",
+                transition: isDragging ? "none" : "transform 0.3s ease-out",
+                transformOrigin: "center center",
               }}
             >
               <Image
                 src={currentImages[lightboxIdx]?.src ?? "/placeholder.jpg"}
                 alt={currentImages[lightboxIdx]?.label ?? ""}
-                width={1400}
-                height={900}
-                className="max-h-[85vh] w-auto rounded-lg object-contain"
+                width={1800}
+                height={1200}
+                className="max-h-[88vh] max-w-[93vw] rounded-lg object-contain"
                 draggable={false}
+                priority
               />
             </div>
           </div>
