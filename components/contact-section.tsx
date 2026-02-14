@@ -74,7 +74,7 @@ export function ContactSection() {
                 <p className="text-xs font-medium tracking-wider text-muted-foreground">
                   {item.label}
                 </p>
-                <p className="truncate text-sm font-medium text-foreground">{item.value}</p>
+                <p className="truncate text-sm uppercase font-medium text-foreground">{item.value}</p>
               </div>
               <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-muted-foreground opacity-0 transition-all group-hover:text-primary group-hover:opacity-100" />
             </a>
