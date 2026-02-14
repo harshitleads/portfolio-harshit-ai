@@ -21,15 +21,15 @@ const allImages = [
     label: "Project One-Pager",
   },
   {
-    src: "/images/explainable-3.jpg",
+    src: "/images/explainable-1.jpg",
     label: "Explainable Reasoning Panel",
   },
   {
-    src: "/images/explainable-2.jpg",
+    src: "/images/explainable-3.jpg",
     label: "Low Confidence Warning (42%)",
   },
   {
-    src: "/images/explainable-1.jpg",
+    src: "/images/explainable-2.jpg",
     label: "High Confidence Suggestion (87%)",
   },
 ];
