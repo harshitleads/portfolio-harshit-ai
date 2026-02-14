@@ -84,12 +84,12 @@ export function AboutSection() {
           >
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
               <p>
-                {"I started in electrical engineering, designing power systems where failure meant explosions, not just bad user reviews. That taught me to think through failure modes obsessively\u2014because in safety-critical systems, \u201Cit works in the demo\u201D isn\u2019t good enough."}
+                {"I started in electrical engineering, designing power systems where failure meant explosions, not just bad user reviews. That taught me to think through failure modes obsessively because in safety-critical systems, \u201Cit works in the demo\u201D isn\u2019t good enough."}
               </p>
               <p>
                 {"I spent the last three years of my time at "}
-                <span className="font-medium text-foreground">GE Vernova</span>
-                {" building B2B SaaS products\u2014PLM systems, data operations platforms, and revenue enablement tools that supported a "}
+                <span className="font-medium text-foreground">GE's Energy business</span>
+                {" building B2B SaaS products: PLM systems, data operations platforms, and revenue enablement tools that supported a "}
                 <span className="font-medium text-foreground">$150M+ sales pipeline</span>
                 {". I learned how to ship complex enterprise software at scale, work with global engineering teams, and drive adoption across organizations."}
               </p>
@@ -104,7 +104,7 @@ export function AboutSection() {
               <p>
                 {"My focus: "}
                 <span className="text-primary">bridging the gap between AI capability and reliable deployment at scale</span>
-                {"\u2014because the companies that win won\u2019t just have the most capable models, they\u2019ll have the most trustworthy ones."}
+                {" because the companies that win won\u2019t just have the most capable models, they\u2019ll have the most trustworthy ones."}
               </p>
             </div>
           </div>
