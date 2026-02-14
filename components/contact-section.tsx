@@ -49,7 +49,7 @@ export function ContactSection() {
           <p className="mb-10 max-w-lg text-base leading-relaxed text-muted-foreground">
             Interested in AI product strategy? Building something cool? Just want to chat about agents and reliability? I'm easy to reach.
             <br /><br />
-            Currently: Trying to resurrect my chess game, playing too much table tennis, and planning my next trip to Japan (vegetarian ramen research in progress).
+            Currently: Trying to resurrect my chess game, playing too much table tennis, and planning my next trip to Japan (vegetarian ramen research in progress!).
           </p>
         </div>
 
