@@ -191,7 +191,7 @@ export function ProjectsSection() {
                   The Problem
                 </p>
                 <p className="text-sm leading-relaxed text-foreground/80">
-                  {"Developers waste hours verifying AI suggestions because tools optimize for speed, not trust\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
+                  {"Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption."}
                 </p>
               </div>
 
@@ -276,7 +276,7 @@ export function ProjectsSection() {
                   The Problem
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {"Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review\u2014creating a \u201Ctrust tax\u201D that blocks adoption."}
+                  {"Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review, creating a \u201Ctrust tax\u201D that blocks adoption."}
                 </p>
               </div>
 
@@ -296,7 +296,7 @@ export function ProjectsSection() {
                   Key Insight
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {"Trust isn\u2019t about being right more often\u2014it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones."}
+                  {"Trust isn\u2019t about being right more often; it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones."}
                 </p>
               </div>
 
