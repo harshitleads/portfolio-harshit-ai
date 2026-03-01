@@ -36,6 +36,8 @@ interface ProjectData {
   differentiation: string[];
   /** index 0 = summary / one-pager image; rest = mockup gallery */
   images: ImageItem[];
+  /** When true, gallery includes the hero image (index 0) as first thumbnail */
+  galleryIncludesHero?: boolean;
   pdfLink?: string;
   liveDemoLink?: string;
   caseStudyLink?: string;
@@ -98,10 +100,11 @@ const projects: ProjectData[] = [
       "Built and shipped to 44 real users in a single 3-hour sprint",
     ],
     images: [
-      { src: "/images/pm-quiz-landing.png", label: "Landing Page: Choose Your Tier" },
+      { src: "/images/pm-quiz-landing.png", label: "Landing Page" },
       { src: "/images/pm-quiz-question.png", label: "Quiz UI: Question Screen" },
       { src: "/images/pm-quiz-results.png", label: "Results: Radar Chart Breakdown" },
     ],
+    galleryIncludesHero: true,
     liveDemoLink: "https://pm-salary-quest.lovable.app/",
     caseStudyLink: "/work/pm-salary-ace",
   },
@@ -209,7 +212,9 @@ function ProjectModal({
   onClose,
   onOpenLightbox,
 }: ProjectModalProps) {
-  const mockupImages = project.images.slice(1);
+  const mockupImages = project.galleryIncludesHero
+    ? project.images
+    : project.images.slice(1);
 
   return (
     <div
@@ -578,7 +583,7 @@ export function ProjectsSection() {
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-6 w-6" />
@@ -586,7 +591,7 @@ export function ProjectsSection() {
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
-                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-6 w-6" />
