@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   X,
   ZoomIn,
@@ -37,6 +38,7 @@ interface ProjectData {
   images: ImageItem[];
   pdfLink?: string;
   liveDemoLink?: string;
+  caseStudyLink?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -101,6 +103,7 @@ const projects: ProjectData[] = [
       { src: "/images/pm-quiz-results.png", label: "Results: Radar Chart Breakdown" },
     ],
     liveDemoLink: "https://pm-salary-quest.lovable.app/",
+    caseStudyLink: "/work/pm-salary-ace",
   },
 ];
 
@@ -353,8 +356,8 @@ function ProjectModal({
           )}
 
           {/* CTA links */}
-          {(project.pdfLink || project.liveDemoLink) && (
-            <div className="flex justify-center gap-3">
+          {(project.pdfLink || project.liveDemoLink || project.caseStudyLink) && (
+            <div className="flex flex-wrap justify-center gap-3">
               {project.pdfLink && (
                 <a
                   href={project.pdfLink}
@@ -376,6 +379,15 @@ function ProjectModal({
                   <ExternalLink className="h-4 w-4" />
                   Live Demo
                 </a>
+              )}
+              {project.caseStudyLink && (
+                <Link
+                  href={project.caseStudyLink}
+                  className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
+                >
+                  Full Case Study
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               )}
             </div>
           )}
