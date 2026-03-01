@@ -100,7 +100,7 @@ const projects: ProjectData[] = [
       { src: "/images/pm-quiz-question.png", label: "Quiz UI: Question Screen" },
       { src: "/images/pm-quiz-results.png", label: "Results: Radar Chart Breakdown" },
     ],
-    liveDemoLink: "https://pm-salary-ace.lovable.app",
+    liveDemoLink: "https://pm-salary-quest.lovable.app/",
   },
 ];
 
