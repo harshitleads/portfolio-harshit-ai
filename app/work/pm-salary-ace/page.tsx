@@ -282,7 +282,6 @@ export default function PMSalaryAcePage() {
                 <ul className="space-y-3">
                   {[
                     "No open-ended questions (MCQ only)",
-                    "Timer goes negative instead of flagging timeout",
                     "Question difficulty still being calibrated",
                     "No user accounts or progress tracking",
                   ].map((item) => (
