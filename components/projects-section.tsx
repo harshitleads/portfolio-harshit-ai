@@ -80,15 +80,15 @@ const projects: ProjectData[] = [
     problem: {
       short:
         "Most PM candidates underprepare because generic frameworks don\u2019t reflect the real skill gap between junior and staff-level roles.",
-      full: "Most PM candidates underprepare because existing resources don\u2019t reflect the real skill gap between junior and staff-level roles. Generic frameworks give false confidence. PM Salary Ace maps 125 questions directly to compensation tiers \u2014 so candidates understand exactly what level they\u2019re actually at.",
+      full: "Most PM candidates underprepare because existing resources don\u2019t reflect the real skill gap between junior and staff-level roles. Generic frameworks give false confidence. PM Salary Ace maps 125 questions directly to compensation tiers, so candidates understand exactly what level they\u2019re actually at.",
     },
     solution: {
       short:
-        "125 questions mapped to real PM salary tiers \u2014 from $130K Junior to $350K+ Staff \u2014 with gamified UX designed to keep you in the quiz, not bouncing off it.",
+        "125 questions mapped to real PM salary tiers (from $130K Junior to $350K+ Staff), with gamified UX designed to keep you in the quiz, not bouncing off it.",
       full: "A gamified quiz platform with 5 difficulty tiers mapped to real PM compensation ranges ($130K\u2013$350K+), skill-based filtering across Product Sense, Product Design, Metrics, and Behavioral, a hint system, multi-correct question support, a countdown timer, and a radar chart performance breakdown. Built and shipped to 44 users in 3 hours using Lovable + Supabase.",
     },
     keyInsight:
-      "Salary ranges aren\u2019t just labels \u2014 they\u2019re psychological permission slips. Showing candidates the money attached to each tier reframes preparation from obligation to aspiration.",
+      "Salary ranges aren\u2019t just labels. They\u2019re psychological permission slips. Showing candidates the money attached to each tier reframes preparation from obligation to aspiration.",
     differentiation: [
       "5 compensation-mapped tiers ($130K Junior \u2192 $350K+ Staff)",
       "Skill-based filtering: Product Sense, Design, Metrics, Behavioral",
@@ -96,9 +96,9 @@ const projects: ProjectData[] = [
       "Built and shipped to 44 real users in a single 3-hour sprint",
     ],
     images: [
-      { src: "/images/pm-quiz-landing.png", label: "Landing Page \u2014 Choose Your Tier" },
-      { src: "/images/pm-quiz-question.png", label: "Quiz UI \u2014 Question Screen" },
-      { src: "/images/pm-quiz-results.png", label: "Results \u2014 Radar Chart Breakdown" },
+      { src: "/images/pm-quiz-landing.png", label: "Landing Page: Choose Your Tier" },
+      { src: "/images/pm-quiz-question.png", label: "Quiz UI: Question Screen" },
+      { src: "/images/pm-quiz-results.png", label: "Results: Radar Chart Breakdown" },
     ],
     liveDemoLink: "https://pm-salary-ace.lovable.app",
   },
