@@ -16,6 +16,29 @@ export const metadata: Metadata = {
   title: "Harshit Sharma | AI Product Manager",
   description:
     "Portfolio of Harshit Sharma - AI Product Manager bridging engineering depth with product vision to build the future of AI.",
+  openGraph: {
+    title: "Harshit Sharma | AI Product Manager",
+    description:
+      "Bridging engineering depth with product vision. Building the next generation of AI-powered tools at the frontier.",
+    url: "https://harshit.ai",
+    siteName: "Harshit Sharma",
+    images: [
+      {
+        url: "https://harshit.ai/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Harshit Sharma — AI Product Manager",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Harshit Sharma | AI Product Manager",
+    description:
+      "Bridging engineering depth with product vision. Building the next generation of AI-powered tools at the frontier.",
+    images: ["https://harshit.ai/images/og-image.jpg"],
+  },
 };
 
 export const viewport: Viewport = {
