@@ -7,8 +7,8 @@ const contacts = [
   {
     icon: Mail,
     label: "Email me!",
-    value: "harshitleads@gmail.com",
-    href: "mailto:harshitleads@gmail.com",
+    value: "harshit@harshit.ai",
+    href: "https://mail.google.com/mail/?view=cm&to=harshit@harshit.ai&su=" + encodeURIComponent("Your portfolio got me. Here I am.") + "&body=" + encodeURIComponent("Hey Harshit,") + "%0A%0A" + encodeURIComponent("I came across your portfolio and wanted to reach out.") + "%0A%0A" + encodeURIComponent("What I'm looking for / why I'm writing:") + "%0A" + encodeURIComponent("[e.g. I'm hiring for an AI PM role / I want to") + "%0A" + encodeURIComponent("collaborate / I have a question about your work]") + "%0A%0A" + encodeURIComponent("A bit about me:") + "%0A" + encodeURIComponent("[e.g. I'm a recruiter at X / PM at Y / student at Z]") + "%0A%0A" + encodeURIComponent("Looking forward to connecting.") + "%0A%0A" + encodeURIComponent("[Your name]"),
   },
   {
     icon: Linkedin,

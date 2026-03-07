@@ -13,6 +13,7 @@ import {
   FileText,
   Maximize2,
   ExternalLink,
+  Telescope,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
@@ -29,6 +30,8 @@ interface ProjectData {
   id: string;
   title: string;
   tagline: string;
+  /** Display tags: Content Type · Domain (e.g. Case Study · Enterprise) */
+  tags: string[];
   /** Card shows a shorter blurb; modal shows the full paragraph. */
   problem: { short: string; full: string };
   solution: { short: string; full: string };
@@ -52,6 +55,7 @@ const projects: ProjectData[] = [
     id: "explainable-ai",
     title: "Explainable AI Coding Assistant",
     tagline: "Trust Through Transparency",
+    tags: ["Case Study", "Enterprise"],
     problem: {
       short:
         "Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption.",
@@ -81,6 +85,7 @@ const projects: ProjectData[] = [
     id: "pm-salary-ace",
     title: "PM Salary Ace",
     tagline: "Practice Like the Job Depends On It",
+    tags: ["Live Product", "Consumer"],
     problem: {
       short:
         "Most PM candidates underprepare because generic frameworks don\u2019t reflect the real skill gap between junior and staff-level roles.",
@@ -109,6 +114,9 @@ const projects: ProjectData[] = [
     caseStudyLink: "/work/pm-salary-ace",
   },
 ];
+
+const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];
+const DOMAIN_FILTERS = ["AI Tools", "Consumer", "Enterprise", "Developer Tools"];
 
 /* ------------------------------------------------------------------ */
 /* ProjectCard                                                          */
@@ -159,7 +167,17 @@ function ProjectCard({
           <h3 className="mb-1 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             {project.title}
           </h3>
-          <p className="mb-5 text-sm font-medium text-primary">{project.tagline}</p>
+          <p className="mb-2 text-sm font-medium text-primary">{project.tagline}</p>
+          <div className="mb-5 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-border/50 bg-secondary/40 px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
           <div className="mb-4">
             <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
@@ -382,7 +400,7 @@ function ProjectModal({
                   className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
                 >
                   <ExternalLink className="h-4 w-4" />
-                  Live Demo
+                  Live Product
                 </a>
               )}
               {project.caseStudyLink && (
@@ -408,6 +426,23 @@ function ProjectModal({
 
 export function ProjectsSection() {
   const [ref, isVisible] = useScrollAnimation<HTMLElement>(0.05);
+
+  /* Filter state: multi-select, AND logic */
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+
+  const toggleFilter = (tag: string) => {
+    setActiveFilters((prev) =>
+      prev.includes(tag) ? prev.filter((f) => f !== tag) : [...prev, tag]
+    );
+  };
+
+  const clearFilters = () => setActiveFilters([]);
+
+  const filteredProjects = activeFilters.length === 0
+    ? projects
+    : projects.filter((p) => activeFilters.every((f) => p.tags.includes(f)));
+
+  const hasActiveFilters = activeFilters.length > 0;
 
   /* Which project's modal is open (null = closed) */
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -523,22 +558,99 @@ export function ProjectsSection() {
           }}
         >
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
-            Selected Work
+            {!hasActiveFilters && "Selected Work, 2 Projects"}
+            {hasActiveFilters && filteredProjects.length === 1 && "Selected Work, Showing 1 of 2 Projects"}
+            {hasActiveFilters && filteredProjects.length === 0 && "Selected Work, 0 of 2 Projects"}
+            {hasActiveFilters && filteredProjects.length > 1 && `Selected Work, Showing ${filteredProjects.length} of 2 Projects`}
           </p>
         </div>
 
-        {/* ---- PROJECT CARDS ---- */}
-        <div className="space-y-8">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isVisible={isVisible}
-              onOpenModal={() => openModal(project.id)}
-              onOpenLightbox={openLightbox}
-            />
-          ))}
+        {/* Filter bar */}
+        <div className="mb-10 mt-6 flex flex-col gap-3">
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={clearFilters}
+              className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                !hasActiveFilters
+                  ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
+                  : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+              }`}
+            >
+              All
+            </button>
+            {CONTENT_TYPE_FILTERS.map((label) => {
+              const isActive = activeFilters.includes(label);
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => toggleFilter(label)}
+                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                    isActive
+                      ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
+                      : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {DOMAIN_FILTERS.map((label) => {
+              const isActive = activeFilters.includes(label);
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => toggleFilter(label)}
+                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                    isActive
+                      ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
+                      : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
+
+        {/* ---- PROJECT CARDS / EMPTY STATE ---- */}
+        {filteredProjects.length > 0 ? (
+          <div className="space-y-8">
+            {filteredProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                isVisible={isVisible}
+                onOpenModal={() => openModal(project.id)}
+                onOpenLightbox={openLightbox}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <Telescope className="mb-6 h-10 w-10 text-primary" />
+            <h3 className="mb-3 text-xl font-bold text-foreground md:text-2xl">
+              Wow. Nobody&apos;s been here before.
+            </h3>
+            <p className="mb-8 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Not even me. You just filtered yourself into a gap in my portfolio. Honestly? That&apos;s useful. Tell me what you were looking for and I&apos;ll tell you if it&apos;s next on my list.
+            </p>
+            <a
+              href={`https://mail.google.com/mail/?view=cm&to=harshit@harshit.ai&su=${encodeURIComponent(`I went looking for ${activeFilters.join(" + ")} and found nothing. We need to talk.`)}&body=${encodeURIComponent("Hey Harshit,") + "%0A%0A" + encodeURIComponent("I was exploring your portfolio and filtered for") + "%0A" + encodeURIComponent(activeFilters.join(" + ") + " but nothing came up yet.") + "%0A%0A" + encodeURIComponent("I'm interested in this space because:") + "%0A" + encodeURIComponent("[e.g. I work in enterprise AI / I'm building") + "%0A" + encodeURIComponent("something in this space]") + "%0A%0A" + encodeURIComponent("Here's what I was hoping to see from you:") + "%0A" + encodeURIComponent("[e.g. a case study on / a live product that does...]") + "%0A%0A" + encodeURIComponent("Would love to know if this is on your roadmap.") + "%0A%0A" + encodeURIComponent("[Your name]")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
+            >
+              Drop me a note
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        )}
       </div>
 
       {/* ---- PROJECT MODAL ---- */}
