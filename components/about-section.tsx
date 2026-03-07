@@ -88,7 +88,7 @@ export function AboutSection() {
               </p>
               <p>
                 {"I spent the last three years of my time at "}
-                <span className="font-medium text-foreground">GE's Energy business</span>
+                <span className="font-medium text-foreground">GE's energy business</span>
                 {" building B2B SaaS products: PLM systems, data operations platforms, and revenue enablement tools that supported a "}
                 <span className="font-medium text-foreground">$150M+ sales pipeline</span>
                 {". I learned how to ship complex enterprise software at scale, work with global engineering teams, and drive adoption across organizations."}
