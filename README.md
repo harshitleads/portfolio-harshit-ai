@@ -17,4 +17,4 @@ Source code for [harshit.ai](https://harshit.ai), the personal portfolio of Hars
 
 ---
 
-Built by [Harshit Sharma](https://harshit.ai) — MEng IEOR @ UC Berkeley, ex-GE Vernova.
+Built by [Harshit Sharma](https://harshit.ai) — MEng IEOR @ UC Berkeley.
