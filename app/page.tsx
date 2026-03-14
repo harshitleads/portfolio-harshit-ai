@@ -10,8 +10,8 @@ export default function Page() {
     <main className="relative min-h-screen overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <AboutSection />
       <ProjectsSection />
+      <AboutSection />
       <ContactSection />
       <Footer />
     </main>

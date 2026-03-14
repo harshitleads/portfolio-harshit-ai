@@ -269,7 +269,7 @@ export function HeroSection() {
           </p>
 
           <p className="mb-8 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-            Bridging engineering depth with product vision. Building the next generation of AI-powered tools at the frontier.
+            AI PM with 5 years shipping B2B products. Now building at the frontier: evals, agents, and the tools that make AI reliable.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -278,12 +278,6 @@ export function HeroSection() {
               className="rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
             >
               View Work
-            </a>
-            <a
-              href="#contact"
-              className="rounded-lg border border-border bg-transparent px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-            >
-              Get in Touch
             </a>
           </div>
         </div>

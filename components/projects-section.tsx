@@ -88,29 +88,30 @@ const projects: ProjectData[] = [
     tags: ["Live Product", "Consumer"],
     problem: {
       short:
-        "Most PM candidates underprepare because generic frameworks don\u2019t reflect the real skill gap between junior and staff-level roles.",
-      full: "Most PM candidates underprepare because existing resources don\u2019t reflect the real skill gap between junior and staff-level roles. Generic frameworks give false confidence. PM Salary Ace maps 125 questions directly to compensation tiers, so candidates understand exactly what level they\u2019re actually at.",
+        "PM candidates don't know what skill level they're actually at. Generic prep doesn't map to real compensation gaps.",
+      full: "Most PM candidates underprepare because generic interview resources don't map to real compensation levels. A candidate preparing for $170K Mid-level and one targeting $350K Staff+ need fundamentally different skills, but almost no tool reflects that gap.",
     },
     solution: {
       short:
-        "125 questions mapped to real PM salary tiers (from $130K Junior to $350K+ Staff), with gamified UX designed to keep you in the quiz, not bouncing off it.",
-      full: "A gamified quiz platform with 5 difficulty tiers mapped to real PM compensation ranges ($130K\u2013$350K+), skill-based filtering across Product Sense, Product Design, Metrics, and Behavioral, a hint system, multi-correct question support, a countdown timer, and a radar chart performance breakdown. Built and shipped to 44 users in 3 hours using Lovable + Supabase.",
+        "336 questions across 5 salary tiers. Practice what a $350K Staff+ PM actually needs, not generic frameworks.",
+      full: "A full-stack quiz platform with 336 questions mapped across 5 PM salary tiers ($130K\u2013$350K+). Key decisions: AI-generated questions required human QA before going live. Early wrong answers were too obvious, which broke the learning value. Auth is opt-in: all 5 tiers are open by default, login unlocks streak tracking and a skill radar chart. Gating higher tiers behind login killed conversions. Trust is a barrier for an unknown product.",
     },
     keyInsight:
-      "Salary ranges aren\u2019t just labels. They\u2019re psychological permission slips. Showing candidates the money attached to each tier reframes preparation from obligation to aspiration.",
+      "The hardest call was quality vs. speed. AI generation got us to 336 questions fast, but the first 125 had detectable wrong answers. We flagged them inactive and regenerated. Shipping fast was right. Shipping bad questions wasn't worth it.",
     differentiation: [
-      "5 compensation-mapped tiers ($130K Junior \u2192 $350K+ Staff)",
-      "Skill-based filtering: Product Sense, Design, Metrics, Behavioral",
-      "Radar chart performance breakdown across PM competencies",
-      "Built and shipped to 44 real users in a single 3-hour sprint",
+      "Tier-mapped questions: Junior and Staff+ require different thinking, not just harder trivia",
+      "AI-generated, human QA'd: wrong answers must force real reasoning, not guessing",
+      "No forced auth: all 5 tiers open by default, progress tracking is opt-in",
+      "22 users \u00B7 12 hours \u00B7 49% activation from a single Berkeley PM Club post",
     ],
     images: [
-      { src: "/images/pm-quiz-landing.png", label: "Landing Page" },
-      { src: "/images/pm-quiz-question.png", label: "Quiz UI: Question Screen" },
-      { src: "/images/pm-quiz-results.png", label: "Results: Radar Chart Breakdown" },
+      { src: "/images/pm-quiz-landing-v2.png", label: "Landing Page" },
+      { src: "/images/pm-quiz-question-v2.png", label: "Quiz UI: Question Screen" },
+      { src: "/images/pm-quiz-results-v2.png", label: "Progress Dashboard" },
+      { src: "/images/pm-quiz-custom-v2.png", label: "Custom Quiz Builder" },
     ],
     galleryIncludesHero: true,
-    liveDemoLink: "https://pm-salary-quest.lovable.app/",
+    liveDemoLink: "https://pmquiz.harshit.ai/",
     caseStudyLink: "/work/pm-salary-ace",
   },
 ];
@@ -324,7 +325,7 @@ function ProjectModal({
           {mockupImages.length > 0 && (
             <div className="mb-10">
               <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
-                Prototype Mockups
+                Product Screenshots
               </h3>
 
               {/* Main display -- clicking opens lightbox */}
