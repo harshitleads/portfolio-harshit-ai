@@ -87,11 +87,9 @@ export function AboutSection() {
                 {"I started in electrical engineering, designing power systems where failure meant explosions, not just bad user reviews. That taught me to think through failure modes obsessively because in safety-critical systems, \u201Cit works in the demo\u201D isn\u2019t good enough."}
               </p>
               <p>
-                {"I spent the last three years of my time at "}
-                <span className="font-medium text-foreground">GE's energy business</span>
-                {" building B2B SaaS products: PLM systems, data operations platforms, and revenue enablement tools that supported a "}
+                {"For five years I shipped products at scale: complex enterprise software, data platforms, and revenue tooling that supported a "}
                 <span className="font-medium text-foreground">$150M+ sales pipeline</span>
-                {". I learned how to ship complex enterprise software at scale, work with global engineering teams, and drive adoption across organizations."}
+                {". I learned how to work with large cross-functional teams, drive adoption across organizations, and own outcomes end to end."}
               </p>
               <p>
                 {"Now at "}
@@ -175,46 +173,60 @@ export function AboutSection() {
               How I Approach Building Products
             </h3>
 
-            <div className="space-y-5 text-base leading-[1.7] text-muted-foreground md:text-lg">
+            <div className="space-y-6 text-base leading-[1.8] text-muted-foreground md:text-lg">
+
               <p>
-                {"I started my career in electrical engineering, designing power systems where a design flaw doesn\u2019t just crash an app, it causes fires, explosions, and casualties."}
+                I started in electrical engineering designing power systems where a design flaw does not just crash an app.{" "}
+                <span className="font-semibold text-foreground">It causes fires, explosions, and casualties.</span>{" "}
+                You learn to think through failure modes obsessively: what breaks, when does it fail silently, how will users misuse it.
               </p>
+
               <p>
-                {"Early in my time at GE Vernova, I worked as a system engineer on power electronics and critical infrastructure. When you\u2019re designing equipment that sits in hospitals, data centers, and industrial facilities, you learn to think through failure modes obsessively. What breaks? When does it fail silently? How will users misuse it? What are the second-order effects?"}
+                For five years I shipped products at scale: complex enterprise software, data platforms, and revenue tooling that supported a{" "}
+                <span className="font-semibold text-foreground">$150M+ sales pipeline</span>.
+                {" "}I learned how to ship in risk-averse organizations, manage cross-functional teams, and drive adoption when users do not want to change how they work.
               </p>
+
               <p>
-                {"I then transitioned into building B2B SaaS products at GE: PLM systems, data operations platforms, and revenue enablement tools supporting a $150M+ sales pipeline. I learned how to ship complex enterprise software at scale, manage stakeholders across global engineering teams, and drive adoption in risk-averse organizations."}
+                That background gives me a specific lens on AI products.{" "}
+                <span className="font-semibold text-foreground">AI systems fail in unpredictable ways.</span>{" "}
+                They hallucinate confidently. They work in demos but break in production. The companies that win will be the ones who{" "}
+                <span className="text-primary font-medium">design for failure modes from day one</span>, not as an afterthought.
               </p>
+
               <p>
-                {"This combination, safety-critical thinking from electrical engineering plus enterprise software experience, gives me a "}
-                <span className="font-medium text-foreground">unique lens on AI products</span>
-                {". AI systems fail in unpredictable ways. They hallucinate confidently. They work in demos but break in production. Users trust them blindly until something goes catastrophically wrong. The companies that win will be the ones who design for failure modes from day one."}
+                At Berkeley I am building technical depth in ML, deep learning, and RL. My capstone on{" "}
+                <span className="font-semibold text-foreground">productizing AI evals</span>{" "}
+                is teaching me how frontier models are calibrated for commercial deployment. I am not trying to become a research scientist. I am learning the foundations to make better product decisions.
               </p>
+
               <p>
-                {"At Berkeley (MEng), I\u2019m building technical depth in ML, deep learning, and reinforcement learning. My capstone on productizing AI evals is teaching me how frontier models are calibrated for commercial deployment. I\u2019m not trying to become a research scientist; I\u2019m learning the technical foundations to make better product decisions."}
+                I am also a power user. I code with Claude, build agents for automation, and use AI to{" "}
+                <span className="font-semibold text-foreground">10x my productivity daily</span>.
+                {" "}I do not theorize about AI adoption. I live it.
               </p>
-              <p>
-                {"I\u2019m also a power user. I use AI to code, build agents for workflow automation, and 10x my productivity daily. I don\u2019t just theorize about AI adoption; I live it."}
-              </p>
-              <p>
-                {"Here\u2019s my perspective on where AI products are headed: many teams focus primarily on capabilities, viz. bigger context windows, faster inference, more complex reasoning. Those advances matter. But I believe if multi-agent coordination is a path to AGI, the next critical step is equally important: "}
-                <span className="font-medium text-primary">building agents that fail predictably and gracefully</span>
-                {"."}
-              </p>
-              <p>
-                {"Current multi-agent systems have real reliability challenges. They can break unpredictably, waste tokens retrying failed processes, and compound errors across agent handoffs. If we\u2019re building toward workflows with hundreds or thousands of coordinating agents, the foundation has to be rock-solid. You can\u2019t scale complexity on top of unreliable primitives."}
-              </p>
-              <p>
-                {"This is where "}
-                <span className="font-medium text-foreground">evals stop being a testing function and become core product strategy</span>
-                {". Calibrated confidence, failure mode mapping, graceful degradation; these aren\u2019t nice-to-haves. They\u2019re what separates demos from products people actually deploy at scale."}
-              </p>
-                <p>
-                  {"This is where I see the opportunity: most PMs treat evals as a testing function. I see them as core product strategy. The companies building reliable AI at scale, the ones that will actually ship AGI, need PMs who think about failure modes as early as they think about features."}
+
+              <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
+                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">The Opportunity I See</p>
+                <p className="text-sm leading-relaxed">
+                  Current multi-agent systems break unpredictably, waste tokens retrying failed processes, and compound errors across handoffs.
+                  If we are building toward workflows with hundreds of coordinating agents,{" "}
+                  <span className="font-semibold text-foreground">the foundation has to be solid.</span>{" "}
+                  You cannot scale complexity on top of unreliable primitives.
                 </p>
-                <p className="font-medium text-foreground">
-                  {"What I bring to AI product development: Systems thinking from safety-critical infrastructure, enterprise SaaS experience, obsessive failure-mode analysis, hands-on expertise with frontier models, and a track record of shipping complex products at scale."}
+              </div>
+
+              <div className="rounded-xl border border-border/40 bg-secondary/20 p-5">
+                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
+                <p className="text-sm leading-relaxed">
+                  Most PMs treat evals as a testing function.{" "}
+                  <span className="text-primary font-semibold">I see them as core product strategy.</span>{" "}
+                  Calibrated confidence, failure mode mapping, graceful degradation: these separate demos from products people actually deploy at scale.
+                  The companies building reliable AI need PMs who think about failure modes as early as they think about features.{" "}
+                  <span className="font-semibold text-foreground">That is the gap I am building toward.</span>
                 </p>
+              </div>
+
             </div>
           </div>
         </div>
