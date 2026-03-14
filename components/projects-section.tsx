@@ -10,7 +10,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  FileText,
   Maximize2,
   ExternalLink,
   Telescope,
@@ -37,6 +36,7 @@ interface ProjectData {
   solution: { short: string; full: string };
   keyInsight: string;
   differentiation: string[];
+  traction?: string;
   /** index 0 = summary / one-pager image; rest = mockup gallery */
   images: ImageItem[];
   /** When true, gallery includes the hero image (index 0) as first thumbnail */
@@ -73,6 +73,7 @@ const projects: ProjectData[] = [
       "Codebase-aware reasoning (beyond generic RAG)",
       "Legible correctness during development (not post-review)",
     ],
+    traction: "Market research · Figma prototype · PDF case study",
     images: [
       { src: "/images/explainable-summary.jpg", label: "Project One-Pager" },
       { src: "/images/explainable-1.jpg", label: "Explainable Reasoning Panel" },
@@ -104,6 +105,7 @@ const projects: ProjectData[] = [
       "No forced auth: all 5 tiers open by default, progress tracking is opt-in",
       "22 users \u00B7 12 hours \u00B7 49% activation from a single Berkeley PM Club post",
     ],
+    traction: "22 users · 12 hours · 49% activation rate",
     images: [
       { src: "/images/pm-quiz-landing-v2.png", label: "Landing Page" },
       { src: "/images/pm-quiz-question-v2.png", label: "Quiz UI: Question Screen" },
@@ -134,6 +136,7 @@ const projects: ProjectData[] = [
       "Privacy first: fully anonymous, no login, no email, letters stored with hashed IPs only",
       "255 visitors, 48 letters, 59% landing-to-writer conversion, 10 countries, zero paid distribution",
     ],
+    traction: "255 visitors · 48 letters · 10 countries · zero paid distribution",
     images: [
       { src: "/images/dear-her-landing.png", label: "Landing Page" },
       { src: "/images/dear-her-writer-active.png", label: "Write Your Letter" },
@@ -155,16 +158,18 @@ const DOMAIN_FILTERS = ["AI Tools", "Evals", "Developer Tools", "Productivity"];
 interface ProjectCardProps {
   project: ProjectData;
   isVisible: boolean;
-  onOpenModal: () => void;
   onOpenLightbox: (idx: number, images: ImageItem[]) => void;
 }
 
 function ProjectCard({
   project,
   isVisible,
-  onOpenModal,
   onOpenLightbox,
 }: ProjectCardProps) {
+  /* Determine the primary CTA destination */
+  const ctaLink = project.caseStudyLink ?? project.pdfLink ?? null;
+  const ctaIsExternal = ctaLink !== null && !ctaLink.startsWith("/work");
+
   return (
     <div
       className="glass-card overflow-hidden rounded-2xl transition-all duration-700 delay-100"
@@ -173,19 +178,19 @@ function ProjectCard({
         transform: isVisible ? "translateY(0)" : "translateY(30px)",
       }}
     >
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col">
         {/* Left: Summary image -- clicks open lightbox */}
         <button
           type="button"
           onClick={() => onOpenLightbox(0, project.images)}
-          className="group relative w-full flex-shrink-0 cursor-pointer overflow-hidden lg:w-[340px] xl:w-[400px]"
+          className="group relative w-full flex-shrink-0 cursor-pointer overflow-hidden"
         >
           <Image
             src={project.images[0].src}
             alt={`${project.title} one-pager`}
             width={600}
             height={800}
-            className="h-60 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 lg:h-full"
+            className="h-52 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
             <Maximize2 className="h-3.5 w-3.5" />
@@ -193,7 +198,7 @@ function ProjectCard({
         </button>
 
         {/* Right: Problem + Solution + CTA */}
-        <div className="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-10">
+        <div className="flex flex-1 flex-col justify-start p-6">
           <h3 className="mb-1 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
             {project.title}
           </h3>
@@ -218,7 +223,7 @@ function ProjectCard({
             </p>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               The Solution
             </p>
@@ -227,222 +232,46 @@ function ProjectCard({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={onOpenModal}
-            className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-          >
-            View Project
-            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* ProjectModal                                                         */
-/* ------------------------------------------------------------------ */
-
-interface ProjectModalProps {
-  project: ProjectData;
-  activeThumb: number;
-  onThumbChange: (idx: number) => void;
-  onClose: () => void;
-  onOpenLightbox: (idx: number, images: ImageItem[]) => void;
-}
-
-function ProjectModal({
-  project,
-  activeThumb,
-  onThumbChange,
-  onClose,
-  onOpenLightbox,
-}: ProjectModalProps) {
-  const mockupImages = project.galleryIncludesHero
-    ? project.images
-    : project.images.slice(1);
-
-  return (
-    <div
-      className="fixed inset-0 z-[80] flex justify-end overflow-hidden"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Project details"
-    >
-      <div
-        className="absolute inset-0 bg-background/70 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      <div className="relative z-10 flex h-full w-full max-w-3xl flex-col overflow-y-auto bg-card shadow-2xl shadow-background/80 animate-in slide-in-from-right duration-300 md:border-l md:border-border/50">
-        {/* Header */}
-        <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-card/95 px-6 py-4 backdrop-blur-sm">
-          <h2 className="text-lg font-bold text-foreground">{project.title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-secondary"
-            aria-label="Close modal"
-          >
-            <X className="h-5 w-5 text-muted-foreground" />
-          </button>
-        </div>
-
-        {/* Scrollable content */}
-        <div className="flex-1 px-6 py-8 md:px-10">
-          {/* Summary image -- clickable to lightbox */}
-          <button
-            type="button"
-            onClick={() => onOpenLightbox(0, project.images)}
-            className="group relative mb-10 block w-full overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/30"
-          >
-            <Image
-              src={project.images[0].src}
-              alt={`${project.title} one-pager`}
-              width={1200}
-              height={1600}
-              className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
-              priority
-            />
-            <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-              <Maximize2 className="h-3.5 w-3.5" />
-            </div>
-          </button>
-
-          {/* THE PROBLEM */}
-          <div className="mb-8">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-              The Problem
-            </h3>
-            <p className="leading-relaxed text-muted-foreground">{project.problem.full}</p>
-          </div>
-
-          {/* THE SOLUTION */}
-          <div className="mb-8">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-              The Solution
-            </h3>
-            <p className="leading-relaxed text-muted-foreground">{project.solution.full}</p>
-          </div>
-
-          {/* KEY INSIGHT */}
-          <div className="mb-8">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-              Key Insight
-            </h3>
-            <p className="leading-relaxed text-muted-foreground">{project.keyInsight}</p>
-          </div>
-
-          {/* DIFFERENTIATION */}
-          <div className="mb-10">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-              Differentiation
-            </h3>
-            <ul className="space-y-2.5 text-muted-foreground">
-              {project.differentiation.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-1.5 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                  <span className="leading-relaxed">{item}</span>
-                </li>
+          {project.traction && (
+            <div className="mb-6 flex flex-wrap gap-2">
+              {project.traction?.split(" · ").map((stat) => (
+                <span
+                  key={stat}
+                  className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
+                >
+                  {stat}
+                </span>
               ))}
-            </ul>
-          </div>
-
-          {/* MOCKUP GALLERY */}
-          {mockupImages.length > 0 && (
-            <div className="mb-10">
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">
-                Product Screenshots
-              </h3>
-
-              {/* Main display -- clicking opens lightbox */}
-              <button
-                type="button"
-                onClick={() => onOpenLightbox(activeThumb, mockupImages)}
-                className="group relative mb-4 block w-full cursor-pointer overflow-hidden rounded-xl border border-border/30 transition-all hover:border-primary/40"
-              >
-                <Image
-                  src={mockupImages[activeThumb].src}
-                  alt={mockupImages[activeThumb].label}
-                  width={1200}
-                  height={800}
-                  className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
-                />
-                <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-                  <Maximize2 className="h-3.5 w-3.5" />
-                </div>
-              </button>
-
-              {/* Thumbnails row */}
-              <div className="grid grid-cols-3 gap-3">
-                {mockupImages.map((img, i) => (
-                  <button
-                    key={img.src}
-                    type="button"
-                    onClick={() => onThumbChange(i)}
-                    className={`group overflow-hidden rounded-lg border-2 transition-all ${
-                      activeThumb === i
-                        ? "border-primary shadow-lg shadow-primary/10"
-                        : "border-border/30 hover:border-muted-foreground/40"
-                    }`}
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.label}
-                      width={400}
-                      height={260}
-                      className="w-full"
-                    />
-                    <p
-                      className={`px-2 py-1.5 text-center text-[10px] font-medium leading-tight md:text-xs ${
-                        activeThumb === i ? "text-primary" : "text-muted-foreground"
-                      }`}
-                    >
-                      {img.label}
-                    </p>
-                  </button>
-                ))}
-              </div>
             </div>
           )}
 
-          {/* CTA links */}
-          {(project.pdfLink || project.liveDemoLink || project.caseStudyLink) && (
-            <div className="flex flex-wrap justify-center gap-3">
-              {project.pdfLink && (
-                <a
-                  href={project.pdfLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-                >
-                  <FileText className="h-4 w-4" />
-                  View Full Analysis
-                </a>
-              )}
-              {project.liveDemoLink && (
-                <a
-                  href={project.liveDemoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  Live Product
-                </a>
-              )}
-              {project.caseStudyLink && (
-                <Link
-                  href={project.caseStudyLink}
-                  className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
-                >
-                  Full Case Study
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              )}
-            </div>
+          {ctaLink === null ? (
+            <button
+              type="button"
+              disabled
+              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-50"
+            >
+              View Project
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          ) : ctaIsExternal ? (
+            <a
+              href={ctaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+            >
+              View Project
+              <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+            </a>
+          ) : (
+            <Link
+              href={ctaLink}
+              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+            >
+              View Project
+              <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            </Link>
           )}
         </div>
       </div>
@@ -474,30 +303,16 @@ export function ProjectsSection() {
 
   const hasActiveFilters = activeFilters.length > 0;
 
-  /* Which project's modal is open (null = closed) */
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-
   /* Lightbox state */
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<ImageItem[]>([]);
   const [lightboxIdx, setLightboxIdx] = useState(0);
-
-  /* Per-modal gallery state */
-  const [activeThumb, setActiveThumb] = useState(0);
 
   /* Zoom / pan state */
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-
-  const selectedProject = projects.find((p) => p.id === selectedProjectId) ?? null;
-
-  const openModal = (id: string) => {
-    setSelectedProjectId(id);
-    setActiveThumb(0);
-  };
-  const closeModal = () => setSelectedProjectId(null);
 
   /* Lightbox: caller passes exactly which image array to browse */
   const openLightbox = (idx: number, images: ImageItem[]) => {
@@ -551,21 +366,17 @@ export function ProjectsSection() {
   };
   const handleMouseUp = () => setIsDragging(false);
 
-  /* Keyboard + scroll lock */
+  /* Keyboard + scroll lock for lightbox */
   useEffect(() => {
-    if (!selectedProjectId && !lightboxOpen) return;
+    if (!lightboxOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (lightboxOpen) {
-          setLightboxOpen(false);
-          setZoom(1);
-          setPosition({ x: 0, y: 0 });
-        } else {
-          setSelectedProjectId(null);
-        }
+        setLightboxOpen(false);
+        setZoom(1);
+        setPosition({ x: 0, y: 0 });
       }
-      if (lightboxOpen && e.key === "ArrowRight") goNext();
-      if (lightboxOpen && e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -573,7 +384,7 @@ export function ProjectsSection() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [selectedProjectId, lightboxOpen, goNext, goPrev]);
+  }, [lightboxOpen, goNext, goPrev]);
 
   return (
     <section id="projects" ref={ref} className="relative px-6 py-20 md:py-24">
@@ -588,10 +399,10 @@ export function ProjectsSection() {
           }}
         >
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
-            {!hasActiveFilters && "Selected Work, 3 Projects"}
-            {hasActiveFilters && filteredProjects.length === 1 && "Selected Work, Showing 1 of 3 Projects"}
-            {hasActiveFilters && filteredProjects.length === 0 && "Selected Work, 0 of 3 Projects"}
-            {hasActiveFilters && filteredProjects.length > 1 && `Selected Work, Showing ${filteredProjects.length} of 3 Projects`}
+            {!hasActiveFilters && `Selected Work, ${projects.length} Projects`}
+            {hasActiveFilters && filteredProjects.length === 1 && `Selected Work, Showing 1 of ${projects.length} Projects`}
+            {hasActiveFilters && filteredProjects.length === 0 && `Selected Work, 0 of ${projects.length} Projects`}
+            {hasActiveFilters && filteredProjects.length > 1 && `Selected Work, Showing ${filteredProjects.length} of ${projects.length} Projects`}
           </p>
         </div>
 
@@ -650,13 +461,12 @@ export function ProjectsSection() {
 
         {/* ---- PROJECT CARDS / EMPTY STATE ---- */}
         {filteredProjects.length > 0 ? (
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
             {filteredProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 isVisible={isVisible}
-                onOpenModal={() => openModal(project.id)}
                 onOpenLightbox={openLightbox}
               />
             ))}
@@ -682,17 +492,6 @@ export function ProjectsSection() {
           </div>
         )}
       </div>
-
-      {/* ---- PROJECT MODAL ---- */}
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          activeThumb={activeThumb}
-          onThumbChange={setActiveThumb}
-          onClose={closeModal}
-          onOpenLightbox={openLightbox}
-        />
-      )}
 
       {/* ---- LIGHTBOX (over everything) ---- */}
       {lightboxOpen && (

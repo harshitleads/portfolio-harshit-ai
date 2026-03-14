@@ -133,7 +133,13 @@ export function AboutSection() {
           </div>
 
           {/* Philosophy button */}
-          <div className="mt-10 flex justify-center">
+          <div
+            className="mt-10 flex justify-center transition-all duration-700 delay-300"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(30px)",
+            }}
+          >
             <button
               type="button"
               onClick={() => setModalOpen(true)}
@@ -156,24 +162,26 @@ export function AboutSection() {
           <div className="absolute inset-0 bg-[rgba(0,0,0,0.8)] backdrop-blur-sm" />
 
           <div
-            className="relative z-10 max-h-[90vh] w-full max-w-[800px] overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl md:p-12"
+            className="relative z-10 flex max-h-[90vh] w-[90vw] max-w-[860px] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             style={{ animation: "slideUp 0.3s ease-out" }}
           >
             <button
               type="button"
               onClick={closeModal}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               aria-label="Close modal"
             >
               <X className="h-6 w-6" />
             </button>
 
-            <h3 className="mb-8 pr-10 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              How I Approach Building Products
-            </h3>
+            <div className="px-6 pb-0 pt-8 md:px-12 md:pt-10">
+              <h3 className="mb-8 pr-10 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                How I Approach Building Products
+              </h3>
+            </div>
 
-            <div className="space-y-6 text-base leading-[1.8] text-muted-foreground md:text-lg">
+            <div className="flex-1 space-y-6 text-base leading-[1.8] text-muted-foreground overflow-y-auto px-6 py-8 md:px-10">
 
               <p>
                 I started in electrical engineering designing power systems where a design flaw does not just crash an app.{" "}
@@ -208,7 +216,7 @@ export function AboutSection() {
 
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">The Opportunity I See</p>
-                <p className="text-sm leading-relaxed">
+                <p className="text-base leading-relaxed">
                   Most AI products are built capability-first. More context, faster inference, better reasoning. Those advances matter. But{" "}
                   <span className="font-semibold text-foreground">capability without reliability is a demo, not a product.</span>{" "}
                   AI systems break in ways that are hard to predict, hard to explain, and hard to recover from. Users get burned once and do not come back. That is not just an engineering problem. It is a product problem, and most teams are not treating it that way.
@@ -217,7 +225,7 @@ export function AboutSection() {
 
               <div className="rounded-xl border border-border/40 bg-secondary/20 p-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
-                <p className="text-sm leading-relaxed">
+                <p className="text-base leading-relaxed">
                   Most teams treat AI failures as engineering problems to patch. I think they are product problems to design around. When a model hallucinates, the failure is not just wrong output. It is a user who trusted the system, got burned, and will not be back.{" "}
                   <span className="text-primary font-semibold">That is a trust problem, and trust is the PM's domain.</span>
                   {" "}Evals are one of the most important tools in that work: not as a testing checkbox, but as a way to understand how a model fails before users do. At Berkeley my capstone is on productizing AI evals precisely because I see them as a product capability, not an infrastructure layer. The companies that win long-term are not the ones with the most capable models. They are the ones whose users{" "}

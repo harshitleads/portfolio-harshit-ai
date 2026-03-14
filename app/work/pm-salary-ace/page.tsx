@@ -46,7 +46,7 @@ export default function PMSalaryAcePage() {
 
       {/* HERO */}
       <section className="px-6 pb-16 pt-12 md:pb-24 md:pt-16">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-7xl">
           <Link href="/" className="mb-12 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             Back to Portfolio
@@ -59,7 +59,7 @@ export default function PMSalaryAcePage() {
             Practice Like the Job Depends On It
           </p>
           <p className="mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            A full-stack PM interview prep platform. V1 shipped in 3 hours. V2 added auth, progress tracking, and 336 QA&apos;d questions.
+            A gamified PM prep platform. V1 shipped in 3 hours and revealed two things: users wanted assessment, not learning, and AI-generated questions were too easy to guess. V2 was built around those findings.
           </p>
           <div className="mb-10 flex flex-wrap gap-3">
             <a
@@ -97,195 +97,233 @@ export default function PMSalaryAcePage() {
       </div>
 
       <div className="px-6 py-16 md:py-20">
-        <div className="mx-auto max-w-3xl space-y-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
 
-          {/* SECTION 1: WHY */}
-          <section>
-            <SectionLabel>The Insight</SectionLabel>
-            <SectionHeading>Why I Built This</SectionHeading>
-            <Card className="space-y-5">
-              <Body>
-                I run the Product Management Affinity Group for UC Berkeley&apos;s MEng program. I kept watching smart engineers undersell themselves into safe technical roles because PM recruitment felt out of reach. The problem was not ability. It was confidence and calibration. They did not know what level they were actually at.
-              </Body>
-              <Body>
-                Salary ranges are not just labels. They are psychological permission slips. Showing someone that their thinking maps to a $280K to $350K Frontier AI PM role reframes preparation from obligation to ambition. That was the core design decision everything else was built around.
-              </Body>
-            </Card>
-          </section>
+            {/* Left sidebar: sticky on desktop */}
+            <div className="lg:w-52 xl:w-60 flex-shrink-0">
+              <div className="space-y-6 lg:sticky lg:top-8">
 
-          {/* SECTION 2: V1 SPRINT */}
-          <section>
-            <SectionLabel>Sprint 1</SectionLabel>
-            <SectionHeading>V1: 3 Hours to Shipped</SectionHeading>
-            <Card>
-              <Body>
-                Built with Lovable (AI app builder), Claude for prompting and debugging, and Supabase for the feedback database. No traditional coding. The goal was to validate the concept with real users before investing more time.
-              </Body>
-              <div className="mt-8 space-y-0">
-                {[
-                  { hour: "Hour 1", label: "Product Decisions", body: "Tier structure, salary ranges, gamification approach, question categories." },
-                  { hour: "Hour 2", label: "Building", body: "Quiz UI, timer, hint system, multi-correct question support, flag button." },
-                  { hour: "Hour 3", label: "Polish and Shipping", body: "Radar chart results, admin feedback dashboard, Safari bug fix, deployment." },
-                ].map(({ hour, label, body }, i, arr) => (
-                  <div key={hour} className="flex gap-5">
-                    <div className="flex flex-col items-center">
-                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary ring-1 ring-primary/30">
-                        {i + 1}
-                      </div>
-                      {i < arr.length - 1 && <div className="mt-1 w-px flex-1 bg-border" />}
-                    </div>
-                    <div className={`pb-7 ${i === arr.length - 1 ? "pb-0" : ""}`}>
-                      <p className="mb-0.5 text-xs font-bold uppercase tracking-widest text-primary">{hour}</p>
-                      <p className="mb-1 font-semibold text-foreground">{label}</p>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
-                    </div>
+                {/* Quick stats */}
+                <div className="rounded-xl border border-border/40 bg-card/50 p-5">
+                  <p className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">At a Glance</p>
+                  <div className="space-y-3">
+                    <div><p className="text-xs text-muted-foreground">Build time</p><p className="text-sm font-semibold text-foreground">V1: 3 Hours</p></div>
+                    <div><p className="text-xs text-muted-foreground">First 12 hours</p><p className="text-sm font-semibold text-foreground">22 Users</p></div>
+                    <div><p className="text-xs text-muted-foreground">Activation rate</p><p className="text-sm font-semibold text-foreground">49%</p></div>
+                    <div><p className="text-xs text-muted-foreground">Questions</p><p className="text-sm font-semibold text-foreground">336 across 5 tiers</p></div>
                   </div>
-                ))}
-              </div>
-              <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-border pt-6">
-                <p className="mr-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">V1 Stack</p>
-                {["Lovable", "Claude", "Supabase", "Vercel"].map((tool) => (
-                  <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-foreground">{tool}</span>
-                ))}
-              </div>
-            </Card>
-          </section>
+                </div>
 
-          {/* SECTION 3: WHAT V1 TAUGHT */}
-          <section>
-            <SectionLabel>User Research</SectionLabel>
-            <SectionHeading>What V1 Taught Me</SectionHeading>
-            <Card className="space-y-5">
-              <p className="font-semibold text-foreground">I built a learning tool. Users treated it as an assessment.</p>
-              <Body>
-                I designed the platform around exploration: hints, show answer, retry without seeing the correct answer first. The assumption was that people would go slow, learn, and build intuition.
-              </Body>
-              <Body>
-                Instead, users answered, clicked next, answered, clicked next. They wanted to know their score, not learn the material. That gap between designer intent and user behavior forced an immediate iteration.
-              </Body>
-              <Body>
-                The second discovery: LLMs generate MCQ distractors that are too obviously wrong. The correct answer was plausible, but the wrong answers were clearly implausible. Real interview questions have four plausible answers. That is what makes them hard. All 125 original questions were flagged for regeneration.
-              </Body>
-            </Card>
-          </section>
+                {/* Section links */}
+                <div className="rounded-xl border border-border/40 bg-card/50 p-5">
+                  <p className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">Sections</p>
+                  <nav className="space-y-2">
+                    <a href="#insight" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">Why I Built This</a>
+                    <a href="#sprint1" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">V1 Sprint</a>
+                    <a href="#research" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">User Research</a>
+                    <a href="#sprint2" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">V2 Decisions</a>
+                    <a href="#feedback" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">User Feedback</a>
+                    <a href="#screenshots" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">Screenshots</a>
+                    <a href="#roadmap" className="block text-sm text-muted-foreground transition-colors hover:text-foreground">Roadmap</a>
+                  </nav>
+                </div>
 
-          {/* SECTION 4: V2 SPRINT */}
-          <section>
-            <SectionLabel>Sprint 2</SectionLabel>
-            <SectionHeading>V2: What Changed and Why</SectionHeading>
-            <div className="space-y-4">
-              {[
-                {
-                  decision: "336 questions via Gemini 2.5 Pro with human QA",
-                  reasoning: "AI generation is fast but produces obvious wrong answers. 211 new questions were generated and reviewed before going live. The original 125 are flagged inactive pending regeneration.",
-                },
-                {
-                  decision: "Supabase backend with RLS and server-side answer security",
-                  reasoning: "V1 had answers hardcoded in the frontend JS array. Anyone could inspect the source and cheat. V2 uses a SECURITY DEFINER view that hides correct answers from the API. Answers are only fetched after submission via RPC call.",
-                },
-                {
-                  decision: "Google OAuth and email auth, but no forced login",
-                  reasoning: "Higher tiers were initially gated behind login. That was reversed. Trust is a barrier for an unknown product. Forcing email signup before letting someone try a Staff+ question creates more friction than value. All 5 tiers are now open. Login unlocks progress tracking.",
-                },
-                {
-                  decision: "Progress dashboard with per-skill radar chart",
-                  reasoning: "The radar chart initially used session-level proxy data. That was not accurate enough. V2 tracks correctness per question per category in a JSONB column, giving users a real skill breakdown across Product Sense, Metrics, Product Design, and Behavioral.",
-                },
-                {
-                  decision: "Custom quiz builder with tier, skill, and difficulty filters",
-                  reasoning: "Direct response to user feedback. Users wanted to drill weaknesses, not practice randomly. The builder lets them cross-filter and set question count.",
-                },
-                {
-                  decision: "Hero copy changed from Master PM Interviews to Think Like a Top PM",
-                  reasoning: "Original copy implied mock interview simulation. The product is a skills builder, not an interview simulator. The target user is someone trying to break into PM, not someone already doing PM interviews.",
-                },
-              ].map(({ decision, reasoning }) => (
-                <Card key={decision}>
-                  <p className="mb-2 font-semibold text-foreground">{decision}</p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{reasoning}</p>
+              </div>
+            </div>
+
+            {/* Main content */}
+            <div className="min-w-0 flex-1 space-y-20">
+
+              {/* SECTION 1: WHY */}
+              <section id="insight">
+                <SectionLabel>The Insight</SectionLabel>
+                <SectionHeading>Why I Built This</SectionHeading>
+                <Card className="space-y-5">
+                  <Body>
+                    I run the Product Management Affinity Group for UC Berkeley&apos;s MEng program. I kept watching smart engineers undersell themselves into safe technical roles because PM recruitment felt out of reach. The problem was not ability. It was confidence and calibration. They did not know what level they were actually at.
+                  </Body>
+                  <Body>
+                    Salary ranges are not just labels. They are psychological permission slips. Showing someone that their thinking maps to a $280K to $350K Frontier AI PM role reframes preparation from obligation to ambition. That was the core design decision everything else was built around.
+                  </Body>
                 </Card>
-              ))}
+              </section>
+
+              {/* SECTION 2: V1 SPRINT */}
+              <section id="sprint1">
+                <SectionLabel>Sprint 1</SectionLabel>
+                <SectionHeading>V1: 3 Hours to Shipped</SectionHeading>
+                <Card>
+                  <Body>
+                    Built with Lovable (AI app builder), Claude for prompting and debugging, and Supabase for the feedback database. No traditional coding. The goal was to validate the concept with real users before investing more time.
+                  </Body>
+                  <div className="mt-8 space-y-0">
+                    {[
+                      { hour: "Hour 1", label: "Product Decisions", body: "Tier structure, salary ranges, gamification approach, question categories." },
+                      { hour: "Hour 2", label: "Building", body: "Quiz UI, timer, hint system, multi-correct question support, flag button." },
+                      { hour: "Hour 3", label: "Polish and Shipping", body: "Radar chart results, admin feedback dashboard, Safari bug fix, deployment." },
+                    ].map(({ hour, label, body }, i, arr) => (
+                      <div key={hour} className="flex gap-5">
+                        <div className="flex flex-col items-center">
+                          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary ring-1 ring-primary/30">
+                            {i + 1}
+                          </div>
+                          {i < arr.length - 1 && <div className="mt-1 w-px flex-1 bg-border" />}
+                        </div>
+                        <div className={`pb-7 ${i === arr.length - 1 ? "pb-0" : ""}`}>
+                          <p className="mb-0.5 text-xs font-bold uppercase tracking-widest text-primary">{hour}</p>
+                          <p className="mb-1 font-semibold text-foreground">{label}</p>
+                          <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-border pt-6">
+                    <p className="mr-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">V1 Stack</p>
+                    {["Lovable", "Claude", "Supabase", "Vercel"].map((tool) => (
+                      <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-foreground">{tool}</span>
+                    ))}
+                  </div>
+                </Card>
+              </section>
+
+              {/* SECTION 3: WHAT V1 TAUGHT */}
+              <section id="research">
+                <SectionLabel>User Research</SectionLabel>
+                <SectionHeading>What V1 Taught Me</SectionHeading>
+                <Card className="space-y-5">
+                  <p className="font-semibold text-foreground">I built a learning tool. Users treated it as an assessment.</p>
+                  <Body>
+                    I designed the platform around exploration: hints, show answer, retry without seeing the correct answer first. The assumption was that people would go slow, learn, and build intuition.
+                  </Body>
+                  <Body>
+                    Instead, users answered, clicked next, answered, clicked next. They wanted to know their score, not learn the material. That gap between designer intent and user behavior forced an immediate iteration.
+                  </Body>
+                  <Body>
+                    The second discovery: LLMs generate MCQ distractors that are too obviously wrong. The correct answer was plausible, but the wrong answers were clearly implausible. Real interview questions have four plausible answers. That is what makes them hard. All 125 original questions were flagged for regeneration.
+                  </Body>
+                </Card>
+              </section>
+
+              {/* SECTION 4: V2 SPRINT */}
+              <section id="sprint2">
+                <SectionLabel>Sprint 2</SectionLabel>
+                <SectionHeading>V2: What Changed and Why</SectionHeading>
+                <div className="space-y-4">
+                  {[
+                    {
+                      decision: "336 questions via Gemini 2.5 Pro with human QA",
+                      reasoning: "AI generation is fast but produces obvious wrong answers. 211 new questions were generated and reviewed before going live. The original 125 are flagged inactive pending regeneration.",
+                    },
+                    {
+                      decision: "Supabase backend with RLS and server-side answer security",
+                      reasoning: "V1 had answers hardcoded in the frontend JS array. Anyone could inspect the source and cheat. V2 uses a SECURITY DEFINER view that hides correct answers from the API. Answers are only fetched after submission via RPC call.",
+                    },
+                    {
+                      decision: "Google OAuth and email auth, but no forced login",
+                      reasoning: "Higher tiers were initially gated behind login. That was reversed. Trust is a barrier for an unknown product. Forcing email signup before letting someone try a Staff+ question creates more friction than value. All 5 tiers are now open. Login unlocks progress tracking.",
+                    },
+                    {
+                      decision: "Progress dashboard with per-skill radar chart",
+                      reasoning: "The radar chart initially used session-level proxy data. That was not accurate enough. V2 tracks correctness per question per category in a JSONB column, giving users a real skill breakdown across Product Sense, Metrics, Product Design, and Behavioral.",
+                    },
+                    {
+                      decision: "Custom quiz builder with tier, skill, and difficulty filters",
+                      reasoning: "Direct response to user feedback. Users wanted to drill weaknesses, not practice randomly. The builder lets them cross-filter and set question count.",
+                    },
+                    {
+                      decision: "Hero copy changed from Master PM Interviews to Think Like a Top PM",
+                      reasoning: "Original copy implied mock interview simulation. The product is a skills builder, not an interview simulator. The target user is someone trying to break into PM, not someone already doing PM interviews.",
+                    },
+                  ].map(({ decision, reasoning }) => (
+                    <Card key={decision}>
+                      <p className="mb-2 font-semibold text-foreground">{decision}</p>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{reasoning}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* SECTION 5: USER FEEDBACK */}
+              <section id="feedback">
+                <SectionLabel>User Feedback</SectionLabel>
+                <SectionHeading>What Beta Users Said</SectionHeading>
+                <Card className="space-y-6">
+                  <div>
+                    <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">Sam, Microsoft PM Intern</p>
+                    <ul className="mt-3 space-y-2">
+                      {[
+                        "Multi-select tag too small, not visible enough",
+                        "Some mid-level questions feel easy",
+                        "Product sense questions are relevant and well-written",
+                        "No bugs encountered, fast performance",
+                        "Suggested making it more similar to actual interviews",
+                      ].map((item) => (
+                        <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="border-t border-border pt-6">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Response</p>
+                    <Body>
+                      Multi-select visibility is a valid bug. Question difficulty is intentional: the target user is an aspiring PM, not a current PM. Interview simulation is a V3 direction, not V2 scope. The product is explicitly a thinking skills builder.
+                    </Body>
+                  </div>
+                </Card>
+              </section>
+
+              {/* SECTION 6: V2 SCREENSHOTS */}
+              <section id="screenshots">
+                <SectionLabel>Product Screenshots</SectionLabel>
+                <SectionHeading>V2 Live Product</SectionHeading>
+                <ScreenshotGallery />
+              </section>
+
+              {/* SECTION 7: WHAT'S NEXT */}
+              <section id="roadmap">
+                <SectionLabel>Roadmap</SectionLabel>
+                <SectionHeading>V3 Direction</SectionHeading>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Card>
+                    <p className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">Still In Progress (V2)</p>
+                    <ul className="space-y-3">
+                      {[
+                        "Contrast fixes on quiz builder and tier badge pills",
+                        "Tablet card height consistency",
+                        "Regenerate original 125 questions via Gemini",
+                        "Make multi-select tag more prominent",
+                      ].map((item) => (
+                        <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-muted-foreground/40" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                  <Card>
+                    <p className="mb-5 text-xs font-bold uppercase tracking-widest text-primary">V3 Vision</p>
+                    <ul className="space-y-3">
+                      {[
+                        "Open-ended questions with LLM-as-judge scoring",
+                        "Full model answer visible after each question",
+                        "Personalized weak area recommendations",
+                        "Interview simulation format",
+                      ].map((item) => (
+                        <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </div>
+              </section>
+
             </div>
-          </section>
-
-          {/* SECTION 5: USER FEEDBACK */}
-          <section>
-            <SectionLabel>User Feedback</SectionLabel>
-            <SectionHeading>What Beta Users Said</SectionHeading>
-            <Card className="space-y-6">
-              <div>
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">Sam, Microsoft PM Intern</p>
-                <ul className="space-y-2 mt-3">
-                  {[
-                    "Multi-select tag too small, not visible enough",
-                    "Some mid-level questions feel easy",
-                    "Product sense questions are relevant and well-written",
-                    "No bugs encountered, fast performance",
-                    "Suggested making it more similar to actual interviews",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="border-t border-border pt-6">
-                <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Response</p>
-                <Body>
-                  Multi-select visibility is a valid bug. Question difficulty is intentional: the target user is an aspiring PM, not a current PM. Interview simulation is a V3 direction, not V2 scope. The product is explicitly a thinking skills builder.
-                </Body>
-              </div>
-            </Card>
-          </section>
-
-          {/* SECTION 6: V2 SCREENSHOTS */}
-          <section>
-            <SectionLabel>Product Screenshots</SectionLabel>
-            <SectionHeading>V2 Live Product</SectionHeading>
-            <ScreenshotGallery />
-          </section>
-
-          {/* SECTION 7: WHAT'S NEXT */}
-          <section>
-            <SectionLabel>Roadmap</SectionLabel>
-            <SectionHeading>V3 Direction</SectionHeading>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Card>
-                <p className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">Still In Progress (V2)</p>
-                <ul className="space-y-3">
-                  {[
-                    "Contrast fixes on quiz builder and tier badge pills",
-                    "Tablet card height consistency",
-                    "Regenerate original 125 questions via Gemini",
-                    "Make multi-select tag more prominent",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-muted-foreground/40" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-              <Card>
-                <p className="mb-5 text-xs font-bold uppercase tracking-widest text-primary">V3 Vision</p>
-                <ul className="space-y-3">
-                  {[
-                    "Open-ended questions with LLM-as-judge scoring",
-                    "Full model answer visible after each question",
-                    "Personalized weak area recommendations",
-                    "Interview simulation format",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
-          </section>
-
+          </div>
         </div>
       </div>
 
