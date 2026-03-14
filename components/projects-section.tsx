@@ -55,7 +55,7 @@ const projects: ProjectData[] = [
     id: "explainable-ai",
     title: "Explainable AI Coding Assistant",
     tagline: "Trust Through Transparency",
-    tags: ["Case Study", "Enterprise"],
+    tags: ["Case Study", "Developer Tools"],
     problem: {
       short:
         "Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption.",
@@ -85,7 +85,7 @@ const projects: ProjectData[] = [
     id: "pm-salary-ace",
     title: "PM Salary Ace",
     tagline: "Practice Like the Job Depends On It",
-    tags: ["Live Product", "Consumer"],
+    tags: ["Live Product", "AI Tools"],
     problem: {
       short:
         "PM candidates don't know what skill level they're actually at. Generic prep doesn't map to real compensation gaps.",
@@ -114,10 +114,39 @@ const projects: ProjectData[] = [
     liveDemoLink: "https://pmquiz.harshit.ai/",
     caseStudyLink: "/work/pm-salary-ace",
   },
+  {
+    id: "dear-her",
+    title: "Dear Her",
+    tagline: "Some feelings are too big for a text message.",
+    tags: ["Live Product", "AI Tools"],
+    problem: {
+      short: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation.",
+      full: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation. Built on Women's Day as a personal gift to my mom and partner, then opened to anyone who needed it.",
+    },
+    solution: {
+      short: "Write three honest prompts about her. Claude transforms them into a beautiful animated letter she can open from any link, no login required.",
+      full: "A free web app where you answer three guided prompts about a woman in your life, and Claude transforms your raw inputs into a beautiful letter that appears typewriter-style on a warm parchment card. Fully anonymous, shareable via a unique link, no account required. Voice input lets you speak instead of type. Relationship-aware sign-offs mean a letter to a mentor reads differently from a letter to a partner.",
+    },
+    keyInsight: "The share button copies a pre-drafted message to clipboard, not just a URL. Recipients should never receive a cold link with no context. The warm message sets emotional tone before the letter is opened.",
+    differentiation: [
+      "Voice input as a friction reducer: speak your feelings instead of typing them",
+      "Relationship-aware sign-offs: mentor letters do not say 'With all my love'",
+      "Privacy first: fully anonymous, no login, no email, letters stored with hashed IPs only",
+      "255 visitors, 48 letters, 59% landing-to-writer conversion, 10 countries, zero paid distribution",
+    ],
+    images: [
+      { src: "/images/dear-her-landing.png", label: "Landing Page" },
+      { src: "/images/dear-her-writer-active.png", label: "Write Your Letter" },
+      { src: "/images/dear-her-letter.png", label: "Letter Output" },
+    ],
+    galleryIncludesHero: true,
+    liveDemoLink: "https://dearher.harshit.ai/",
+    caseStudyLink: "/work/dear-her",
+  },
 ];
 
 const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];
-const DOMAIN_FILTERS = ["AI Tools", "Consumer", "Enterprise", "Developer Tools"];
+const DOMAIN_FILTERS = ["AI Tools", "Evals", "Developer Tools", "Productivity"];
 
 /* ------------------------------------------------------------------ */
 /* ProjectCard                                                          */
@@ -559,10 +588,10 @@ export function ProjectsSection() {
           }}
         >
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
-            {!hasActiveFilters && "Selected Work, 2 Projects"}
-            {hasActiveFilters && filteredProjects.length === 1 && "Selected Work, Showing 1 of 2 Projects"}
-            {hasActiveFilters && filteredProjects.length === 0 && "Selected Work, 0 of 2 Projects"}
-            {hasActiveFilters && filteredProjects.length > 1 && `Selected Work, Showing ${filteredProjects.length} of 2 Projects`}
+            {!hasActiveFilters && "Selected Work, 3 Projects"}
+            {hasActiveFilters && filteredProjects.length === 1 && "Selected Work, Showing 1 of 3 Projects"}
+            {hasActiveFilters && filteredProjects.length === 0 && "Selected Work, 0 of 3 Projects"}
+            {hasActiveFilters && filteredProjects.length > 1 && `Selected Work, Showing ${filteredProjects.length} of 3 Projects`}
           </p>
         </div>
 

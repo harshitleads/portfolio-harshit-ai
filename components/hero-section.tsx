@@ -269,7 +269,7 @@ export function HeroSection() {
           </p>
 
           <p className="mb-8 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-            AI PM with 5 years shipping B2B products. Now building at the frontier: evals, agents, and the tools that make AI reliable.
+            Product manager building at the frontier. I ship real products, work across the AI stack, and think obsessively about evals, reliability, and what makes AI systems trustworthy.
           </p>
 
           <div className="flex flex-wrap gap-4">
