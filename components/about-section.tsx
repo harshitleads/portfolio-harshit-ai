@@ -209,21 +209,20 @@ export function AboutSection() {
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">The Opportunity I See</p>
                 <p className="text-sm leading-relaxed">
-                  Current multi-agent systems break unpredictably, waste tokens retrying failed processes, and compound errors across handoffs.
-                  If we are building toward workflows with hundreds of coordinating agents,{" "}
-                  <span className="font-semibold text-foreground">the foundation has to be solid.</span>{" "}
-                  You cannot scale complexity on top of unreliable primitives.
+                  Most AI products are built capability-first. More context, faster inference, better reasoning. Those advances matter. But{" "}
+                  <span className="font-semibold text-foreground">capability without reliability is a demo, not a product.</span>{" "}
+                  AI systems break in ways that are hard to predict, hard to explain, and hard to recover from. Users get burned once and do not come back. That is not just an engineering problem. It is a product problem, and most teams are not treating it that way.
                 </p>
               </div>
 
               <div className="rounded-xl border border-border/40 bg-secondary/20 p-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
                 <p className="text-sm leading-relaxed">
-                  Most PMs treat evals as a testing function.{" "}
-                  <span className="text-primary font-semibold">I see them as core product strategy.</span>{" "}
-                  Calibrated confidence, failure mode mapping, graceful degradation: these separate demos from products people actually deploy at scale.
-                  The companies building reliable AI need PMs who think about failure modes as early as they think about features.{" "}
-                  <span className="font-semibold text-foreground">That is the gap I am building toward.</span>
+                  Most teams treat AI failures as engineering problems to patch. I think they are product problems to design around. When a model hallucinates, the failure is not just wrong output. It is a user who trusted the system, got burned, and will not be back.{" "}
+                  <span className="text-primary font-semibold">That is a trust problem, and trust is the PM's domain.</span>
+                  {" "}Evals are one of the most important tools in that work: not as a testing checkbox, but as a way to understand how a model fails before users do. At Berkeley my capstone is on productizing AI evals precisely because I see them as a product capability, not an infrastructure layer. The companies that win long-term are not the ones with the most capable models. They are the ones whose users{" "}
+                  <span className="font-semibold text-foreground">trust the product enough to actually depend on it.</span>{" "}
+                  That is what I am building toward.
                 </p>
               </div>
 
