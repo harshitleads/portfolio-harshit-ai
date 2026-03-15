@@ -41,6 +41,7 @@ interface ProjectData {
   images: ImageItem[];
   /** When true, gallery includes the hero image (index 0) as first thumbnail */
   galleryIncludesHero?: boolean;
+  imagePosition?: string;
   pdfLink?: string;
   liveDemoLink?: string;
   caseStudyLink?: string;
@@ -80,6 +81,7 @@ const projects: ProjectData[] = [
       { src: "/images/explainable-4.jpeg", label: "Low Confidence Warning (42%)" },
       { src: "/images/explainable-2.jpg", label: "High Confidence Suggestion (87%)" },
     ],
+    imagePosition: "object-[center_15%]",
     pdfLink: "/Explainable_Coding_Assistant.pdf",
   },
   {
@@ -113,6 +115,7 @@ const projects: ProjectData[] = [
       { src: "/images/pm-quiz-custom-v2.png", label: "Custom Quiz Builder" },
     ],
     galleryIncludesHero: true,
+    imagePosition: "object-top",
     liveDemoLink: "https://pmquiz.harshit.ai/",
     caseStudyLink: "/work/pm-salary-ace",
   },
@@ -143,6 +146,7 @@ const projects: ProjectData[] = [
       { src: "/images/dear-her-letter.png", label: "Letter Output" },
     ],
     galleryIncludesHero: true,
+    imagePosition: "object-center",
     liveDemoLink: "https://dearher.harshit.ai/",
     caseStudyLink: "/work/dear-her",
   },
@@ -190,7 +194,7 @@ function ProjectCard({
             alt={`${project.title} one-pager`}
             width={600}
             height={800}
-            className="h-52 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            className={`h-52 w-full object-cover ${project.imagePosition ?? 'object-top'} transition-transform duration-500 group-hover:scale-105`}
           />
           <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
             <Maximize2 className="h-3.5 w-3.5" />
