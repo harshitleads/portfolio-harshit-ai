@@ -46,7 +46,7 @@ export function ContactSection() {
           <h2 className="mb-4 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             {"Let's Connect!"}
           </h2>
-          <p className="mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground">
+          <p className="mb-10 text-base leading-relaxed text-muted-foreground">
             Interested in AI product strategy? Building something cool? Just want to chat about agents and reliability? I'm easy to reach.
             <br /><br />
             Currently: Trying to resurrect my chess game, playing too much table tennis, and planning my next trip to Japan (vegetarian ramen research in progress!).
