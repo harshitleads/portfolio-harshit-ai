@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Explainable AI Coding Assistant | Case Study | Harshit Sharma",
@@ -61,6 +61,14 @@ export default function ExplainableAIPage() {
               className="inline-flex items-center gap-2 text-sm font-medium border border-foreground/20 rounded-full px-4 py-1.5 hover:bg-foreground/5 transition-colors"
             >
               View Full PDF
+            </a>
+            <a
+              href="https://explainable-coding-assistant-6r1papywr.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+            >
+              Live Product <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>
