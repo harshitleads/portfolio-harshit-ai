@@ -420,7 +420,7 @@ export function ProjectsSection() {
               className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
                 !hasActiveFilters
                   ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
-                  : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+                  : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
               }`}
             >
               All
@@ -435,7 +435,7 @@ export function ProjectsSection() {
                   className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
                     isActive
                       ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
-                      : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+                      : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
                   }`}
                 >
                   {label}
@@ -454,7 +454,7 @@ export function ProjectsSection() {
                   className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
                     isActive
                       ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
-                      : "border border-border/50 bg-secondary/50 text-muted-foreground hover:border-border hover:brightness-110"
+                      : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
                   }`}
                 >
                   {label}
