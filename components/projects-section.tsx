@@ -83,6 +83,7 @@ const projects: ProjectData[] = [
     ],
     imagePosition: "object-[center_25%]",
     pdfLink: "/Explainable_Coding_Assistant.pdf",
+    caseStudyLink: "/work/explainable-ai",
   },
   {
     id: "pm-salary-ace",
