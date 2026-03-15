@@ -81,7 +81,6 @@ const projects: ProjectData[] = [
       { src: "/images/explainable-4.jpeg", label: "Low Confidence Warning (42%)" },
       { src: "/images/explainable-2.jpg", label: "High Confidence Suggestion (87%)" },
     ],
-    imagePosition: "object-[center_15%]",
     pdfLink: "/Explainable_Coding_Assistant.pdf",
   },
   {
