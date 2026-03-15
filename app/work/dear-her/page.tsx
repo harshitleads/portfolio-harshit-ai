@@ -61,7 +61,7 @@ export default function DearHerPage() {
           <div className="flex flex-wrap gap-3">
             {[
               { value: "One Afternoon", sub: "Idea to live product" },
-              { value: "255 Visitors", sub: "First 7 days" },
+              { value: "255 Visitors", sub: "First 3 days" },
               { value: "48 Letters", sub: "Generated" },
               { value: "10 Countries", sub: "Zero paid distribution" },
             ].map(({ value, sub }) => (
@@ -92,7 +92,7 @@ export default function DearHerPage() {
                 <div className="rounded-xl border border-border/40 bg-card/50 p-5">
                   <p className="mb-4 text-xs font-bold uppercase tracking-widest text-primary">At a Glance</p>
                   <div className="space-y-3">
-                    <div><p className="text-xs text-muted-foreground">Visitors</p><p className="text-sm font-semibold text-foreground">255 (7 days)</p></div>
+                    <div><p className="text-xs text-muted-foreground">Visitors</p><p className="text-sm font-semibold text-foreground">255 (3 days)</p></div>
                     <div><p className="text-xs text-muted-foreground">Letters generated</p><p className="text-sm font-semibold text-foreground">48</p></div>
                     <div><p className="text-xs text-muted-foreground">Landing to writer</p><p className="text-sm font-semibold text-foreground">59%</p></div>
                     <div><p className="text-xs text-muted-foreground">Countries</p><p className="text-sm font-semibold text-foreground">10</p></div>
@@ -224,7 +224,7 @@ export default function DearHerPage() {
                 <Card className="space-y-6">
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     {[
-                      { value: "255", label: "Visitors (7 days)" },
+                      { value: "255", label: "Visitors (3 days)" },
                       { value: "48", label: "Letters generated" },
                       { value: "59%", label: "Landing to writer" },
                       { value: "10", label: "Countries" },
