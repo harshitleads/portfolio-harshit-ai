@@ -225,11 +225,29 @@ export function AboutSection() {
 
               <div className="rounded-xl border border-border/40 bg-secondary/20 p-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
-                <p className="text-base leading-relaxed">
-                  Most teams treat AI failures as engineering problems to patch. I think they are product problems to design around. When a model hallucinates, the failure is not just wrong output. It is a user who trusted the system, got burned, and will not be back.{" "}
-                  <span className="text-primary font-semibold">That is a trust problem, and trust is the PM's domain.</span>
-                  {" "}Evals are one of the most important tools in that work: not as a testing checkbox, but as a way to understand how a model fails before users do. At Berkeley my capstone is on productizing AI evals precisely because I see them as a product capability, not an infrastructure layer. The companies that win long-term are not the ones with the most capable models. They are the ones whose users{" "}
-                  <span className="font-semibold text-foreground">trust the product enough to actually depend on it.</span>{" "}
+                <p className="text-sm leading-relaxed">
+                  Most teams treat AI failures as engineering problems to patch.
+                  I think they are product problems to design around. When a
+                  model hallucinates, the failure is not just wrong output. It
+                  is a user who trusted the system, got burned, and will not
+                  be back.{" "}
+                  <span className="text-primary font-semibold">
+                    That is a trust problem, and trust is the PM's domain.
+                  </span>
+                </p>
+                <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
+                  {[
+                    "Evals: a product capability, not a testing checkbox",
+                    "Reliability: a design decision, not an engineering fix",
+                    "The winners will be trusted products, not just capable ones",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm font-semibold text-foreground">
                   That is what I am building toward.
                 </p>
               </div>
