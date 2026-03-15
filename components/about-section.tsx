@@ -76,7 +76,7 @@ export function AboutSection() {
 
           {/* Bio text */}
           <div
-            className="max-w-4xl transition-all duration-700 delay-100"
+            className="max-w-6xl transition-all duration-700 delay-100"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(30px)",
