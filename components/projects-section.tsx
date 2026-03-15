@@ -81,7 +81,7 @@ const projects: ProjectData[] = [
       { src: "/images/explainable-4.jpeg", label: "Low Confidence Warning (42%)" },
       { src: "/images/explainable-2.jpg", label: "High Confidence Suggestion (87%)" },
     ],
-    imagePosition: "object-[center_30%]",
+    imagePosition: "object-[center_25%]",
     pdfLink: "/Explainable_Coding_Assistant.pdf",
   },
   {
@@ -505,8 +505,12 @@ export function ProjectsSection() {
           onClick={() => { if (zoom <= 1) closeLightbox(); }}
           onWheel={(e) => {
             e.preventDefault();
-            if (e.deltaY < 0) setZoom((z) => Math.min(z + 0.25, 5));
-            else setZoom((z) => { const n = Math.max(z - 0.25, 0.5); if (n <= 1) setPosition({ x: 0, y: 0 }); return n; });
+            if (zoom > 1) {
+              setPosition((prev) => ({
+                x: prev.x - e.deltaX,
+                y: prev.y - e.deltaY,
+              }));
+            }
           }}
           role="dialog"
           aria-modal="true"
