@@ -268,7 +268,7 @@ export function HeroSection() {
             AI Product Manager
           </p>
 
-          <p className="mb-8 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mb-8 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
             Product manager building at the frontier. I ship real products, work across the AI stack, and think obsessively about evals, reliability, and what makes AI systems trustworthy.
           </p>
 

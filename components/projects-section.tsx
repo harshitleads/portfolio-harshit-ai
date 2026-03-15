@@ -212,7 +212,7 @@ function ProjectCard({
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-border/50 bg-secondary/40 px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
+                className="rounded-md border border-slate-400/20 bg-slate-400/[0.06] px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-400"
               >
                 {tag}
               </span>
