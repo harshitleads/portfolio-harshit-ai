@@ -123,7 +123,7 @@ const projects: ProjectData[] = [
   {
     id: "dear-her",
     title: "Dear Her",
-    tagline: "Some feelings are too big for a text message.",
+    tagline: "Some feelings are too big for a text message",
     tags: ["Live Product", "AI Tools"],
     problem: {
       short: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation.",
