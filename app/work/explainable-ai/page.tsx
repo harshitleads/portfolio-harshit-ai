@@ -123,7 +123,7 @@ export default async function ExplainableAIPage() {
               View Full PDF
             </a>
             <a
-              href="https://explainable-coding-assistant-6r1papywr.vercel.app"
+              href="https://trust.harshit.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
