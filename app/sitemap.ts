@@ -14,5 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: 'https://harshit.ai/work/explainable-ai',
+      lastModified: new Date('2026-03-16'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
-import { ScreenshotGallery } from "@/components/case-study/ScreenshotGallery";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Explainable AI Coding Assistant | Case Study | Harshit Sharma",
@@ -426,15 +426,28 @@ export default async function ExplainableAIPage() {
         <section id="screenshots">
           <SectionLabel>Product Screenshots</SectionLabel>
           <SectionHeading>The Product</SectionHeading>
-          <ScreenshotGallery
-            screenshots={[
+          <div className="space-y-6">
+            {[
               { src: "/images/explainable-1.jpg", alt: "Suggestion with explanation panel", caption: "Suggestion with explanation panel, 42% confidence" },
               { src: "/images/explainable-2.jpg", alt: "High confidence suggestion", caption: "High confidence suggestion, 87%" },
               { src: "/images/explainable-3.jpg", alt: "Full reasoning panel", caption: "Full reasoning panel with verification step" },
-              { src: "/images/explainable-4.jpeg", alt: "Low confidence suggestion", caption: "Low confidence suggestion, no panel open" },
+              { src: "/images/explainable-4.jpeg", alt: "Low confidence suggestion", caption: "Low confidence, no panel open" },
               { src: "/images/explainable-summary.jpg", alt: "Product summary", caption: "Product summary: problem, solution, value props" },
-            ]}
-          />
+            ].map((img) => (
+              <div key={img.src}>
+                <div className="overflow-hidden rounded-xl border border-foreground/10" style={{ aspectRatio: "16/10" }}>
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    width={1200}
+                    height={750}
+                    className="w-full object-cover rounded-xl"
+                  />
+                </div>
+                <p className="cs-caption text-center mt-2">{img.caption}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="next">
