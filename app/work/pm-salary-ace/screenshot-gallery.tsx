@@ -24,7 +24,7 @@ export function ScreenshotGallery() {
                 <Maximize2 className="h-3 w-3" />
               </div>
             </div>
-            <p className="px-3 py-2.5 text-center text-xs font-medium text-muted-foreground">{label}</p>
+            <p className="px-3 py-2.5 text-center text-[13px] font-medium text-slate-400">{label}</p>
           </button>
         ))}
       </div>
@@ -36,7 +36,7 @@ export function ScreenshotGallery() {
           <div className="flex max-h-[90vh] max-w-[92vw] items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <Image src={openImg.src} alt={openImg.label} width={1600} height={1100} className="max-h-[90vh] max-w-[92vw] rounded-lg object-contain" priority />
           </div>
-          <p className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm">{openImg.label}</p>
+          <p className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm">{openImg.label}</p>
         </div>
       )}
     </>
