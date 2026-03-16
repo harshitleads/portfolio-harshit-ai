@@ -88,8 +88,12 @@ export function CaseStudySidebar({ stats, sections }: CaseStudySidebarProps) {
               {stat.showProgressBar && stat.progressValue != null && (
                 <div className="mt-1.5 h-[6px] w-full rounded-full bg-white/15">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600"
-                    style={{ width: `${stat.progressValue}%` }}
+                    style={{
+                      width: `${stat.progressValue}%`,
+                      height: '100%',
+                      borderRadius: '9999px',
+                      background: 'linear-gradient(to right, #34d399, #059669)',
+                    }}
                   />
                 </div>
               )}
