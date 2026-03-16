@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 
 interface Node {
@@ -31,7 +31,6 @@ export function HeroSection() {
   const connectionsRef = useRef<Connection[]>([]);
   const animFrameRef = useRef<number>(0);
   const lastTimeRef = useRef(0);
-  const isVisibleRef = useRef(true);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -108,24 +107,6 @@ export function HeroSection() {
     };
     window.addEventListener("mousemove", onMove);
 
-    // Pause when off screen
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          console.log("canvas resumed");
-          isVisibleRef.current = true;
-          lastTimeRef.current = 0;
-          animFrameRef.current = requestAnimationFrame(animate);
-        } else {
-          console.log("canvas paused");
-          isVisibleRef.current = false;
-          cancelAnimationFrame(animFrameRef.current);
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
-
     const getColor = (hue: number, alpha: number) => {
       const r = Math.round(20 + hue * 10);
       const g = Math.round(180 + (1 - hue) * 40);
@@ -134,8 +115,6 @@ export function HeroSection() {
     };
 
     const animate = (currentTime: number) => {
-      if (!isVisibleRef.current) return;
-
       // 30fps throttle
       if (lastTimeRef.current && currentTime - lastTimeRef.current < 33) {
         animFrameRef.current = requestAnimationFrame(animate);
@@ -237,9 +216,29 @@ export function HeroSection() {
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animFrameRef.current = requestAnimationFrame(animate);
+    // Pause when off screen — observer controls start/stop entirely
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          console.log("canvas resumed");
+          lastTimeRef.current = 0;
+          animFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          console.log("canvas paused");
+          cancelAnimationFrame(animFrameRef.current);
+          animFrameRef.current = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
-    const onScroll = () => setScrollY(window.scrollY);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY < window.innerHeight * 1.5) {
+        setScrollY(currentY);
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
@@ -251,8 +250,8 @@ export function HeroSection() {
     };
   }, []);
 
-  const parallax = Math.min(scrollY * 0.3, 200);
-  const opacity = Math.max(1 - scrollY / 600, 0);
+  const parallax = useMemo(() => Math.min(scrollY * 0.3, 200), [scrollY]);
+  const opacity = useMemo(() => Math.max(1 - scrollY / 600, 0), [scrollY]);
 
   return (
     <section className="relative flex h-screen items-end overflow-hidden pb-20 md:items-center md:pb-0">
