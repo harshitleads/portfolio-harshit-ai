@@ -40,7 +40,54 @@ const sidebarSections = [
   { id: "next", label: "What's Next" },
 ];
 
-export default function ExplainableAIPage() {
+interface CompetitiveTool {
+  name: string
+  marketPosition: string
+  keyFeatures: string
+  uniqueAngle: string
+  keyInsights: string
+  targetUser: string
+  pricing: string
+}
+
+async function getCompetitiveTools(): Promise<CompetitiveTool[]> {
+  try {
+    const res = await fetch(
+      `https://api.notion.com/v1/databases/${process.env.NOTION_COMPETITIVE_DB_ID}/query`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+          'Notion-Version': '2022-06-28',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ page_size: 20 }),
+        next: { revalidate: 3600 },
+      }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.results.map((page: any) => ({
+      name: page.properties['Competitor Name']?.title?.[0]?.plain_text ?? '',
+      marketPosition: page.properties['Market Position']?.rich_text?.[0]?.plain_text ?? '',
+      keyFeatures: page.properties['Key Features']?.rich_text?.[0]?.plain_text ?? '',
+      uniqueAngle: page.properties['Unique Angle']?.rich_text?.[0]?.plain_text ?? '',
+      keyInsights: page.properties['Key Insight']?.rich_text?.[0]?.plain_text ?? '',
+      targetUser: page.properties['Target User']?.rich_text?.[0]?.plain_text ?? '',
+      pricing: page.properties['Pricing']?.rich_text?.[0]?.plain_text ?? '',
+      analysisType: page.properties['Analysis Type']?.select?.name ?? page.properties['Analysis Type']?.multi_select?.[0]?.name ?? '',
+    })).filter((t: any) => {
+      if (!t.name) return false
+      const excluded = ['user pain point', 'strategic', 'solution mockup', 'one-pager', 'synthesis', 'analysis']
+      return !excluded.some((term: string) => t.name.toLowerCase().includes(term))
+    })
+  } catch {
+    return []
+  }
+}
+
+export default async function ExplainableAIPage() {
+  const tools = await getCompetitiveTools()
   return (
     <main className="min-h-screen bg-background text-foreground">
 
@@ -129,30 +176,50 @@ export default function ExplainableAIPage() {
             and language coverage. None compete on explainability. This is
             a consistent gap, not an oversight.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            {[
-              {
-                name: "GitHub Copilot",
-                note: "Inline autocomplete with no rationale surface. Comment-driven generation has no explanation layer.",
-              },
-              {
-                name: "Cursor",
-                note: "Chat alongside the editor is closer, but it is reactive. The user has to ask. Explanations are not surfaced proactively.",
-              },
-              {
-                name: "Codeium / Tabnine",
-                note: "Speed-focused. The value prop is low latency, not transparency. No explanation affordance at all.",
-              },
-            ].map((tool) => (
-              <div
-                key={tool.name}
-                className="border border-foreground/10 rounded-xl p-4"
-              >
-                <p className="cs-card-title mb-1">{tool.name}</p>
-                <p className="cs-body">{tool.note}</p>
-              </div>
-            ))}
-          </div>
+          {tools.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {tools.map((tool) => (
+                <div key={tool.name} className="border border-foreground/10 rounded-xl p-4 space-y-3">
+                  <p className="cs-card-title">{tool.name}</p>
+                  {tool.marketPosition && (
+                    <p className="text-[13px] font-medium text-emerald-400/80 uppercase tracking-wide">{tool.marketPosition}</p>
+                  )}
+                  {tool.keyFeatures && (
+                    <p className="cs-body">{tool.keyFeatures}</p>
+                  )}
+                  {tool.uniqueAngle && (
+                    <div className="border-t border-foreground/10 pt-3">
+                      <p className="text-[12px] font-bold uppercase tracking-widest text-slate-400 mb-1">Unique Angle</p>
+                      <p className="cs-body">{tool.uniqueAngle}</p>
+                    </div>
+                  )}
+                  {tool.keyInsights && (
+                    <div className="border-t border-foreground/10 pt-3">
+                      <p className="text-[12px] font-bold uppercase tracking-widest text-slate-400 mb-1">Key Insight</p>
+                      <p className="cs-body">{tool.keyInsights}</p>
+                    </div>
+                  )}
+                  {tool.pricing && (
+                    <p className="text-[13px] text-slate-400">{tool.pricing}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              {[
+                { name: "GitHub Copilot", note: "Inline autocomplete with no rationale surface. Comment-driven generation has no explanation layer." },
+                { name: "Cursor", note: "Chat alongside the editor is closer, but it is reactive. The user has to ask. Explanations are not surfaced proactively." },
+                { name: "Codeium / Tabnine", note: "Speed-focused. The value prop is low latency, not transparency. No explanation affordance at all." },
+              ].map((tool) => (
+                <div key={tool.name} className="border border-foreground/10 rounded-xl p-4">
+                  <p className="cs-card-title mb-1">{tool.name}</p>
+                  <p className="cs-body">{tool.note}</p>
+                </div>
+              ))}
+            </div>
+          )}
+          <p className="text-[13px] text-slate-400 mb-6">Source: competitive analysis database, updated continuously.</p>
           <p className="cs-body">
             The gap is structural. These tools were built to maximize
             suggestion throughput. Explanation is friction by default.
