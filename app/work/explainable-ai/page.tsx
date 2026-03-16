@@ -189,13 +189,13 @@ export default async function ExplainableAIPage() {
                   )}
                   {tool.uniqueAngle && (
                     <div className="border-t border-foreground/10 pt-3">
-                      <p className="text-[12px] font-bold uppercase tracking-widest text-slate-400 mb-1">Unique Angle</p>
+                      <p className="text-[13px] font-bold uppercase tracking-widest text-slate-400 mb-1">Unique Angle</p>
                       <p className="cs-body">{tool.uniqueAngle}</p>
                     </div>
                   )}
                   {tool.keyInsights && (
                     <div className="border-t border-foreground/10 pt-3">
-                      <p className="text-[12px] font-bold uppercase tracking-widest text-slate-400 mb-1">Key Insight</p>
+                      <p className="text-[13px] font-bold uppercase tracking-widest text-slate-400 mb-1">Key Insight</p>
                       <p className="cs-body">{tool.keyInsights}</p>
                     </div>
                   )}
