@@ -2,27 +2,32 @@
 
 Standard design tokens and conventions for all case study pages.
 
-## Typography
+**Never use arbitrary Tailwind font sizes like text-sm, text-xs, text-base on body content — always use the cs-* classes.**
 
-| Element | Classes |
-|---|---|
-| Body text | `text-[15px] leading-7 text-slate-400` |
-| Body (in Body component) | `text-base leading-8 text-slate-400 md:text-[17px]` |
-| Section headings | `text-2xl font-bold tracking-tight text-foreground md:text-3xl` |
-| Section category labels | `text-[11px] font-bold uppercase tracking-widest text-primary` |
-| Card descriptions | `text-[15px] leading-7 text-slate-400` |
-| Screenshot captions | `text-[13px] text-slate-400 font-medium` |
+## CSS Utility Classes (defined in app/globals.css)
+
+These are the **only approved way** to style text on case study pages:
+
+| Class | Purpose | Styles |
+|---|---|---|
+| `cs-body` | Body text, descriptions, bullets | 15px, line-height 1.75rem, slate-400 |
+| `cs-card-title` | Card titles, step titles | 15px, semibold, slate-100 |
+| `cs-section-label` | Section category labels (teal) | 11px, bold, uppercase, tracking, emerald |
+| `cs-label` | Sidebar stat labels | 13px, slate-400 |
+| `cs-sublabel` | Sidebar teal accent sublabels | 12px, emerald-400/80 |
+| `cs-micro` | Tiny labels, funnel drops, metadata | 11px, slate-400 |
+| `cs-caption` | Screenshot captions | 13px, medium, slate-400 |
 
 ## Sidebar (At a Glance)
 
-| Element | Classes |
+| Element | How to style |
 |---|---|
 | AT A GLANCE / SECTIONS labels | `text-[13px] font-bold uppercase tracking-widest text-primary` |
 | Stat numbers | `text-xl font-bold text-slate-100` |
-| Stat labels | `text-[13px] text-slate-400` |
-| Sublabels (teal accent) | `text-[12px] text-emerald-400/80` |
+| Stat labels | `cs-label` |
+| Sublabels (teal accent) | `cs-sublabel` |
 | Progress bar track | `h-[6px] rounded-full bg-white/15` |
-| Progress bar fill | `bg-gradient-to-r from-emerald-400 to-emerald-600` |
+| Progress bar fill | Inline style: `linear-gradient(to right, #34d399, #059669)` |
 | Card container | `rounded-lg border border-white/[0.07] bg-white/[0.04] p-3` |
 
 ## Navigation
@@ -40,19 +45,19 @@ IntersectionObserver config: `threshold: 0.3`, `rootMargin: '-10% 0px -60% 0px'`
 
 - Container: `grid grid-cols-1 md:grid-cols-2 gap-4`
 - Card wrapper: `glass-card rounded-2xl p-6 md:p-8`
-- Title: `mb-2 font-semibold text-foreground`
-- Description: `text-[15px] leading-7 text-slate-400`
+- Title: `cs-card-title mb-2`
+- Description: `cs-body`
 
 ## Writing Rules
 
 - No em dashes anywhere. Use commas or periods instead.
 - Sublabels should use teal accent color, never muted grey.
-- Body text uses `text-slate-400`, never `text-muted-foreground`.
+- Body text uses `cs-body`, never `text-muted-foreground` or arbitrary Tailwind sizes.
 - Stat numbers use `text-slate-100`, never pure `text-white`.
 
 ## Shared Components
 
-All case study pages should use these shared components from `/components/case-study/`:
+All case study pages must use these shared components from `/components/case-study/`:
 
 ### CaseStudySidebar
 

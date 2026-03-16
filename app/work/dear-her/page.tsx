@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-primary">{children}</p>;
+  return <p className="cs-section-label mb-2">{children}</p>;
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -24,7 +24,7 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
 }
 
 function Body({ children }: { children: React.ReactNode }) {
-  return <p className="text-base leading-8 text-slate-400 md:text-[17px]">{children}</p>;
+  return <p className="cs-body">{children}</p>;
 }
 
 const sidebarStats = [
@@ -95,8 +95,8 @@ export default function DearHerPage() {
               { value: "10 Countries", sub: "Zero paid distribution" },
             ].map(({ value, sub }) => (
               <div key={value} className="rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-center">
-                <p className="text-sm font-bold text-primary">{value}</p>
-                <p className="text-[11px] text-muted-foreground">{sub}</p>
+                <p className="text-[15px] font-bold text-primary">{value}</p>
+                <p className="text-[13px] text-slate-400">{sub}</p>
               </div>
             ))}
           </div>
@@ -152,17 +152,17 @@ export default function DearHerPage() {
                     {i < arr.length - 1 && <div className="mt-1 w-px flex-1 bg-border" />}
                   </div>
                   <div className={`pb-7 ${i === arr.length - 1 ? "pb-0" : ""}`}>
-                    <p className="mb-0.5 text-[11px] font-bold uppercase tracking-widest text-primary">{step}</p>
-                    <p className="mb-1 font-semibold text-foreground">{label}</p>
-                    <p className="text-[15px] leading-7 text-slate-400">{body}</p>
+                    <p className="mb-0.5 text-[12px] font-bold uppercase tracking-widest text-primary">{step}</p>
+                    <p className="cs-card-title mb-1">{label}</p>
+                    <p className="cs-body">{body}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-border pt-6">
-              <p className="mr-1 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Stack</p>
+              <p className="cs-section-label mr-1">Stack</p>
               {["Lovable", "Claude API", "Supabase", "Namecheap"].map((tool) => (
-                <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-foreground">{tool}</span>
+                <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-[13px] font-medium text-foreground">{tool}</span>
               ))}
             </div>
           </Card>
@@ -182,47 +182,47 @@ export default function DearHerPage() {
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p className="text-2xl font-bold text-primary">{value}</p>
-                  <p className="text-[11px] text-muted-foreground">{label}</p>
+                  <p className="cs-micro">{label}</p>
                 </div>
               ))}
             </div>
 
             {/* Conversion Funnel */}
             <div className="space-y-4 border-t border-border pt-6">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400/80">Conversion Funnel</p>
+              <p className="cs-section-label">Conversion Funnel</p>
               <div className="flex flex-col items-center gap-0">
                 <div className="relative w-full">
                   <svg viewBox="0 0 400 70" className="w-full">
                     <polygon points="0,0 400,0 365,70 35,70" fill="rgba(52,211,153,0.22)" stroke="rgba(52,211,153,0.4)" strokeWidth="1" />
                     <text x="200" y="28" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">255</text>
-                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="11">Visitors</text>
-                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="9">100%</text>
+                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="12">Visitors</text>
+                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="12">100%</text>
                   </svg>
                 </div>
                 <div className="flex w-full items-center gap-2 py-1.5">
                   <div className="h-px flex-1 bg-white/[0.06]" />
-                  <p className="text-[10px] text-slate-400">&darr; 41% dropped off</p>
+                  <p className="cs-micro">&darr; 41% dropped off</p>
                   <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
                 <div className="relative w-[78%]">
                   <svg viewBox="0 0 400 70" className="w-full">
                     <polygon points="0,0 400,0 365,70 35,70" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.3)" strokeWidth="1" />
                     <text x="200" y="28" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">150</text>
-                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="11">Reached Writer</text>
-                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="9">59% of visitors</text>
+                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="12">Reached Writer</text>
+                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="12">59% of visitors</text>
                   </svg>
                 </div>
                 <div className="flex w-full items-center gap-2 py-1.5">
                   <div className="h-px flex-1 bg-white/[0.06]" />
-                  <p className="text-[10px] text-slate-400">&darr; 68% dropped off</p>
+                  <p className="cs-micro">&darr; 68% dropped off</p>
                   <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
                 <div className="relative w-[46%]">
                   <svg viewBox="0 0 400 70" className="w-full">
                     <polygon points="0,0 400,0 365,70 35,70" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.2)" strokeWidth="1" />
                     <text x="200" y="28" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">48</text>
-                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="11">Letters Generated</text>
-                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="9">19% end-to-end</text>
+                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="12">Letters Generated</text>
+                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="12">19% end-to-end</text>
                   </svg>
                 </div>
               </div>
@@ -234,11 +234,11 @@ export default function DearHerPage() {
             </div>
 
             <div className="space-y-3 border-t border-border pt-6">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">First User Comment</p>
-              <blockquote className="border-l-2 border-primary pl-4 text-[15px] italic leading-7 text-slate-400">
+              <p className="cs-section-label">First User Comment</p>
+              <blockquote className="cs-body border-l-2 border-primary pl-4 italic">
                 &ldquo;Tried it and really liked it. It also made me reflect on a few things about someone I deeply love. This is beautiful, Harshit. Also really liked the voice feature, reduces a lot of friction.&rdquo;
               </blockquote>
-              <p className="text-[11px] text-muted-foreground">Himani Agarwal, Cornell 2026, AI and Product</p>
+              <p className="text-[13px] text-slate-400">Himani Agarwal, Cornell 2026, AI and Product</p>
             </div>
           </Card>
         </section>
@@ -275,8 +275,8 @@ export default function DearHerPage() {
               },
             ].map(({ decision, reasoning }) => (
               <Card key={decision}>
-                <p className="mb-2 font-semibold text-foreground">{decision}</p>
-                <p className="text-[15px] leading-7 text-slate-400">{reasoning}</p>
+                <p className="cs-card-title mb-2">{decision}</p>
+                <p className="cs-body">{reasoning}</p>
               </Card>
             ))}
           </div>

@@ -90,3 +90,12 @@ html {
   border-color: hsla(160,70%,50%,0.3);
   background: linear-gradient(135deg, hsla(222,45%,14%,0.8), hsla(222,45%,10%,0.6));
 }
+
+/* Case study typography utilities */
+.cs-body { font-size: 17px; line-height: 1.8rem; color: rgb(148, 163, 184); }
+.cs-card-title { font-size: 17px; line-height: 1.5rem; font-weight: 600; color: rgb(241, 245, 249); }
+.cs-section-label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(38, 217, 157); }
+.cs-label { font-size: 14px; color: rgb(148, 163, 184); }
+.cs-sublabel { font-size: 14px; color: rgba(52, 211, 153, 0.8); }
+.cs-micro { font-size: 13px; color: rgb(148, 163, 184); }
+.cs-caption { font-size: 14px; font-weight: 500; color: rgb(148, 163, 184); }

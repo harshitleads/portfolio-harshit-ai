@@ -26,21 +26,26 @@ export function CaseStudySidebar({ stats, sections }: CaseStudySidebarProps) {
   const isAtBottom = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && !isAtBottom.current) {
-            setActiveSection(entry.target.id);
-          }
-        }
-      },
-      { threshold: 0.3, rootMargin: "-10% 0px -60% 0px" }
-    );
+    const sectionIds = sections.map((s) => s.id);
 
-    for (const { id } of sections) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
+    const getActiveSection = () => {
+      if (isAtBottom.current) return;
+
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const offset = viewportHeight * 0.25;
+
+      let active = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + scrollY;
+        if (top <= scrollY + offset) {
+          active = id;
+        }
+      }
+      setActiveSection(active);
+    };
 
     const handleScroll = () => {
       const atBottom =
@@ -50,21 +55,21 @@ export function CaseStudySidebar({ stats, sections }: CaseStudySidebarProps) {
         setActiveSection(sections[sections.length - 1].id);
       } else {
         isAtBottom.current = false;
+        getActiveSection();
       }
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-    };
+    getActiveSection();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [sections]);
 
   return (
     <div className="space-y-6 lg:sticky lg:top-8">
       {/* Quick stats */}
       <div className="rounded-xl border border-border/40 bg-card/50 p-5">
-        <p className="mb-4 text-[13px] font-bold uppercase tracking-widest text-primary">
+        <p className="mb-4 text-[14px] font-bold uppercase tracking-widest text-primary">
           At a Glance
         </p>
         <div className="grid gap-2">
@@ -81,9 +86,9 @@ export function CaseStudySidebar({ stats, sections }: CaseStudySidebarProps) {
               ) : (
                 <p className="text-xl font-bold text-slate-100">{stat.value}</p>
               )}
-              <p className="text-[13px] text-slate-400">{stat.label}</p>
+              <p className="cs-label">{stat.label}</p>
               {stat.sublabel && (
-                <p className="text-[12px] text-emerald-400/80">{stat.sublabel}</p>
+                <p className="cs-sublabel">{stat.sublabel}</p>
               )}
               {stat.showProgressBar && stat.progressValue != null && (
                 <div className="mt-1.5 h-[6px] w-full rounded-full bg-white/15">
@@ -104,7 +109,7 @@ export function CaseStudySidebar({ stats, sections }: CaseStudySidebarProps) {
 
       {/* Section links */}
       <div className="rounded-xl border border-border/40 bg-card/50 p-5">
-        <p className="mb-4 text-[13px] font-bold uppercase tracking-widest text-primary">
+        <p className="mb-4 text-[14px] font-bold uppercase tracking-widest text-primary">
           Sections
         </p>
         <nav className="space-y-2">

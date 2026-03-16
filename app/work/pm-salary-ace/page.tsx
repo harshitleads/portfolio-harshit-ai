@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-2 text-xs font-bold uppercase tracking-widest text-primary">
+    <p className="cs-section-label mb-2">
       {children}
     </p>
   );
@@ -36,7 +36,7 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
 
 function Body({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-base leading-8 text-slate-400 md:text-[17px]">
+    <p className="cs-body">
       {children}
     </p>
   );
@@ -113,8 +113,8 @@ export default function PMSalaryAcePage() {
               { value: "336 Questions", sub: "Across 5 tiers" },
             ].map(({ value, sub }) => (
               <div key={value} className="rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-center">
-                <p className="text-sm font-bold text-primary">{value}</p>
-                <p className="text-xs text-muted-foreground">{sub}</p>
+                <p className="text-[15px] font-bold text-primary">{value}</p>
+                <p className="text-[13px] text-slate-400">{sub}</p>
               </div>
             ))}
           </div>
@@ -169,17 +169,17 @@ export default function PMSalaryAcePage() {
                     {i < arr.length - 1 && <div className="mt-1 w-px flex-1 bg-border" />}
                   </div>
                   <div className={`pb-7 ${i === arr.length - 1 ? "pb-0" : ""}`}>
-                    <p className="mb-0.5 text-xs font-bold uppercase tracking-widest text-primary">{hour}</p>
-                    <p className="mb-1 font-semibold text-foreground">{label}</p>
-                    <p className="text-[15px] leading-7 text-slate-400">{body}</p>
+                    <p className="mb-0.5 text-[12px] font-bold uppercase tracking-widest text-primary">{hour}</p>
+                    <p className="cs-card-title mb-1">{label}</p>
+                    <p className="cs-body">{body}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-border pt-6">
-              <p className="mr-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">V1 Stack</p>
+              <p className="cs-section-label mr-1">V1 Stack</p>
               {["Lovable", "Claude", "Supabase", "Vercel"].map((tool) => (
-                <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-foreground">{tool}</span>
+                <span key={tool} className="rounded-full border border-border bg-secondary px-3 py-1 text-[13px] font-medium text-foreground">{tool}</span>
               ))}
             </div>
           </Card>
@@ -210,27 +210,27 @@ export default function PMSalaryAcePage() {
           <Card className="space-y-8">
             {/* Part A: Activation Funnel */}
             <div className="space-y-4">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400/80">Activation Funnel</p>
+              <p className="cs-section-label">Activation Funnel</p>
               <div className="flex flex-col items-center gap-0">
                 <div className="relative w-full">
                   <svg viewBox="0 0 400 70" className="w-full">
                     <polygon points="0,0 400,0 365,70 35,70" fill="rgba(52,211,153,0.22)" stroke="rgba(52,211,153,0.4)" strokeWidth="1" />
                     <text x="200" y="28" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">22</text>
-                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="11">Users</text>
-                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="9">First 12 hours</text>
+                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="12">Users</text>
+                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="12">First 12 hours</text>
                   </svg>
                 </div>
                 <div className="flex w-full items-center gap-2 py-1.5">
                   <div className="h-px flex-1 bg-white/[0.06]" />
-                  <p className="text-[10px] text-slate-400">&darr; 51% didn&apos;t activate</p>
+                  <p className="cs-micro">&darr; 51% didn&apos;t activate</p>
                   <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
                 <div className="relative w-[49%]">
                   <svg viewBox="0 0 400 70" className="w-full">
                     <polygon points="0,0 400,0 365,70 35,70" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.2)" strokeWidth="1" />
                     <text x="200" y="28" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">11</text>
-                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="11">Activated</text>
-                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="9">49% activation rate</text>
+                    <text x="200" y="44" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="12">Activated</text>
+                    <text x="200" y="58" textAnchor="middle" fill="rgba(52,211,153,0.9)" fontSize="12">49% activation rate</text>
                   </svg>
                 </div>
               </div>
@@ -238,25 +238,25 @@ export default function PMSalaryAcePage() {
 
             {/* Part B: Question Tier Breakdown */}
             <div className="space-y-3 border-t border-border pt-6">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400/80">Question Distribution</p>
+              <p className="cs-section-label">Question Distribution</p>
               <div className="flex h-10 overflow-hidden rounded-lg">
                 <div className="flex items-center justify-center bg-emerald-400/20" style={{ width: `${(60 / 336) * 100}%` }}>
-                  <span className="text-[10px] text-white">Associate 60</span>
+                  <span className="text-[12px] text-white">Associate 60</span>
                 </div>
                 <div className="flex items-center justify-center bg-emerald-400/35" style={{ width: `${(65 / 336) * 100}%` }}>
-                  <span className="text-[10px] text-white">Mid 65</span>
+                  <span className="text-[12px] text-white">Mid 65</span>
                 </div>
                 <div className="flex items-center justify-center bg-emerald-400/50" style={{ width: `${(67 / 336) * 100}%` }}>
-                  <span className="text-[10px] text-white">Senior 67</span>
+                  <span className="text-[12px] text-white">Senior 67</span>
                 </div>
                 <div className="flex items-center justify-center bg-emerald-400/65" style={{ width: `${(72 / 336) * 100}%` }}>
-                  <span className="text-[10px] text-white">Staff 72</span>
+                  <span className="text-[12px] text-white">Staff 72</span>
                 </div>
                 <div className="flex items-center justify-center bg-emerald-400/80" style={{ width: `${(72 / 336) * 100}%` }}>
-                  <span className="text-[10px] text-white">Principal 72</span>
+                  <span className="text-[12px] text-white">Principal 72</span>
                 </div>
               </div>
-              <div className="flex justify-between text-[9px] text-slate-500">
+              <div className="cs-micro flex justify-between">
                 <span>$130–170K</span>
                 <span>$170–220K</span>
                 <span>$220–280K</span>
@@ -299,8 +299,8 @@ export default function PMSalaryAcePage() {
               },
             ].map(({ decision, reasoning }) => (
               <Card key={decision}>
-                <p className="mb-2 font-semibold text-foreground">{decision}</p>
-                <p className="text-[15px] leading-7 text-slate-400">{reasoning}</p>
+                <p className="cs-card-title mb-2">{decision}</p>
+                <p className="cs-body">{reasoning}</p>
               </Card>
             ))}
           </div>
@@ -312,7 +312,7 @@ export default function PMSalaryAcePage() {
           <SectionHeading>What Beta Users Said</SectionHeading>
           <Card className="space-y-6">
             <div>
-              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">Beta User, aspiring PM</p>
+              <p className="cs-section-label mb-1">Beta User, aspiring PM</p>
               <ul className="mt-3 space-y-2">
                 {[
                   "Multi-select tag too small, not visible enough",
@@ -321,7 +321,7 @@ export default function PMSalaryAcePage() {
                   "No bugs encountered, fast performance",
                   "Suggested making it more similar to actual interviews",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[15px] leading-7 text-slate-400">
+                  <li key={item} className="cs-body flex gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
                     {item}
                   </li>
@@ -329,7 +329,7 @@ export default function PMSalaryAcePage() {
               </ul>
             </div>
             <div className="border-t border-border pt-6">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Response</p>
+              <p className="cs-section-label mb-3">My Response</p>
               <Body>
                 Multi-select visibility is a valid bug. Question difficulty is intentional: the target user is an aspiring PM, not a current PM. Interview simulation is a V3 direction, not V2 scope. The product is explicitly a thinking skills builder.
               </Body>
@@ -350,7 +350,7 @@ export default function PMSalaryAcePage() {
           <SectionHeading>V3 Direction</SectionHeading>
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
-              <p className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">Still In Progress (V2)</p>
+              <p className="cs-section-label mb-5">Still In Progress (V2)</p>
               <ul className="space-y-3">
                 {[
                   "Contrast fixes on quiz builder and tier badge pills",
@@ -358,7 +358,7 @@ export default function PMSalaryAcePage() {
                   "Regenerate original 125 questions via Gemini",
                   "Make multi-select tag more prominent",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[15px] leading-7 text-slate-400">
+                  <li key={item} className="cs-body flex gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-muted-foreground/40" />
                     {item}
                   </li>
@@ -366,7 +366,7 @@ export default function PMSalaryAcePage() {
               </ul>
             </Card>
             <Card>
-              <p className="mb-5 text-xs font-bold uppercase tracking-widest text-primary">V3 Vision</p>
+              <p className="cs-section-label mb-5">V3 Vision</p>
               <ul className="space-y-3">
                 {[
                   "Open-ended questions with LLM-as-judge scoring",
@@ -374,7 +374,7 @@ export default function PMSalaryAcePage() {
                   "Personalized weak area recommendations",
                   "Interview simulation format",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[15px] leading-7 text-slate-400">
+                  <li key={item} className="cs-body flex gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
                     {item}
                   </li>
