@@ -257,7 +257,7 @@ export function HeroSection() {
         <div className="max-w-2xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
             <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            <span className="text-xs font-medium text-primary">Open to Opportunities</span>
+            <span className="text-[13px] font-medium text-primary">Open to Opportunities</span>
           </div>
 
           <h1 className="mb-4 text-balance text-5xl font-bold leading-tight tracking-tight text-foreground md:text-7xl">
@@ -268,7 +268,7 @@ export function HeroSection() {
             AI Product Manager
           </p>
 
-          <p className="mb-8 max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
+          <p className="mb-8 max-w-lg text-[17px] leading-relaxed text-slate-400">
             Product manager building at the frontier. I ship real products, work across the AI stack, and think obsessively about evals, reliability, and what makes AI systems trustworthy.
           </p>
 

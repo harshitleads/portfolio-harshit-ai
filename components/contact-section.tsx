@@ -40,13 +40,13 @@ export function ContactSection() {
             transform: isVisible ? "translateY(0)" : "translateY(30px)",
           }}
         >
-          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
+          <p className="mb-2 text-[13px] font-medium uppercase tracking-widest text-primary">
             Connect
           </p>
           <h2 className="mb-4 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             {"Let's Connect!"}
           </h2>
-          <p className="mb-10 text-base leading-relaxed text-muted-foreground">
+          <p className="mb-10 text-[17px] leading-relaxed text-slate-400">
             Interested in AI product strategy? Building something cool? Just want to chat about agents and reliability? I'm easy to reach.
             <br /><br />
             Currently: Trying to resurrect my chess game, playing too much table tennis, and planning my next trip to Japan (vegetarian ramen research in progress!).
@@ -71,10 +71,10 @@ export function ContactSection() {
                 <item.icon className="h-5 w-5 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold tracking-wider text-muted-foreground">
+                <p className="text-[15px] font-semibold tracking-wider text-slate-400">
                   {item.label}
                 </p>
-                <p className="truncate text-sm font-medium text-foreground">{item.value}</p>
+                <p className="truncate text-[14px] font-medium text-slate-400">{item.value}</p>
               </div>
               <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-muted-foreground opacity-0 transition-all group-hover:text-primary group-hover:opacity-100" />
             </a>

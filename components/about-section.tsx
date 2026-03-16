@@ -66,7 +66,7 @@ export function AboutSection() {
               transform: isVisible ? "translateY(0)" : "translateY(30px)",
             }}
           >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
+            <p className="mb-2 text-[13px] font-medium uppercase tracking-widest text-primary">
               Background
             </p>
             <h2 className="mb-10 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -82,7 +82,7 @@ export function AboutSection() {
               transform: isVisible ? "translateY(0)" : "translateY(30px)",
             }}
           >
-            <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            <div className="space-y-5 text-[17px] leading-relaxed text-slate-400">
               <p>
                 {"I started in electrical engineering, designing power systems where failure meant explosions, not just bad user reviews. That taught me to think through failure modes obsessively because in safety-critical systems, \u201Cit works in the demo\u201D isn\u2019t good enough."}
               </p>
@@ -122,10 +122,10 @@ export function AboutSection() {
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 transition-colors duration-300 group-hover:bg-primary/20">
                   <card.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xs font-bold uppercase tracking-widest text-foreground">
+                <h3 className="mb-2 text-[13px] font-bold uppercase tracking-widest text-foreground">
                   {card.heading}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-[16px] leading-7 text-slate-400">
                   {card.text}
                 </p>
               </div>
@@ -181,7 +181,7 @@ export function AboutSection() {
               </h3>
             </div>
 
-            <div className="flex-1 space-y-6 text-base leading-[1.8] text-muted-foreground overflow-y-auto px-6 py-8 md:px-10">
+            <div className="flex-1 space-y-6 text-[17px] leading-relaxed text-slate-400 overflow-y-auto px-6 py-8 md:px-10">
 
               <p>
                 I started in electrical engineering designing power systems where a design flaw does not just crash an app.{" "}
@@ -215,8 +215,8 @@ export function AboutSection() {
               </p>
 
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">The Opportunity I See</p>
-                <p className="text-base leading-relaxed">
+                <p className="mb-1 text-[13px] font-bold uppercase tracking-widest text-primary">The Opportunity I See</p>
+                <p className="text-[16px] leading-relaxed">
                   Most AI products are built capability-first. More context, faster inference, better reasoning. Those advances matter. But{" "}
                   <span className="font-semibold text-foreground">capability without reliability is a demo, not a product.</span>{" "}
                   AI systems break in ways that are hard to predict, hard to explain, and hard to recover from. Users get burned once and do not come back. That is not just an engineering problem. It is a product problem, and most teams are not treating it that way.
@@ -224,8 +224,8 @@ export function AboutSection() {
               </div>
 
               <div className="rounded-xl border border-border/40 bg-secondary/20 p-5">
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
-                <p className="text-sm leading-relaxed">
+                <p className="mb-1 text-[13px] font-bold uppercase tracking-widest text-muted-foreground">My Thesis</p>
+                <p className="text-[16px] leading-relaxed">
                   Most teams treat AI failures as engineering problems to patch.
                   I think they are product problems to design around. When a
                   model hallucinates, the failure is not just wrong output. It
@@ -235,7 +235,7 @@ export function AboutSection() {
                     That is a trust problem, and trust is the PM's domain.
                   </span>
                 </p>
-                <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
+                <ul className="mt-3 space-y-1.5 text-[16px] leading-7 text-slate-400">
                   {[
                     "Evals: a product capability, not a testing checkbox",
                     "Reliability: a design decision, not an engineering fix",
@@ -247,7 +247,7 @@ export function AboutSection() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-3 text-sm font-semibold text-foreground">
+                <p className="mt-3 text-[16px] font-semibold text-foreground">
                   That is what I am building toward.
                 </p>
               </div>

@@ -212,7 +212,7 @@ function ProjectCard({
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-slate-400/20 bg-slate-400/[0.06] px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-400"
+                className="rounded-md border border-slate-400/20 bg-slate-400/[0.06] px-2 py-0.5 text-[13px] font-medium tracking-wide text-slate-400"
               >
                 {tag}
               </span>
@@ -220,19 +220,19 @@ function ProjectCard({
           </div>
 
           <div className="mb-4">
-            <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            <p className="mb-1.5 text-[13px] font-bold uppercase tracking-widest text-primary">
               The Problem
             </p>
-            <p className="text-sm leading-relaxed text-foreground/80">
+            <p className="text-[16px] leading-7 text-slate-400">
               {project.problem.short}
             </p>
           </div>
 
           <div className="mb-4">
-            <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            <p className="mb-1.5 text-[13px] font-bold uppercase tracking-widest text-primary">
               The Solution
             </p>
-            <p className="text-sm leading-relaxed text-foreground/80">
+            <p className="text-[16px] leading-7 text-slate-400">
               {project.solution.short}
             </p>
           </div>
@@ -242,7 +242,7 @@ function ProjectCard({
               {project.traction?.split(" · ").map((stat) => (
                 <span
                   key={stat}
-                  className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
+                  className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[14px] font-semibold text-primary"
                 >
                   {stat}
                 </span>
@@ -403,7 +403,7 @@ export function ProjectsSection() {
             transform: isVisible ? "translateY(0)" : "translateY(30px)",
           }}
         >
-          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
+          <p className="mb-2 text-[13px] font-medium uppercase tracking-widest text-primary">
             {!hasActiveFilters && `Selected Work, ${projects.length} Projects`}
             {hasActiveFilters && filteredProjects.length === 1 && `Selected Work, Showing 1 of ${projects.length} Projects`}
             {hasActiveFilters && filteredProjects.length === 0 && `Selected Work, 0 of ${projects.length} Projects`}
@@ -417,7 +417,7 @@ export function ProjectsSection() {
             <button
               type="button"
               onClick={clearFilters}
-              className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+              className={`rounded-full px-4 py-2 text-[13px] font-medium transition-all ${
                 !hasActiveFilters
                   ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
                   : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
@@ -432,7 +432,7 @@ export function ProjectsSection() {
                   key={label}
                   type="button"
                   onClick={() => toggleFilter(label)}
-                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                  className={`rounded-full px-4 py-2 text-[13px] font-medium transition-all ${
                     isActive
                       ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
                       : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
@@ -451,7 +451,7 @@ export function ProjectsSection() {
                   key={label}
                   type="button"
                   onClick={() => toggleFilter(label)}
-                  className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                  className={`rounded-full px-4 py-2 text-[13px] font-medium transition-all ${
                     isActive
                       ? "border border-primary bg-primary text-primary-foreground hover:brightness-110"
                       : "border border-slate-400/20 bg-slate-400/[0.06] text-slate-400 hover:border-slate-400/40 hover:brightness-110"
@@ -552,7 +552,7 @@ export function ProjectsSection() {
           {/* Bottom bar: dots + label + zoom controls */}
           <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3">
             <div className="flex flex-col items-center gap-2">
-              <p className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm">
+              <p className="rounded-full bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm">
                 {lightboxImages[lightboxIdx]?.label}
               </p>
               {lightboxImages.length > 1 && (
@@ -589,7 +589,7 @@ export function ProjectsSection() {
               >
                 <ZoomOut className="h-4 w-4" />
               </button>
-              <span className="min-w-[48px] text-center text-xs font-medium text-white/80">
+              <span className="min-w-[48px] text-center text-[13px] font-medium text-white/80">
                 {Math.round(zoom * 100)}%
               </span>
               <button
