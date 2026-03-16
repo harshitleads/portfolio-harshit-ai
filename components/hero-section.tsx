@@ -111,13 +111,18 @@ export function HeroSection() {
     // Pause when off screen
     const observer = new IntersectionObserver(
       ([entry]) => {
-        isVisibleRef.current = entry.isIntersecting;
         if (entry.isIntersecting) {
+          console.log("canvas resumed");
+          isVisibleRef.current = true;
           lastTimeRef.current = 0;
           animFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          console.log("canvas paused");
+          isVisibleRef.current = false;
+          cancelAnimationFrame(animFrameRef.current);
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0 }
     );
     observer.observe(canvas);
 
