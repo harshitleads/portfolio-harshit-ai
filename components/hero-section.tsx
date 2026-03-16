@@ -1,53 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 
 interface Node {
+  homeX: number;
+  homeY: number;
   x: number;
   y: number;
-  vx: number;
-  vy: number;
+  offsetX: number;
+  offsetY: number;
+  speedX: number;
+  speedY: number;
+  phase: number;
   radius: number;
   baseOpacity: number;
-  hue: number; /* 0-1 blend between green and blue */
-  pulseOffset: number;
+  hue: number;
+}
+
+interface Connection {
+  i: number;
+  j: number;
+  baseAlpha: number;
 }
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const nodesRef = useRef<Node[]>([]);
+  const connectionsRef = useRef<Connection[]>([]);
   const animFrameRef = useRef<number>(0);
-  const timeRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const isVisibleRef = useRef(true);
   const [scrollY, setScrollY] = useState(0);
-
-  const initNodes = useCallback((w: number, h: number) => {
-    /* Grid-based seeding: divide viewport into cells, place one node per cell
-       with random jitter. This ensures even, dense coverage with no clumping. */
-    const cellSize = 55; // smaller = denser
-    const cols = Math.ceil(w / cellSize);
-    const rows = Math.ceil(h / cellSize);
-    const nodes: Node[] = [];
-
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        /* ~85% fill rate so it doesn't look perfectly gridded */
-        if (Math.random() > 0.85) continue;
-        nodes.push({
-          x: col * cellSize + Math.random() * cellSize,
-          y: row * cellSize + Math.random() * cellSize,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 2 + 1,
-          baseOpacity: Math.random() * 0.4 + 0.4,
-          hue: Math.random(),
-          pulseOffset: Math.random() * Math.PI * 2,
-        });
-      }
-    }
-    nodesRef.current = nodes;
-  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -55,11 +40,66 @@ export function HeroSection() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      if (nodesRef.current.length === 0) initNodes(canvas.width, canvas.height);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Reinitialize nodes and connections on resize
+      initNodes(w, h);
     };
+
+    const initNodes = (w: number, h: number) => {
+      const cellSize = 55;
+      const cols = Math.ceil(w / cellSize);
+      const rows = Math.ceil(h / cellSize);
+      const nodes: Node[] = [];
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          if (Math.random() > 0.85) continue;
+          const homeX = col * cellSize + Math.random() * cellSize;
+          const homeY = row * cellSize + Math.random() * cellSize;
+          nodes.push({
+            homeX,
+            homeY,
+            x: homeX,
+            y: homeY,
+            offsetX: Math.random() * 30 - 15,
+            offsetY: Math.random() * 30 - 15,
+            speedX: (Math.random() * 0.9 + 0.3) * (Math.random() > 0.5 ? 1 : -1),
+            speedY: (Math.random() * 0.9 + 0.3) * (Math.random() > 0.5 ? 1 : -1),
+            phase: Math.random() * Math.PI * 2,
+            radius: Math.random() * 2 + 1,
+            baseOpacity: Math.random() * 0.4 + 0.4,
+            hue: Math.random(),
+          });
+        }
+      }
+      nodesRef.current = nodes;
+
+      // Pre-determine connections based on home positions
+      const maxDist = 120;
+      const connections: Connection[] = [];
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].homeX - nodes[j].homeX;
+          const dy = nodes[i].homeY - nodes[j].homeY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDist) {
+            connections.push({ i, j, baseAlpha: (1 - dist / maxDist) * 0.4 });
+          }
+        }
+      }
+      connectionsRef.current = connections;
+    };
+
     resize();
     window.addEventListener("resize", resize);
 
@@ -68,7 +108,19 @@ export function HeroSection() {
     };
     window.addEventListener("mousemove", onMove);
 
-    /* Colour helpers: blend between emerald green and cyan blue */
+    // Pause when off screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          lastTimeRef.current = 0;
+          animFrameRef.current = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
     const getColor = (hue: number, alpha: number) => {
       const r = Math.round(20 + hue * 10);
       const g = Math.round(180 + (1 - hue) * 40);
@@ -76,111 +128,70 @@ export function HeroSection() {
       return `rgba(${r},${g},${b},${alpha})`;
     };
 
-    const animate = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-      timeRef.current += 0.01;
-      const t = timeRef.current;
+    const animate = (currentTime: number) => {
+      if (!isVisibleRef.current) return;
 
-      /* Clear with subtle trail */
-      ctx.fillStyle = "rgba(8,14,32,0.15)";
-      ctx.fillRect(0, 0, w, h);
+      // 30fps throttle
+      if (lastTimeRef.current && currentTime - lastTimeRef.current < 33) {
+        animFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastTimeRef.current = currentTime;
 
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const t = Date.now() * 0.001;
       const nodes = nodesRef.current;
+      const connections = connectionsRef.current;
       const mouse = mouseRef.current;
       const mouseActive = mouse.x > 0 && mouse.y > 0;
 
-      /* Update positions */
-      for (const node of nodes) {
-        node.x += node.vx;
-        node.y += node.vy;
-        if (node.x < 0 || node.x > w) node.vx *= -1;
-        if (node.y < 0 || node.y > h) node.vy *= -1;
+      // Clear
+      ctx.clearRect(0, 0, w, h);
 
-        /* Gentle mouse attraction */
-        if (mouseActive) {
-          const dx = mouse.x - node.x;
-          const dy = mouse.y - node.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 300 && dist > 30) {
-            node.vx += (dx / dist) * 0.015;
-            node.vy += (dy / dist) * 0.015;
-          }
-          /* Clamp velocity */
-          const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy);
-          if (speed > 1.2) {
-            node.vx = (node.vx / speed) * 1.2;
-            node.vy = (node.vy / speed) * 1.2;
-          }
-        }
+      // Update node positions via sine waves
+      for (const node of nodes) {
+        node.x = node.homeX + Math.sin(t * node.speedX + node.phase) * node.offsetX;
+        node.y = node.homeY + Math.cos(t * node.speedY + node.phase) * node.offsetY;
       }
 
-      /* Draw connections -- slightly larger than cell size for a dense mesh */
-      const maxDist = 120;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDist) {
-            const falloff = 1 - dist / maxDist;
-            let alpha = falloff * 0.25;
+      // Draw connections from static list
+      for (const conn of connections) {
+        const a = nodes[conn.i];
+        const b = nodes[conn.j];
 
-            /* Boost connections near mouse */
-            if (mouseActive) {
-              const midX = (nodes[i].x + nodes[j].x) / 2;
-              const midY = (nodes[i].y + nodes[j].y) / 2;
-              const mDist = Math.sqrt(
-                (midX - mouse.x) ** 2 + (midY - mouse.y) ** 2
-              );
-              if (mDist < 250) {
-                alpha += (1 - mDist / 250) * 0.35;
-              }
-            }
+        // Distance-based glow on hover
+        const midX = (a.x + b.x) / 2;
+        const midY = (a.y + b.y) / 2;
+        const distToMouse = Math.hypot(midX - mouse.x, midY - mouse.y);
+        const glowBoost = mouseActive ? Math.max(0, 1 - distToMouse / 320) : 0;
+        const lineAlpha = conn.baseAlpha + glowBoost * 0.55;
 
-            const avgHue = (nodes[i].hue + nodes[j].hue) / 2;
-
-            /* Draw gradient line */
-            const grad = ctx.createLinearGradient(
-              nodes[i].x, nodes[i].y,
-              nodes[j].x, nodes[j].y
-            );
-            grad.addColorStop(0, getColor(nodes[i].hue, alpha));
-            grad.addColorStop(1, getColor(nodes[j].hue, alpha));
-
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = grad;
-            ctx.lineWidth = falloff * 1.5 + 0.3;
-            ctx.stroke();
-          }
-        }
+        const avgHue = (a.hue + b.hue) / 2;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = getColor(avgHue, lineAlpha);
+        ctx.lineWidth = 1.2 + glowBoost * 0.8;
+        ctx.stroke();
       }
 
-      /* Draw nodes */
+      // Draw nodes
       for (const node of nodes) {
-        const dx = node.x - mouse.x;
-        const dy = node.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const mouseProximity = mouseActive && dist < 250 ? 1 - dist / 250 : 0;
+        const dist = Math.hypot(node.x - mouse.x, node.y - mouse.y);
+        const glow = mouseActive && dist < 320 ? Math.max(0, 1 - dist / 320) : 0;
 
-        /* Pulsing opacity */
-        const pulse = Math.sin(t * 2 + node.pulseOffset) * 0.15 + 0.85;
-        const opacity = Math.min(
-          (node.baseOpacity + mouseProximity * 0.5) * pulse,
-          1
-        );
-        const r = node.radius + mouseProximity * 3;
+        const opacity = Math.min(node.baseOpacity + glow * 0.5, 1);
+        const r = node.radius + glow * 3;
 
-        /* Outer glow */
-        if (mouseProximity > 0.05) {
-          const glowR = r + mouseProximity * 15;
+        // Outer glow near cursor
+        if (glow > 0.05) {
+          const glowR = r + glow * 15;
           const grd = ctx.createRadialGradient(
             node.x, node.y, r * 0.5,
             node.x, node.y, glowR
           );
-          grd.addColorStop(0, getColor(node.hue, mouseProximity * 0.4));
+          grd.addColorStop(0, getColor(node.hue, glow * 0.4));
           grd.addColorStop(1, getColor(node.hue, 0));
           ctx.beginPath();
           ctx.arc(node.x, node.y, glowR, 0, Math.PI * 2);
@@ -188,22 +199,22 @@ export function HeroSection() {
           ctx.fill();
         }
 
-        /* Core node */
+        // Core node
         ctx.beginPath();
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
         ctx.fillStyle = getColor(node.hue, opacity);
         ctx.fill();
 
-        /* Bright white center for near-mouse nodes */
-        if (mouseProximity > 0.4) {
+        // White center for close nodes
+        if (glow > 0.4) {
           ctx.beginPath();
           ctx.arc(node.x, node.y, r * 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${mouseProximity * 0.6})`;
+          ctx.fillStyle = `rgba(255,255,255,${glow * 0.6})`;
           ctx.fill();
         }
       }
 
-      /* Mouse cursor glow */
+      // Mouse cursor ambient glow
       if (mouseActive) {
         const grd = ctx.createRadialGradient(
           mouse.x, mouse.y, 0,
@@ -220,18 +231,20 @@ export function HeroSection() {
 
       animFrameRef.current = requestAnimationFrame(animate);
     };
-    animate();
+
+    animFrameRef.current = requestAnimationFrame(animate);
 
     const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       cancelAnimationFrame(animFrameRef.current);
+      observer.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [initNodes]);
+  }, []);
 
   const parallax = Math.min(scrollY * 0.3, 200);
   const opacity = Math.max(1 - scrollY / 600, 0);
