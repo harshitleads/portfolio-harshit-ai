@@ -19,7 +19,6 @@ node_modules/
 # AI workflow files
 .claude/
 .cursor/
-CLAUDE.md
 AGENTS.md
 
 # Finder duplicates
