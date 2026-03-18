@@ -1,18 +1,26 @@
-# v0 runtime files (should only exist in preview, not in git)
+# v0 runtime files
 __v0_runtime_loader.js
 __v0_devtools.tsx
 __v0_jsx-dev-runtime.ts
 instrumentation-client.js
 instrumentation-client.ts
 
-# Common ignores
+# Dependencies
 node_modules/
 .next/
+
+# Environment variables
 .env*.local
-.DS_Store.claude/
+.env
+
+# Mac system files
+.DS_Store
+
+# AI workflow files
+.claude/
 .cursor/
 CLAUDE.md
-CLAUDE.md
 AGENTS.md
-AGENTS.md
+
+# Finder duplicates
 * 2
