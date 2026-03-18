@@ -180,3 +180,21 @@ Portfolio Website folder restructured. Repo now lives directly at:
 /Users/H8har/Desktop/Berkeley - Academics/Projects/Portfolio Website/
 No longer nested inside portfolio-harshit-ai subfolder.
 Git history preserved. GitHub remote unchanged. Vercel unaffected.
+
+### 2026-03-18
+## Session: 2026-03-17 — Major Infrastructure Day
+
+- Built claude-code-bridge MCP server from scratch. TypeScript, @modelcontextprotocol/sdk, zod. Two tools: read_file and write_decisions. Registered in Claude Mac app as LOCAL DEV connector.
+- Folder restructured: repo now lives directly at Portfolio Website/, no longer nested inside portfolio-harshit-ai/. Git history preserved, GitHub remote unchanged, Vercel unaffected.
+- Added .cursorrules to root. Cursor now reads CLAUDE.md automatically at every session start — no slash command needed.
+- Added .cursorrules to dev-template so all future projects get this automatically.
+- Notion API key was exposed in chat — rotate it at notion.so and update Vercel env var.
+- CTO Project system prompt updated with full path registry for all active projects.
+- Next: rotate Notion API key, verify site still loads at harshit.ai, resume Explainable AI screenshots task.
+
+### 2026-03-18
+## Backlog Update — 2026-03-17
+- [x] Screenshots wired into /work/explainable-ai — DONE
+- [x] sitemap.ts updated with /work/explainable-ai — DONE
+- [ ] Custom domain explainable.harshit.ai in Vercel still pending
+- Notion API key rotation: already handled, no further action needed
