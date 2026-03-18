@@ -174,3 +174,9 @@ After every significant build session, append to Project Log:
 
 Run /document to trigger this update. Think of it as git commit, not autosave.
 Only run /document when a stable, meaningful state has been reached.
+### 2026-03-18
+## Folder Restructure — 2026-03-17
+Portfolio Website folder restructured. Repo now lives directly at:
+/Users/H8har/Desktop/Berkeley - Academics/Projects/Portfolio Website/
+No longer nested inside portfolio-harshit-ai subfolder.
+Git history preserved. GitHub remote unchanged. Vercel unaffected.
