@@ -14,7 +14,7 @@ const journeyCards = [
   {
     icon: BookOpen,
     heading: "WHERE I AM",
-    text: "Berkeley MEng diving into ML/RL/AI evals. Daily power user across frontier models. Learning by building, not just studying.",
+    text: "Berkeley MEng. Deep in ML/RL/AI evals. Daily power user across frontier models. Building real products, shipping them, iterating.",
     delay: 100,
   },
   {
@@ -92,9 +92,9 @@ export function AboutSection() {
                 {". I learned how to work with large cross-functional teams, drive adoption across organizations, and own outcomes end to end."}
               </p>
               <p>
-                {"Now at "}
+                {"At "}
                 <span className="font-medium text-foreground">Berkeley (M. Eng.)</span>
-                {", I\u2019m combining both backgrounds, technical depth in ML/deep learning/RL, plus hands-on experience with AI evals productization, to transition into AI Product Management."}
+                {", I\u2019ve sharpened both edges: technical depth in ML, deep learning, and RL, combined with hands-on AI evals productization. I build products daily, not just study them."}
               </p>
               <p>
                 {"I\u2019m a daily AI power user: I code with Claude, build agents for automation, and live in the products I want to help build."}
@@ -203,9 +203,9 @@ export function AboutSection() {
               </p>
 
               <p>
-                At Berkeley I am building technical depth in ML, deep learning, and RL. My capstone on{" "}
+                At Berkeley I built technical depth in ML, deep learning, and RL. My capstone on{" "}
                 <span className="font-semibold text-foreground">productizing AI evals</span>{" "}
-                is teaching me how frontier models are calibrated for commercial deployment. I am not trying to become a research scientist. I am learning the foundations to make better product decisions.
+                gave me a direct view into how frontier models are calibrated for commercial deployment. Not to become a research scientist. To make better product decisions.
               </p>
 
               <p>
