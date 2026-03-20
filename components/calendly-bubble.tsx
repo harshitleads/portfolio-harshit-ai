@@ -46,7 +46,7 @@ export default function CalendlyBubble() {
           Let&apos;s find a time
         </p>
         <p className="text-[11px]" style={{ color: "rgb(148,163,184)" }}>
-          30 min · Google Meet
+          15 / 30 min · Google Meet
         </p>
       </div>
       <button
