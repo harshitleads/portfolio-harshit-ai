@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from '@vercel/analytics/next';
 
 import "./globals.css";
+import CalendlyBubble from "@/components/calendly-bubble";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -61,6 +62,7 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">
         {children}
+        <CalendlyBubble />
         <Analytics />
       </body>
     </html>
