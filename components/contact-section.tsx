@@ -120,7 +120,7 @@ export function ContactSection() {
           </div>
           <div
             className="calendly-inline-widget"
-            data-url="https://calendly.com/harshit-harshit/30min?background_color=0a0f1e&text_color=ffffff&primary_color=00ff88"
+            data-url="https://calendly.com/harshit-harshit/15min?background_color=0a0f1e&text_color=ffffff&primary_color=00ff88"
             style={{ minWidth: 320, height: 700 }}
           />
         </div>
