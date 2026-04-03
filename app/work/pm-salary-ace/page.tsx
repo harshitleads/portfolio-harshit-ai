@@ -43,14 +43,10 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 const sidebarStats = [
-  { value: "V1: 3 Hrs", label: "Build time", sublabel: "Concept to shipped" },
-  { value: "22", label: "First 12 hours", sublabel: "Beta launch" },
-  { value: "49%", label: "Activation rate", showProgressBar: true, progressValue: 49 },
-  {
-    value: "336",
-    label: "Across 5 tiers",
-    icon: <Layers size={14} className="text-emerald-400/70" />,
-  },
+  { value: "3 Hrs", label: "Shipped in", sublabel: "Concept to shipped" },
+  { value: "336", label: "Questions", sublabel: "Across 5 tiers", icon: <Layers size={14} className="text-emerald-400/70" /> },
+  { value: "49%", label: "Activation Rate", showProgressBar: true, progressValue: 49 },
+  { value: "V2", label: "Live" },
 ];
 
 const sidebarSections = [
@@ -107,10 +103,10 @@ export default function PMSalaryAcePage() {
           </div>
           <div className="flex flex-wrap gap-3">
             {[
-              { value: "V1: 3 Hours", sub: "Concept to shipped" },
-              { value: "22 Users", sub: "First 12 hours" },
-              { value: "49%", sub: "Activation rate" },
+              { value: "Shipped in 3 Hours", sub: "Concept to shipped" },
               { value: "336 Questions", sub: "Across 5 tiers" },
+              { value: "49% Activation", sub: "Activation rate" },
+              { value: "V2 Live", sub: "Iterating" },
             ].map(({ value, sub }) => (
               <div key={value} className="rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-center">
                 <p className="text-[15px] font-bold text-primary">{value}</p>

@@ -8,7 +8,7 @@ import { ScreenshotGallery } from "@/components/case-study/ScreenshotGallery";
 
 export const metadata: Metadata = {
   title: "Dear Her | Case Study | Harshit Sharma",
-  description: "A free AI letter-writing app built on Women's Day. 255 visitors, 48 letters, 10 countries in 24 hours.",
+  description: "A free AI letter-writing app built on Women's Day. 59% conversion, 10 countries, zero paid distribution.",
 };
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -28,15 +28,15 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 const sidebarStats = [
-  { value: "255", label: "Visitors", sublabel: "First 3 days" },
-  { value: "48", label: "Letters generated", sublabel: "19% end-to-end" },
-  { value: "59%", label: "Landing to writer", showProgressBar: true, progressValue: 59 },
+  { value: "3 Hrs", label: "Shipped in", sublabel: "Idea to live product" },
+  { value: "59%", label: "Conversion", showProgressBar: true, progressValue: 59 },
   {
     value: "10",
     label: "Countries",
     sublabel: "Zero paid distribution",
     icon: <Globe size={14} className="text-emerald-400/70" />,
   },
+  { value: "$0", label: "Paid Distribution" },
 ];
 
 const sidebarSections = [
@@ -89,10 +89,10 @@ export default function DearHerPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             {[
-              { value: "One Afternoon", sub: "Idea to live product" },
-              { value: "255 Visitors", sub: "First 3 days" },
-              { value: "48 Letters", sub: "Generated" },
+              { value: "Shipped in 3 Hours", sub: "Idea to live product" },
+              { value: "59% Conversion", sub: "Landing to writer" },
               { value: "10 Countries", sub: "Zero paid distribution" },
+              { value: "Zero Paid", sub: "Distribution" },
             ].map(({ value, sub }) => (
               <div key={value} className="rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-center">
                 <p className="text-[15px] font-bold text-primary">{value}</p>
@@ -127,7 +127,7 @@ export default function DearHerPage() {
               I built Dear Her to say what I never quite say out loud. Then I realized other people had the same problem. The gap is not feeling. It is articulation. Most people feel things deeply about the women in their lives and find no words that feel worthy of the feeling.
             </Body>
             <Body>
-              I shipped it on Women&apos;s Day. By the end of the day, 48 people had used it to write letters to their moms, partners, sisters, friends, and mentors across 10 countries.
+              I shipped it on Women&apos;s Day. By the end of the day, people across 10 countries had used it to write letters to their moms, partners, sisters, friends, and mentors.
             </Body>
           </Card>
         </section>
@@ -175,10 +175,10 @@ export default function DearHerPage() {
           <Card className="space-y-6">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {[
-                { value: "255", label: "Visitors (3 days)" },
-                { value: "48", label: "Letters generated" },
-                { value: "59%", label: "Landing to writer" },
+                { value: "59%", label: "Conversion rate" },
                 { value: "10", label: "Countries" },
+                { value: "3 Hrs", label: "Build time" },
+                { value: "$0", label: "Paid distribution" },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p className="text-2xl font-bold text-primary">{value}</p>

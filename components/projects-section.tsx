@@ -106,9 +106,9 @@ const projects: ProjectData[] = [
       "Tier-mapped questions: Junior and Staff+ require different thinking, not just harder trivia",
       "AI-generated, human QA'd: wrong answers must force real reasoning, not guessing",
       "No forced auth: all 5 tiers open by default, progress tracking is opt-in",
-      "22 users \u00B7 12 hours \u00B7 49% activation from a single Berkeley PM Club post",
+      "Shipped in 3 hours · 336 questions · 49% activation rate · V2 live",
     ],
-    traction: "22 users · 12 hours · 49% activation rate",
+    traction: "Shipped in 3 hours · 336 questions · 49% activation rate",
     images: [
       { src: "/images/pm-quiz-landing-v2.png", label: "Landing Page" },
       { src: "/images/pm-quiz-question-v2.png", label: "Quiz UI: Question Screen" },
@@ -138,9 +138,9 @@ const projects: ProjectData[] = [
       "Voice input as a friction reducer: speak your feelings instead of typing them",
       "Relationship-aware sign-offs: mentor letters do not say 'With all my love'",
       "Privacy first: fully anonymous, no login, no email, letters stored with hashed IPs only",
-      "255 visitors, 48 letters, 59% landing-to-writer conversion, 10 countries, zero paid distribution",
+      "59% conversion, 10 countries, zero paid distribution",
     ],
-    traction: "255 visitors · 48 letters · 10 countries · zero paid distribution",
+    traction: "Shipped in 3 hours · 59% conversion · 10 countries · zero paid distribution",
     images: [
       { src: "/images/dear-her-landing.png", label: "Landing Page" },
       { src: "/images/dear-her-writer-active.png", label: "Write Your Letter" },
