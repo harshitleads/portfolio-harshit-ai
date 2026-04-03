@@ -37,6 +37,18 @@ Personal portfolio site for an AI PM targeting frontier tech companies. Every pa
 - Filter logic is AND, must match all selected tags, never change this
 - All case study pages must use shared case study components, no new layout patterns
 - Fonts, colors, spacing: inherit from existing system, never introduce new styles
+- NEVER run git commit, git push, git reset, git checkout, or any git write commands. Only the developer commits and pushes manually. This rule has no exceptions.
+- NEVER delete files unless the task spec explicitly says to delete a specific named file. If unsure, rename or comment out instead of deleting.
+
+## Decision Logging
+When you make or execute a product or technical decision, append it to `docs/decisions.md` in this format:
+```
+### YYYY-MM-DD -- Short title
+**Decision:** What was decided.
+**Why:** The reasoning.
+**Rejected:** What alternatives were considered and why they lost.
+```
+This applies to every Claude session touching this project, not just the CTO chat.
 
 ## Design System
 - Dark navy background (#0a0f1e), bright green accent (#00c896), glass-card components
