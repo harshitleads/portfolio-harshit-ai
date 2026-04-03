@@ -95,3 +95,16 @@ Entries are append-only. Never edit old entries.
 - Mic broken in Lovable preview (expected — iframe blocks mic permissions, test on live site only)
 - TTLs in Namecheap should be set back to Automatic now that DNS is stable
 
+
+### 2026-04-03
+
+### 2026-04-03 — Calendly theming: accept default colors
+**Decision:** Accept Calendly's default white/blue theme now that the premium trial expired. No workaround.
+**Why:** Custom color params require a paid plan. The embed still functions. Theming mismatch is cosmetic, not worth paying for or hacking around.
+**Rejected:** CSS override hacks (fragile, Calendly loads in iframe so cross-origin blocks most overrides), paying for Calendly premium just for colors.
+
+### 2026-04-03 — Calendly bubble: reappear after 30-40s instead of permanent dismiss
+**Decision:** After user clicks or dismisses the floating bubble, bring it back after 30-40 seconds if they're still browsing.
+**Why:** A first-time visitor who dismisses the bubble may later want to book a call but not know where the calendar is. Permanent dismiss means the CTA is lost. A timed reappearance gives a second chance without being aggressive.
+**Rejected:** Permanent dismiss (loses the CTA forever), immediate reappear (annoying), never dismissible (blocks content).
+

@@ -63,3 +63,63 @@ Personal portfolio site for an AI PM targeting frontier tech companies. Every pa
 - explainable-coding-assistant: repo description and topics added on GitHub.
 - CLAUDE.md initialized with proper workflow — bridge now active for this project.
 
+
+### 2026-04-03
+
+## Session: 2026-04-03
+
+### Calendly Bubble Fixes (3 issues)
+
+1. **Cross-page navigation broken:** Floating bubble click uses scroll-only logic, which fails on `/work/*` pages. Fix: detect if on homepage — if not, navigate to `/#contact` first, then scroll to the Calendly embed element specifically.
+
+2. **Scroll target too high:** Bubble scrolls to the contact section anchor, but the Calendly embed is further down within it. Fix: scroll to the Calendly embed container element directly (not the section top).
+
+3. **Bubble never reappears:** After dismissing or clicking the bubble, it's gone permanently. Fix: after dismiss/click, set a 30-40 second timeout to show the bubble again if user is still on the site.
+
+### Calendly Theming
+
+- Calendly premium/trial expired. Custom color params (background_color, text_color, primary_color) in the embed URL no longer apply. Calendly now renders with default white/blue theme. This is accepted — not a blocker. Do not attempt to fix or hack around it.
+
+### Discovery Needed
+
+Before implementing fixes, Cursor needs to find:
+- Where the bubble component lives and how click/dismiss state is managed
+- Whether bubble is rendered in layout.tsx (all pages) or only homepage
+- What the current scroll/navigation logic is on bubble click
+
+
+### 2026-04-03
+
+---
+
+## TASK: Fix Calendly Floating Bubble (3 issues)
+**Status:** Ready for execution
+**Priority:** High
+
+### Context
+The floating bubble is in `components/calendly-bubble.tsx`, rendered globally in `app/layout.tsx`. The contact section is in `components/contact-section.tsx`. The Calendly embed has class `calendly-inline-widget` but no `id`.
+
+### Issue 1: Cross-page navigation broken
+**Problem:** Bubble click does `document.getElementById("contact").scrollIntoView()`. On `/work/*` pages, `#contact` doesn't exist so nothing happens.
+**Fix:** On click, check if `document.getElementById("contact")` exists. If not, use Next.js `router.push("/#contact")`. After navigation, scroll to the Calendly embed. Use `useRouter` from `next/navigation`.
+
+### Issue 2: Scroll target too high
+**Problem:** Scrolls to `#contact` section top, but Calendly embed is further down within it.
+**Fix:** Add `id="calendly-embed"` to the Calendly embed container in `contact-section.tsx`. Update bubble click to scroll to `#calendly-embed` instead of `#contact`.
+
+### Issue 3: Bubble disappears permanently after dismiss/click
+**Problem:** `sessionStorage.setItem("calendly-bubble-dismissed", "true")` kills the bubble for the entire session with no reappearance.
+**Fix:** After dismiss or click, hide the bubble. Set a `setTimeout` of 35 seconds. When it fires, show the bubble again (set `visible: true`, `dismissed: false`). Do NOT clear sessionStorage on reappearance — use component state only. Remove the sessionStorage logic entirely; rely on useState + timeout.
+
+### Acceptance Criteria
+- [ ] On any `/work/*` page, clicking bubble navigates to homepage and scrolls to Calendly embed
+- [ ] On homepage, clicking bubble scrolls directly to Calendly embed (not section top)
+- [ ] After dismissing bubble (X or click), it reappears after ~35 seconds
+- [ ] Bubble still fades in on initial page load with existing delay
+- [ ] Test on both homepage and at least one `/work/*` page
+- [ ] No console errors
+
+### Files to touch
+- `components/calendly-bubble.tsx` — main fixes
+- `components/contact-section.tsx` — add `id="calendly-embed"` to the embed container
+

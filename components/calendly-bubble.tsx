@@ -1,33 +1,87 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { CalendarDays } from "lucide-react";
 
 export default function CalendlyBubble() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [calendarInView, setCalendarInView] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const reappearTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("calendly-bubble-dismissed")) return;
-
-    const timer = setTimeout(() => setVisible(true), 3000);
-    return () => clearTimeout(timer);
+  const scheduleShow = useCallback((delay: number) => {
+    if (reappearTimer.current) clearTimeout(reappearTimer.current);
+    reappearTimer.current = setTimeout(() => setVisible(true), delay);
   }, []);
+
+  // Initial 3s delay to show
+  useEffect(() => {
+    scheduleShow(3000);
+    return () => {
+      if (reappearTimer.current) clearTimeout(reappearTimer.current);
+    };
+  }, [scheduleShow]);
+
+  // Track whether the Calendly embed is in view
+  useEffect(() => {
+    const el = document.getElementById("calendly-embed");
+    if (!el) {
+      setCalendarInView(false);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setCalendarInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  function closeAllOverlays() {
+    document.querySelectorAll<HTMLElement>('[role="dialog"]').forEach((el) => {
+      el.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  }
+
+  function hide() {
+    setVisible(false);
+    scheduleShow(7000);
+  }
 
   function handleDismiss(e: React.MouseEvent) {
     e.stopPropagation();
-    setDismissed(true);
-    sessionStorage.setItem("calendly-bubble-dismissed", "1");
+    hide();
   }
 
   function handleClick() {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-    setDismissed(true);
-    sessionStorage.setItem("calendly-bubble-dismissed", "1");
+    closeAllOverlays();
+    hide();
+
+    if (pathname === "/") {
+      const embed = document.getElementById("calendly-embed");
+      if (embed) {
+        embed.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+
+    // Navigate to homepage, then scroll to embed after load
+    router.push("/");
+    const poll = setInterval(() => {
+      const embed = document.getElementById("calendly-embed");
+      if (embed) {
+        clearInterval(poll);
+        embed.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+    setTimeout(() => clearInterval(poll), 5000);
   }
 
-  if (!visible || dismissed) return null;
+  // Hide bubble when calendar is in view
+  if (!visible || calendarInView) return null;
 
   return (
     <div
