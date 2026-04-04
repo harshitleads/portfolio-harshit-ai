@@ -151,6 +151,37 @@ const projects: ProjectData[] = [
     liveDemoLink: "https://dearher.harshit.ai/",
     caseStudyLink: "/work/dear-her",
   },
+  {
+    id: "eval-studio",
+    title: "Eval Studio",
+    tagline: "Which prompt, which model, at what cost?",
+    tags: ["Live Product", "Evals"],
+    problem: {
+      short:
+        "AI teams pick prompts and models using spreadsheets, gut feel, or generic benchmarks that have nothing to do with their actual product.",
+      full: "Every AI team faces the same question: which prompt, which model, at what cost? Existing eval tools either require significant engineering setup, test on public benchmarks that do not reflect real use cases, or lock results behind expensive SaaS plans. There is no simple way to point a tool at your own data, define your own criteria, and get a scored, reproducible result.",
+    },
+    solution: {
+      short:
+        "Browser-based LLM eval tool. Test prompts and models on your own data with multi-model judge council, cost tracking, and ranked results.",
+      full: "Upload a CSV, configure 2-4 prompt/model combinations across Anthropic, OpenAI, and Gemini, define a weighted scoring rubric, and let a cross-provider judge council score every row independently. Results come back as a ranked leaderboard with per-row scores, cost breakdown, outlier flags, and CSV export. BYO API keys, nothing stored.",
+    },
+    keyInsight:
+      "A single model judging its own provider's outputs has a documented bias. Eval Studio uses two independent judges from different providers, averages their scores, and flags disagreements above 15 points.",
+    differentiation: [
+      "Multi-model judge council with cross-provider bias detection",
+      "BYO API keys, zero backend storage, keys never leave React state",
+      "Cost tracking as a first-class metric alongside quality scores",
+      "Multi-provider / Judge Council / Cost Tracking / Live",
+    ],
+    traction: "Multi-provider / Judge Council / Cost Tracking / Live",
+    images: [
+      { src: "/images/placeholder-eval-studio.png", label: "Eval Studio" },
+    ],
+    imagePosition: "object-center",
+    liveDemoLink: "https://eval.harshit.ai",
+    caseStudyLink: "/work/eval-studio",
+  },
 ];
 
 const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];

@@ -85,3 +85,11 @@ Entries are append-only. Never edit old entries.
 **Decision:** Added two code rules to all project CLAUDE.md files: (1) Never run git commit, push, reset, or any git write commands. (2) Never delete files unless the task spec explicitly names the file. Default to rename or comment out.
 **Why:** With Cursor auto-run mode enabled, Claude Code executes without permission prompts. Without guardrails, a poorly scoped prompt could result in destructive commits or file deletions. These rules apply regardless of which chat generates the Cursor prompt.
 **Rejected:** Relying on Cursor's sandbox protection alone (tested: sandbox does not block file deletion), disabling auto-run (too much friction for daily workflow).
+
+### 2026-04-04
+
+### 2026-04-04 -- Eval Studio case study page added to portfolio
+**Decision:** Built /work/eval-studio with 6 sections (Problem, Two Use Cases, How It Works, Design Decisions, Honest Limitations, What's Next). Added homepage project card with tags [Live Product, Evals]. Sidebar stats: AI Eval Tool / LLM Infra / Live / Next.js + TS.
+**Why:** Eval Studio is the highest-signal project for frontier AI PM roles. It demonstrates LLM evals fluency, judge council architecture, cost tracking, and multi-provider integration. The case study needed to be on the portfolio to complete the positioning story.
+**Rejected:** Waiting for screenshots before building the page (delays shipping, placeholder is acceptable for now).
+
