@@ -11,14 +11,17 @@ Personal portfolio site for an AI PM targeting frontier tech companies. Every pa
 - Primary domain: harshit.ai
 
 ## Architecture
-- `/` -- main portfolio with anchor nav and filter system
-- `/work/pm-salary-ace` -- PM Salary Ace case study
-- `/work/dear-her` -- Dear Her case study
-- `/work/explainable-ai` -- Explainable AI case study
-- `/work/eval-studio` -- Eval Studio case study
-- `/sitemap.xml` -- auto-generated via sitemap.ts
-- `components/projects-section.tsx` -- ProjectData interface, projects array, filter system
-- `components/case-study/` -- shared case study components (CaseStudySidebar, ScreenshotGallery, CaseStudyLayout)
+- `/` — main portfolio with anchor nav and filter system
+- `/work/pm-salary-ace` — PM Salary Ace case study
+- `/work/dear-her` — Dear Her case study
+- `/work/explainable-ai` — Explainable AI case study
+- `/work/eval-studio` — Eval Studio case study
+- `/work/claude-code-bridge` — claude-code-bridge case study
+- `/sitemap.xml` — auto-generated via sitemap.ts
+- `components/projects-section.tsx` — ProjectData interface, projects array, filter system
+- `components/case-study/` — shared case study components (CaseStudySidebar, ScreenshotGallery, CaseStudyLayout)
+- `components/calendly-bubble.tsx` — floating CTA bubble, rendered globally in `app/layout.tsx`
+- `components/contact-section.tsx` — contact cards + Calendly inline embed (`id="calendly-embed"`)
 
 ## Code Rules
 - No em dashes anywhere in copy
@@ -33,7 +36,7 @@ Personal portfolio site for an AI PM targeting frontier tech companies. Every pa
 ## Decision Logging
 When you make or execute a product or technical decision, append it to `docs/decisions.md` in this format:
 ```
-### YYYY-MM-DD -- Short title
+### YYYY-MM-DD — Short title
 **Decision:** What was decided.
 **Why:** The reasoning.
 **Rejected:** What alternatives were considered and why they lost.
@@ -42,10 +45,11 @@ When you make or execute a product or technical decision, append it to `docs/dec
 ## Design System
 - Dark navy background (#0a0f1e), bright green accent (#00c896), glass-card components
 - Case study pages: two-column layout with sticky left sidebar
+- Contact cards: title font-weight 500, subtitle font-weight 400 at 13px, no exclamation marks
 
 ## Case Study Page Button Standard
-1. Try It (primary green, ExternalLink icon)
-2. GitHub (secondary border, Github icon -- skip for Dear Her)
+1. Try It (primary green, ExternalLink icon) — for web apps with live demos
+2. GitHub (primary green if no Try It, otherwise secondary, Github icon)
 3. Back to Portfolio (secondary border, ArrowLeft icon)
 
 ## Homepage Card Standard
@@ -53,17 +57,20 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 
 ## Calendly Integration
 - Embed URL: https://calendly.com/harshit-harshit/15min (with hide_gdpr_banner=1)
-- Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport
+- Premium expired: renders with default Calendly theme. Accepted, do not hack around it.
+- Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport (IntersectionObserver)
+- Cross-page nav: bubble uses usePathname + useRouter to navigate from /work/* pages to homepage embed
 
 ## Pending Work
-- OG metadata: title is 35 chars (optimal 50-60), description text outdated. Minor optimization.
-- OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed.
+- OG metadata: title is 35 chars (optimal 50-60), description text outdated
+- OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed
 - All READMEs: humanize copy (review for AI voice)
 - PM Salary Ace: paste updated README to GitHub web editor
-- claude-code-bridge: build case study page on harshit.ai
 - Explainable AI: configure explainable.harshit.ai domain in Vercel
 
 ## Completed Work
+- 2026-03-21: Calendly inline embed, floating bubble, contact copy cleanup, about section language cleanup
+- 2026-04-03: Calendly bubble fixes (cross-page nav, scroll target, 7s reappearance, IntersectionObserver, GDPR banner hidden)
 - 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px
 - 2026-04-04: Standardized all case study hero buttons (Try It > GitHub > Back to Portfolio)
 - 2026-04-04: Removed GitHub/Try It from homepage cards (View Project only)
@@ -71,4 +78,5 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - 2026-04-04: Dear Her repo public, renamed, CLAUDE.md + decisions.md + README created
 - 2026-04-04: All GitHub READMEs updated with case study links
 - 2026-04-04: Eval Studio favicon and OG image added, GitHub description/website/topics set
-- 2026-04-04: Eval Studio mockup screenshots added to case study page (4 images) and homepage gallery
+- 2026-04-04: Eval Studio mockup screenshots added to case study page and homepage gallery
+- 2026-04-04: claude-code-bridge case study page built (7 sections, sidebar, hero, screenshots), homepage card added, sitemap updated

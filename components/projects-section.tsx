@@ -192,6 +192,38 @@ const projects: ProjectData[] = [
     githubLink: "https://github.com/harshitleads/eval-studio",
     caseStudyLink: "/work/eval-studio",
   },
+  {
+    id: "claude-code-bridge",
+    title: "claude-code-bridge",
+    tagline: "Context compounds. It never resets.",
+    tags: ["Case Study", "Developer Tools"],
+    problem: {
+      short: "Every time you switch from Claude to Cursor, context is lost. You re-explain decisions, repeat constraints, and rebuild mental state from scratch.",
+      full: "You use Claude to think through architecture and product decisions. Then you switch to Cursor to build. The moment you switch, the context is gone. You re-explain what was decided, repeat the constraints, and hope you remember what you agreed on. This is not a tooling problem. It is a context engineering problem.",
+    },
+    solution: {
+      short: "A local MCP server that auto-syncs strategy decisions from Claude to your project files. When you open Cursor, Claude Code already knows where things stand.",
+      full: "A local MCP server built on Anthropic's Model Context Protocol. At the end of every Claude strategy session, technical decisions are written to CLAUDE.md and product decisions to docs/decisions.md. Cursor reads CLAUDE.md automatically. Context compounds across sessions. It never resets.",
+    },
+    keyInsight: "The hardest problem in AI-assisted development is not code generation. It is context continuity. Decisions made in conversation are worthless if they do not reach the code editor.",
+    differentiation: [
+      "Auto-sync from Claude Mac app to project files via MCP",
+      "Two-file architecture: CLAUDE.md for code context, decisions.md for product reasoning",
+      "Three tools only: read_file, write_decisions, create_file",
+      "Shipped, Open Source, Used Daily across 6 projects",
+    ],
+    traction: "Shipped · Context Engineering · Used Daily",
+    images: [
+      { src: "/images/claude-bridge-architecture.png", label: "Architecture Loop" },
+      { src: "/images/claude-bridge-before-after.png", label: "Before and After" },
+      { src: "/images/claude-bridge-tools.png", label: "MCP Tools" },
+      { src: "/images/claude-bridge-claudemd.png", label: "CLAUDE.md in Action" },
+    ],
+    galleryIncludesHero: true,
+    imagePosition: "object-center",
+    githubLink: "https://github.com/harshitleads/claude-code-bridge",
+    caseStudyLink: "/work/claude-code-bridge",
+  },
 ];
 
 const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];
