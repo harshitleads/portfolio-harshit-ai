@@ -138,3 +138,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Personal origin story is more compelling than generic problem statement. Shows the tool was born from a real need, not spec'd in a vacuum. "Shipped in 2 hours" signals speed and execution. Golden dataset generator is the natural next step and shows product vision beyond V1.
 **Rejected:** Redesigning Eval Studio's UI to look more polished. The "vibecoded in 2 hours" story is stronger than a pretty UI for an infra tool. Recruiters care about the architecture and thinking, not the font.
 
+
+### 2026-04-05
+
+### 2026-04-05 -- Add competitive landscape to Eval Studio case study
+**Decision:** Added 6-competitor landscape section between Problem and Use Cases. Competitors: Prompt Cannon, Promptfoo (acquired by OpenAI), Braintrust, LangSmith, Google LLM Comparator, Langfuse. Positioning: "zero-setup eval tooling" — every competitor requires CLI, SDK, cloud accounts, or Python. Eval Studio is a URL.
+**Why:** Shows market awareness and clear differentiation. A PM who can articulate why their product exists relative to funded alternatives demonstrates product sense. The competitive landscape also validates that the problem space is real (Promptfoo was acquired by OpenAI for this exact category).
+**Rejected:** Including more competitors (DeepEval, Inspect AI, W&B Weave). Six is enough to make the point without overwhelming the page. Also rejected putting this on the homepage card — too detailed for a card, belongs in the case study deep dive.
+

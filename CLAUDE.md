@@ -71,21 +71,19 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 
 ---
 
-## ACTIVE TASK: Update Eval Studio case study — origin story + traction pill + roadmap
+## ACTIVE TASK: Eval Studio case study updates (3 parts)
 
 ### Part 1: Add "Shipped in 2 Hours" traction pill
 
-In `app/work/eval-studio/page.tsx`, find the traction pills array in the hero section (the `.map(({ value, sub })` block with 4 items). Add a 5th pill:
+In `app/work/eval-studio/page.tsx`, find the traction pills array in the hero section (the `.map(({ value, sub })` block with 4 items). Add a 5th pill as the LAST item:
 
 ```tsx
 { value: "Shipped in 2 Hours", sub: "Side project" },
 ```
 
-Add it as the LAST item in the array, after the "Live" pill.
-
 ### Part 2: Rewrite the Problem section with origin story
 
-In `app/work/eval-studio/page.tsx`, find section id="problem". Replace the entire content of that section with:
+In `app/work/eval-studio/page.tsx`, find section id="problem". Replace the entire section content with:
 
 ```tsx
 <section id="problem">
@@ -105,9 +103,78 @@ In `app/work/eval-studio/page.tsx`, find section id="problem". Replace the entir
 </section>
 ```
 
-### Part 3: Update the What's Next roadmap
+### Part 3: Add competitive landscape section
 
-In `app/work/eval-studio/page.tsx`, find section id="whats-next". Replace the items array in the `ul` with these items (in this exact order):
+In `app/work/eval-studio/page.tsx`, add a NEW section between the "problem" section and the "use-cases" section. Also add this section to the sidebarSections array.
+
+**Update sidebarSections** — add a new entry after "Problem":
+```tsx
+{ id: "landscape", label: "Competitive Landscape" },
+```
+
+**New section JSX** — insert this between the closing `</section>` of id="problem" and the opening `<section id="use-cases">`:
+
+```tsx
+{/* SECTION: COMPETITIVE LANDSCAPE */}
+<section id="landscape">
+  <SectionLabel>Market Context</SectionLabel>
+  <SectionHeading>What Exists and Where It Falls Short</SectionHeading>
+  <Card className="space-y-5 mb-4">
+    <Body>
+      LLM evaluation is not a new idea. The tools exist. But they are all built for different users than the PM or founder who just needs to pick a model and a prompt before building.
+    </Body>
+  </Card>
+  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    {[
+      {
+        name: "Prompt Cannon",
+        position: "Casual model comparison",
+        gap: "One prompt at a time, side-by-side outputs. No dataset, no scoring rubric, no cost tracking. Good for curiosity, not for product decisions.",
+      },
+      {
+        name: "Promptfoo (acquired by OpenAI)",
+        position: "Developer CLI tool",
+        gap: "Powerful but requires Node.js, YAML config files, and terminal setup. Pivoted heavily toward red teaming and security testing. Not built for quick prompt/model comparison.",
+      },
+      {
+        name: "Braintrust",
+        position: "Enterprise eval platform",
+        gap: "Full observability suite with CI/CD integration, tracing, and experiment tracking. Pro plan at $249/month. Built for teams with production AI, not for a PM prototyping an agent.",
+      },
+      {
+        name: "LangSmith",
+        position: "LangChain ecosystem",
+        gap: "Tightly coupled to LangChain. Strong for teams already in that ecosystem, but requires SDK integration. Not model-agnostic in practice.",
+      },
+      {
+        name: "Google LLM Comparator",
+        position: "Research tool",
+        gap: "Python library that ingests JSON files. Built for ML researchers comparing Gemma model versions, not for PMs comparing prompt strategies across providers.",
+      },
+      {
+        name: "Langfuse",
+        position: "Open-source observability",
+        gap: "Excellent for production logging and tracing. Eval features exist but are secondary to observability. Requires self-hosting or cloud account setup.",
+      },
+    ].map(({ name, position, gap }) => (
+      <Card key={name}>
+        <p className="cs-card-title mb-1">{name}</p>
+        <p className="mb-2 text-[12px] font-bold uppercase tracking-widest text-primary">{position}</p>
+        <p className="cs-body">{gap}</p>
+      </Card>
+    ))}
+  </div>
+  <Card className="mt-4 space-y-5">
+    <Body>
+      The gap is not eval tooling. The gap is zero-setup eval tooling. Every tool above requires CLI installation, SDK integration, cloud accounts, or Python scripting before you can compare a single prompt. Eval Studio is a URL. Open it, paste your API keys, upload a CSV, and get scored results in minutes. That is the product bet: the fastest path from question to answer for anyone choosing a model or prompt.
+    </Body>
+  </Card>
+</section>
+```
+
+### Part 4: Update the What's Next roadmap
+
+In `app/work/eval-studio/page.tsx`, find section id="whats-next". Replace the items array with:
 
 ```tsx
 "Synthetic golden dataset generator: create high-precision evaluation datasets from minimal inputs, so you do not need 50 hand-labeled rows to start",
@@ -117,17 +184,17 @@ In `app/work/eval-studio/page.tsx`, find section id="whats-next". Replace the it
 "Hybrid scoring: auto-detect exact match for structured outputs, LLM judge for open-ended",
 ```
 
-The golden dataset generator is now item 1 (top of the roadmap).
-
 ### Files to modify
-- MODIFY: `app/work/eval-studio/page.tsx` — traction pill, problem section rewrite, roadmap update
+- MODIFY: `app/work/eval-studio/page.tsx` — traction pill, problem rewrite, competitive landscape section, roadmap update
 
 ### Acceptance Criteria
 - [ ] 5 traction pills in hero (Multi-provider, Judge Council, Cost Tracking, Live, Shipped in 2 Hours)
-- [ ] Problem section heading is "I Needed This Myself"
-- [ ] Problem section has 3 paragraphs: personal origin, shipped fast, market validation
-- [ ] No em dashes in any copy
+- [ ] Problem section heading is "I Needed This Myself" with 3 paragraphs
+- [ ] New "Competitive Landscape" section with 6 competitor cards appears between Problem and Two Use Cases
+- [ ] Competitive Landscape section appears in sidebar navigation
+- [ ] Summary paragraph below competitor cards articulates the zero-setup positioning
 - [ ] What's Next has 5 items with golden dataset generator first
+- [ ] No em dashes in any copy
 - [ ] `pnpm build` passes with no errors
 
 ---
@@ -155,4 +222,4 @@ The golden dataset generator is now item 1 (top of the roadmap).
 - 2026-04-05: Explainable AI sidebar stats updated: Developer Tool, AI Trust (Shield), Live (Zap), Next.js + Claude
 - 2026-04-05: Explainable AI product UI redesigned: FilePanel removed, two-panel layout, confidence score enlarged
 - 2026-04-05: Sidebar icons bumped from 20px to 24px across all case study pages
-- 2026-04-05: Explainable AI buttons reordered with progression labels: Read the Research (primary) > Try the Prototype > View Code > Back to Portfolio
+- 2026-04-05: Explainable AI buttons reordered with progression labels

@@ -56,6 +56,7 @@ const sidebarStats = [
 
 const sidebarSections = [
   { id: "problem", label: "Problem" },
+  { id: "landscape", label: "Competitive Landscape" },
   { id: "use-cases", label: "Two Use Cases" },
   { id: "how-it-works", label: "How It Works" },
   { id: "decisions", label: "Design Decisions" },
@@ -157,6 +158,62 @@ export default function EvalStudioPage() {
             </Body>
             <Body>
               When I talked to other founders and PMs building Gen AI and agentic AI products, they described the same problem. Everyone was manually iterating through models and prompts, copying outputs into spreadsheets, losing track of which version performed better. It felt productive but it was productive procrastination. No rigor, no reproducibility, no cost visibility.
+            </Body>
+          </Card>
+        </section>
+
+        {/* SECTION: COMPETITIVE LANDSCAPE */}
+        <section id="landscape">
+          <SectionLabel>Market Context</SectionLabel>
+          <SectionHeading>What Exists and Where It Falls Short</SectionHeading>
+          <Card className="space-y-5 mb-4">
+            <Body>
+              LLM evaluation is not a new idea. The tools exist. But they are all built for different users than the PM or founder who just needs to pick a model and a prompt before building.
+            </Body>
+          </Card>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {[
+              {
+                name: "Prompt Cannon",
+                position: "Casual model comparison",
+                gap: "One prompt at a time, side-by-side outputs. No dataset, no scoring rubric, no cost tracking. Good for curiosity, not for product decisions.",
+              },
+              {
+                name: "Promptfoo (acquired by OpenAI)",
+                position: "Developer CLI tool",
+                gap: "Powerful but requires Node.js, YAML config files, and terminal setup. Pivoted heavily toward red teaming and security testing. Not built for quick prompt/model comparison.",
+              },
+              {
+                name: "Braintrust",
+                position: "Enterprise eval platform",
+                gap: "Full observability suite with CI/CD integration, tracing, and experiment tracking. Pro plan at $249/month. Built for teams with production AI, not for a PM prototyping an agent.",
+              },
+              {
+                name: "LangSmith",
+                position: "LangChain ecosystem",
+                gap: "Tightly coupled to LangChain. Strong for teams already in that ecosystem, but requires SDK integration. Not model-agnostic in practice.",
+              },
+              {
+                name: "Google LLM Comparator",
+                position: "Research tool",
+                gap: "Python library that ingests JSON files. Built for ML researchers comparing Gemma model versions, not for PMs comparing prompt strategies across providers.",
+              },
+              {
+                name: "Langfuse",
+                position: "Open-source observability",
+                gap: "Excellent for production logging and tracing. Eval features exist but are secondary to observability. Requires self-hosting or cloud account setup.",
+              },
+            ].map(({ name, position, gap }) => (
+              <Card key={name}>
+                <p className="cs-card-title mb-1">{name}</p>
+                <p className="mb-2 text-[12px] font-bold uppercase tracking-widest text-primary">{position}</p>
+                <p className="cs-body">{gap}</p>
+              </Card>
+            ))}
+          </div>
+          <Card className="mt-4 space-y-5">
+            <Body>
+              The gap is not eval tooling. The gap is zero-setup eval tooling. Every tool above requires CLI installation, SDK integration, cloud accounts, or Python scripting before you can compare a single prompt. Eval Studio is a URL. Open it, paste your API keys, upload a CSV, and get scored results in minutes. That is the product bet: the fastest path from question to answer for anyone choosing a model or prompt.
             </Body>
           </Card>
         </section>
