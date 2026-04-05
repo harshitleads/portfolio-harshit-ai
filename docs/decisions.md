@@ -164,6 +164,11 @@ Entries are append-only. Never edit old entries.
 
 ### 2026-04-05 -- Job Market Pulse: no case study page, dashboard is the case study
 **Decision:** Job Market Pulse gets a homepage card on harshit.ai but NO dedicated /work/ case study page. The "View Project" button links directly to pulse.harshit.ai. Narrative blocks are built into the dashboard itself.
-**Why:** The dashboard IS the artifact. Data choices, chart design, annotations, and H-1B tracker all speak for themselves. Adding a case study page would just describe what the visitor can already see. Every other case study page exists because the product alone doesn't tell the full PM story — this one does.
+**Why:** The dashboard IS the artifact. Data choices, chart design, annotations, and H-1B tracker all speak for themselves. Adding a case study page would just describe what the visitor can already see. Every other case study page exists because the product alone doesn't tell the full PM story -- this one does.
 **Rejected:** Building a /work/job-market-pulse case study page. Would take 2-3 hours with no additional signal for recruiters.
+
+### 2026-04-05 -- Job Market Pulse: case study page added after all
+**Decision:** Built a lightweight case study page at /work/job-market-pulse with 5 sections (motivation, live preview chart, data sources, design decisions, screenshots). Homepage card caseStudyLink updated from external URL to /work/job-market-pulse.
+**Why:** Reversed earlier decision. A case study page adds context the dashboard alone cannot provide: motivation, data source breakdown, and design decision rationale. The embedded Recharts preview chart bridges static case study and live dashboard.
+**Rejected:** Keeping the external-only link. Having a case study page is consistent with other projects and gives recruiters the PM narrative they expect.
 

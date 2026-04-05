@@ -32,5 +32,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: 'https://harshit.ai/work/job-market-pulse',
+      lastModified: new Date('2026-04-05'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

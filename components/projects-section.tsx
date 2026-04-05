@@ -251,7 +251,7 @@ const projects: ProjectData[] = [
     galleryIncludesHero: true,
     imagePosition: "object-top",
     liveDemoLink: "https://pulse.harshit.ai",
-    caseStudyLink: "https://pulse.harshit.ai",
+    caseStudyLink: "/work/job-market-pulse",
   },
 ];
 
