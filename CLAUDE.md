@@ -56,20 +56,16 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport
 
 ## Pending Work
-- OG metadata: title is 35 chars (optimal 50-60), description text outdated. Minor optimization, not blocking.
-- OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed.
-- Eval Studio: add mockup screenshots to case study page using ScreenshotGallery component
-- Explainable AI: add mockup screenshots, configure explainable.harshit.ai domain
-- All READMEs: humanize copy (review for AI voice)
-- PM Salary Ace: paste updated README to GitHub web editor
+- OG metadata: title is 35 chars (optimal 50-60), description text outdated. Minor optimization.
+- All READMEs: humanize copy
+- PM Salary Ace: paste updated README to GitHub
 - claude-code-bridge: build case study page on harshit.ai
 
 ## Completed Work
 - 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px
-- 2026-04-04: Standardized all case study hero buttons (Try It > GitHub > Back to Portfolio)
-- 2026-04-04: Removed GitHub/Try It from homepage cards (View Project only)
+- 2026-04-04: Standardized all case study hero buttons, removed secondary CTAs from homepage cards
 - 2026-04-04: Traction pill casing standardized to Sentence Case
-- 2026-04-04: Dear Her repo public, renamed, CLAUDE.md + decisions.md + README created
+- 2026-04-04: Dear Her repo public, CLAUDE.md + decisions.md + README created
 - 2026-04-04: All GitHub READMEs updated with case study links
-- 2026-04-04: Eval Studio GitHub description/website/topics set, favicon and OG image added
-- 2026-04-04: Eval Studio mockup screenshots generated (landing, config, rubric, results)
+- 2026-04-04: Eval Studio favicon and OG image added
+- 2026-04-04: Added 4 mockup screenshots to Eval Studio case study (ScreenshotGallery) and homepage card lightbox (galleryIncludesHero)

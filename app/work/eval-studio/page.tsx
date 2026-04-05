@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink, FlaskConical, Github, Server, BarChart3, Zap } from "lucide-react";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
+import { ScreenshotGallery } from "@/components/case-study/ScreenshotGallery";
 
 export const metadata: Metadata = {
   title: "Eval Studio | Case Study | Harshit Sharma",
@@ -59,7 +60,15 @@ const sidebarSections = [
   { id: "how-it-works", label: "How It Works" },
   { id: "decisions", label: "Design Decisions" },
   { id: "limitations", label: "Honest Limitations" },
+  { id: "screenshots", label: "Screenshots" },
   { id: "whats-next", label: "What's Next" },
+];
+
+const screenshots = [
+  { src: "/images/eval-studio-landing.png", alt: "Landing Page", caption: "Landing Page" },
+  { src: "/images/eval-studio-config.png", alt: "Multi-provider Config", caption: "Multi-provider Config" },
+  { src: "/images/eval-studio-rubric.png", alt: "Rubric Builder + Judge Council", caption: "Rubric Builder + Judge Council" },
+  { src: "/images/eval-studio-results.png", alt: "Ranked Results + Cost Breakdown", caption: "Ranked Results + Cost Breakdown" },
 ];
 
 export default function EvalStudioPage() {
@@ -276,7 +285,14 @@ export default function EvalStudioPage() {
           </Card>
         </section>
 
-        {/* SECTION 6: WHAT'S NEXT */}
+        {/* SECTION 6: SCREENSHOTS */}
+        <section id="screenshots">
+          <SectionLabel>Product Screenshots</SectionLabel>
+          <SectionHeading>The Product</SectionHeading>
+          <ScreenshotGallery screenshots={screenshots} />
+        </section>
+
+        {/* SECTION 7: WHAT'S NEXT */}
         <section id="whats-next">
           <SectionLabel>Roadmap</SectionLabel>
           <SectionHeading>What&apos;s Next</SectionHeading>

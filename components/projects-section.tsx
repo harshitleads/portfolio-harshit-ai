@@ -181,8 +181,12 @@ const projects: ProjectData[] = [
     ],
     traction: "3 Providers · 2-Judge Council · Per-row Cost Tracking · Live",
     images: [
-      { src: "/images/eval-studio-hero.png", label: "Eval Studio" },
+      { src: "/images/eval-studio-results.png", label: "Ranked Results" },
+      { src: "/images/eval-studio-landing.png", label: "Landing Page" },
+      { src: "/images/eval-studio-config.png", label: "Multi-provider Config" },
+      { src: "/images/eval-studio-rubric.png", label: "Rubric Builder" },
     ],
+    galleryIncludesHero: true,
     imagePosition: "object-[center_30%]",
     liveDemoLink: "https://eval.harshit.ai",
     githubLink: "https://github.com/harshitleads/eval-studio",
