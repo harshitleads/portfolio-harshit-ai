@@ -172,9 +172,9 @@ const projects: ProjectData[] = [
       "Multi-model judge council with cross-provider bias detection",
       "BYO API keys, zero backend storage, keys never leave React state",
       "Cost tracking as a first-class metric alongside quality scores",
-      "Multi-provider / Judge Council / Cost Tracking / Live",
+      "3 providers · 2-judge council · per-row cost tracking · live",
     ],
-    traction: "Multi-provider / Judge Council / Cost Tracking / Live",
+    traction: "3 providers · 2-judge council · per-row cost tracking · live",
     images: [
       { src: "/images/eval-studio-hero.png", label: "Eval Studio" },
     ],
