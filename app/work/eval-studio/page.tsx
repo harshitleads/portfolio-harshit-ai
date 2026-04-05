@@ -49,8 +49,8 @@ function Body({ children }: { children: React.ReactNode }) {
 
 const sidebarStats = [
   { value: "AI Eval Tool", label: "Type" },
-  { value: "LLM Infra", label: "Domain", icon: <Server size={20} className="text-emerald-400/70" /> },
-  { value: "Live", label: "Status", icon: <Zap size={20} className="text-emerald-400/70" /> },
+  { value: "LLM Infra", label: "Domain", icon: <Server size={24} className="text-emerald-400/70" /> },
+  { value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
   { value: "Next.js + TS", label: "Stack" },
 ];
 

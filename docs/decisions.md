@@ -117,3 +117,16 @@ Entries are append-only. Never edit old entries.
 **Why:** The product is live at trust.harshit.ai. Sidebar saying "Prototype" and "Figma stage" undercuts the narrative that this went from design to working product. The case study tells the full story; the sidebar should reflect current state.
 **Rejected:** Keeping "Case Study" as type. Changed to "Developer Tool" to match the domain and be consistent with Explainable AI's positioning alongside claude-code-bridge.
 
+
+### 2026-04-05
+
+### 2026-04-05 -- Sidebar icon size bump to 24px
+**Decision:** Increase all case study sidebar icons from 20px to 24px across Eval Studio, claude-code-bridge, and Explainable AI. Keep vertically centered.
+**Why:** At 20px the icons looked undersized and disconnected from the stat values. 24px gives better visual weight and presence in the At a Glance cards.
+**Rejected:** Reducing to 16px (would make icons too subtle). Removing icons entirely (they add scannability).
+
+### 2026-04-05 -- Explainable AI button progression labeling
+**Decision:** Reorder hero buttons to: "Read the Research" (primary, PDF) > "Try the Prototype" > "View Code" > "Back to Portfolio". Merged old "View PDF" into "Read the Research" as the primary green CTA.
+**Why:** Explainable AI is the only portfolio project with the full PM lifecycle: research > design > working prototype. Button order should tell that story. The PDF research doc is the star PM deliverable and deserves the primary position. Other projects keep their current button labels since they don't have this three-deliverable progression.
+**Rejected:** Relabeling buttons across all five projects. Only Explainable AI has three distinct deliverables worth narrating. Others are already clear with "Try It" / "GitHub".
+

@@ -27,8 +27,8 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 const sidebarStats = [
   { value: "Developer Tool", label: "Type" },
-  { value: "AI Trust", label: "Domain", icon: <Shield size={20} className="text-emerald-400/70" /> },
-  { value: "Live", label: "Status", icon: <Zap size={20} className="text-emerald-400/70" /> },
+  { value: "AI Trust", label: "Domain", icon: <Shield size={24} className="text-emerald-400/70" /> },
+  { value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
   { value: "Next.js + Claude", label: "Stack" },
 ];
 
@@ -115,12 +115,21 @@ export default async function ExplainableAIPage() {
           </p>
           <div className="mb-10 flex flex-wrap gap-3 mt-5">
             <a
-              href="https://trust.harshit.ai"
+              href="/Explainable_Coding_Assistant.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
             >
-              Try It <ExternalLink className="h-4 w-4" />
+              Read the Research <ExternalLink className="h-4 w-4" />
+            </a>
+            <a
+              href="https://trust.harshit.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Try the Prototype
             </a>
             <a
               href="https://github.com/harshitleads/explainable-coding-assistant"
@@ -129,15 +138,7 @@ export default async function ExplainableAIPage() {
               className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
             >
               <Github className="h-4 w-4" />
-              GitHub
-            </a>
-            <a
-              href="/Explainable_Coding_Assistant.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
-            >
-              View PDF
+              View Code
             </a>
             <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
               <ArrowLeft className="h-4 w-4" />

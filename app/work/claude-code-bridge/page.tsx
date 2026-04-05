@@ -49,8 +49,8 @@ function Body({ children }: { children: React.ReactNode }) {
 
 const sidebarStats = [
   { value: "Developer Tool", label: "Type" },
-  { value: "Context Engineering", label: "Domain", icon: <GitBranch size={20} className="text-emerald-400/70" /> },
-  { value: "Shipped", label: "Status", icon: <Zap size={20} className="text-emerald-400/70" /> },
+  { value: "Context Engineering", label: "Domain", icon: <GitBranch size={24} className="text-emerald-400/70" /> },
+  { value: "Shipped", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
   { value: "TypeScript + MCP", label: "Stack" },
 ];
 

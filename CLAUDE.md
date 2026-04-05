@@ -70,6 +70,115 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 
 ---
 
+## ACTIVE TASK: Fix sidebar icons + Explainable AI button progression labels
+
+### Part 1: Fix icon alignment in CaseStudySidebar component
+
+In `components/case-study/CaseStudySidebar.tsx`, find the stat card rendering. When a stat has an `icon`, the current layout uses a flex row with the icon pushed to the far right via `justify-between`. The icon floats to the top-right and looks disconnected.
+
+**Fix:** When a stat has an icon, keep the icon on the right BUT vertically center the icon with the value text using `items-center`. Also bump icon size from 20px to 24px for better visual weight.
+
+Find this block in the stats rendering:
+```tsx
+{stat.icon ? (
+  <div className="flex items-center justify-between">
+    <p className="text-xl font-bold text-slate-100">{stat.value}</p>
+    {stat.icon}
+  </div>
+) : (
+  <p className="text-xl font-bold text-slate-100">{stat.value}</p>
+)}
+```
+
+This layout is fine structurally — `items-center` is already there. The problem is the icons themselves are being passed in at size={20} from each case study page. The fix is in each page that passes icons.
+
+**Update icon sizes in ALL case study pages that use sidebar icons:**
+
+File: `app/work/eval-studio/page.tsx`
+Find sidebarStats and change all icon `size={20}` to `size={24}`:
+```tsx
+{ value: "LLM Infra", label: "Domain", icon: <Server size={24} className="text-emerald-400/70" /> },
+{ value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
+```
+
+File: `app/work/claude-code-bridge/page.tsx`
+Find sidebarStats and change all icon `size={20}` to `size={24}`:
+```tsx
+{ value: "Context Engineering", label: "Domain", icon: <GitBranch size={24} className="text-emerald-400/70" /> },
+{ value: "Shipped", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
+```
+
+File: `app/work/explainable-ai/page.tsx`
+Find sidebarStats and change all icon `size={20}` to `size={24}`:
+```tsx
+{ value: "AI Trust", label: "Domain", icon: <Shield size={24} className="text-emerald-400/70" /> },
+{ value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
+```
+
+### Part 2: Explainable AI button progression labels
+
+In `app/work/explainable-ai/page.tsx`, find the hero buttons section (the `<div className="mb-10 flex flex-wrap gap-3 mt-5">` block).
+
+Replace the current buttons with this exact order and labeling:
+
+```tsx
+<div className="mb-10 flex flex-wrap gap-3 mt-5">
+  <a
+    href="/Explainable_Coding_Assistant.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+  >
+    Read the Research <ExternalLink className="h-4 w-4" />
+  </a>
+  <a
+    href="https://trust.harshit.ai"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+  >
+    <ExternalLink className="h-4 w-4" />
+    Try the Prototype
+  </a>
+  <a
+    href="https://github.com/harshitleads/explainable-coding-assistant"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+  >
+    <Github className="h-4 w-4" />
+    View Code
+  </a>
+  <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
+    <ArrowLeft className="h-4 w-4" />
+    Back to Portfolio
+  </Link>
+</div>
+```
+
+Key changes:
+- "Read the Research" (PDF) is now the PRIMARY green button — this is the star PM deliverable
+- "Try the Prototype" is secondary — the functional implementation
+- "View Code" replaces "GitHub" — clearer label
+- "View PDF" button removed (replaced by "Read the Research" as primary)
+- Order tells the PM lifecycle story: Research → Prototype → Code
+
+### Files to modify
+- MODIFY: `app/work/eval-studio/page.tsx` — icon size 20→24
+- MODIFY: `app/work/claude-code-bridge/page.tsx` — icon size 20→24
+- MODIFY: `app/work/explainable-ai/page.tsx` — icon size 20→24 + button reorder/relabel
+
+### Acceptance Criteria
+- [ ] All sidebar icons are 24px across all case study pages
+- [ ] Icons are vertically centered with their stat value text
+- [ ] Explainable AI hero buttons order: Read the Research (primary) → Try the Prototype → View Code → Back to Portfolio
+- [ ] "Read the Research" is the green primary button
+- [ ] No "View PDF" button (merged into "Read the Research")
+- [ ] No other case study pages' buttons are changed
+- [ ] `pnpm build` passes with no errors
+
+---
+
 ## Pending Work
 - OG metadata: title is 35 chars (optimal 50-60), description text outdated
 - OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed
@@ -90,4 +199,6 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - 2026-04-04: Eval Studio mockup screenshots added to case study page and homepage gallery
 - 2026-04-04: claude-code-bridge case study page built, homepage card added, sitemap updated
 - 2026-04-04: Eval Studio imagePosition fix committed
+- 2026-04-05: Homepage projects reordered: Eval Studio > claude-code-bridge > Explainable AI > Dear Her > PM Salary Ace
 - 2026-04-05: Explainable AI sidebar stats updated: Developer Tool, AI Trust (Shield), Live (Zap), Next.js + Claude
+- 2026-04-05: Explainable AI product UI redesigned: FilePanel removed, two-panel layout, confidence score enlarged
