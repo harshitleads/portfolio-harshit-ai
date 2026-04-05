@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Mail, Linkedin, FileText, ArrowUpRight, CalendarDays } from "lucide-react";
+import { Mail, Linkedin, FileText, Github, ArrowUpRight, CalendarDays } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const contacts = [
@@ -16,6 +16,12 @@ const contacts = [
     label: "Connect with me on LinkedIn",
     value: "/in/harryleads",
     href: "https://linkedin.com/in/harryleads",
+  },
+  {
+    icon: Github,
+    label: "Check out my code",
+    value: "github.com/harshitleads",
+    href: "https://github.com/harshitleads",
   },
   {
     icon: FileText,
@@ -67,7 +73,7 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {contacts.map((item, i) => (
             <a
               key={item.label}

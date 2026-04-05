@@ -7,6 +7,11 @@ import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
 export const metadata: Metadata = {
   title: "Eval Studio | Case Study | Harshit Sharma",
   description: "Browser-based LLM evaluation tool. Test prompts and models on your own data with multi-model judge council, cost tracking, and ranked results.",
+  openGraph: {
+    title: "Eval Studio | Harshit Sharma",
+    description: "Browser-based LLM evaluation tool. Test prompts and models on your own data with multi-model judge council, cost tracking, and ranked results.",
+    images: [{ url: "/images/eval-studio-hero.png", width: 1200, height: 630 }],
+  },
 };
 
 function SectionLabel({ children }: { children: React.ReactNode }) {

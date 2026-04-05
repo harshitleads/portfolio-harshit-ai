@@ -68,11 +68,9 @@ This applies to every Claude session touching this project, not just the CTO cha
 
 ## Known Issues and Backlog
 - Custom domain explainable.harshit.ai not yet configured in Vercel
-- Eval Studio homepage card has placeholder image (needs real screenshot saved to /public/images/eval-studio-hero.png)
 
 ## Completed Work
 - 2026-03-21: Calendly inline embed, floating bubble, contact copy cleanup, about section language cleanup, philosophy modal copy
-- 2026-04-03: Calendly bubble fixes (cross-page nav, scroll to embed, 7s reappearance, IntersectionObserver auto-hide, GDPR banner hidden, overlay cleanup before nav), URL updated to /15min, subtitle updated to "15 / 30 min"
-- 2026-04-03: Reframed stats across entire site. Removed raw user/visitor counts from case study sidebars, body copy, and homepage project cards.
-- 2026-04-04: Eval Studio case study page built at /work/eval-studio (6 sections, sidebar, hero). Homepage project card added. Sitemap updated.
-- 2026-04-04: Fixed Eval Studio homepage card traction/differentiation to use dot-separated format matching other cards. Sidebar icons already consistent at 20px across all pages.
+- 2026-04-03: Calendly bubble fixes, stats reframed, guardrails added
+- 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px, traction pills fixed, GitHub/live demo buttons added, GitHub in contact section
+- 2026-04-04: Eval Studio card image set to object-[center_30%], OG metadata added to case study page, favicon confirmed present

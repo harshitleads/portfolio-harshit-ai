@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Maximize2,
   ExternalLink,
+  Github,
   Telescope,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
@@ -44,6 +45,7 @@ interface ProjectData {
   imagePosition?: string;
   pdfLink?: string;
   liveDemoLink?: string;
+  githubLink?: string;
   caseStudyLink?: string;
 }
 
@@ -83,6 +85,8 @@ const projects: ProjectData[] = [
     ],
     imagePosition: "object-[center_25%]",
     pdfLink: "/Explainable_Coding_Assistant.pdf",
+    liveDemoLink: "https://trust.harshit.ai",
+    githubLink: "https://github.com/harshitleads/explainable-coding-assistant",
     caseStudyLink: "/work/explainable-ai",
   },
   {
@@ -118,6 +122,7 @@ const projects: ProjectData[] = [
     galleryIncludesHero: true,
     imagePosition: "object-top",
     liveDemoLink: "https://pmquiz.harshit.ai/",
+    githubLink: "https://github.com/harshitleads/pm-salary-quest",
     caseStudyLink: "/work/pm-salary-ace",
   },
   {
@@ -178,8 +183,9 @@ const projects: ProjectData[] = [
     images: [
       { src: "/images/eval-studio-hero.png", label: "Eval Studio" },
     ],
-    imagePosition: "object-center",
+    imagePosition: "object-[center_30%]",
     liveDemoLink: "https://eval.harshit.ai",
+    githubLink: "https://github.com/harshitleads/eval-studio",
     caseStudyLink: "/work/eval-studio",
   },
 ];
@@ -281,34 +287,58 @@ function ProjectCard({
             </div>
           )}
 
-          {ctaLink === null ? (
-            <button
-              type="button"
-              disabled
-              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-50"
-            >
-              View Project
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          ) : ctaIsExternal ? (
-            <a
-              href={ctaLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-            >
-              View Project
-              <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-            </a>
-          ) : (
-            <Link
-              href={ctaLink}
-              className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-            >
-              View Project
-              <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-            </Link>
-          )}
+          <div className="flex flex-wrap items-center gap-3">
+            {ctaLink === null ? (
+              <button
+                type="button"
+                disabled
+                className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-50"
+              >
+                View Project
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            ) : ctaIsExternal ? (
+              <a
+                href={ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+              >
+                View Project
+                <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+              </a>
+            ) : (
+              <Link
+                href={ctaLink}
+                className="group/btn inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
+              >
+                View Project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+              </Link>
+            )}
+            {project.liveDemoLink && (
+              <a
+                href={project.liveDemoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Try It
+              </a>
+            )}
+            {project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

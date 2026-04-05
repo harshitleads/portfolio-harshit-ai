@@ -128,7 +128,7 @@ export default async function ExplainableAIPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
             >
-              Live Product <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              Try It <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>
