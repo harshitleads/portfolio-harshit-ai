@@ -187,7 +187,7 @@ const projects: ProjectData[] = [
       { src: "/images/eval-studio-rubric.png", label: "Rubric Builder" },
     ],
     galleryIncludesHero: true,
-    imagePosition: "object-[center_30%]",
+    imagePosition: "object-top",
     liveDemoLink: "https://eval.harshit.ai",
     githubLink: "https://github.com/harshitleads/eval-studio",
     caseStudyLink: "/work/eval-studio",
