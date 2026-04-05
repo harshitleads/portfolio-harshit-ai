@@ -159,3 +159,11 @@ Entries are append-only. Never edit old entries.
 **Why:** "Shipped" is generic. "Shipped in 2 Hours" shows execution speed and matches the Eval Studio traction pill pattern. The third paragraph adds personal origin and daily usage proof, turning the problem section from abstract to concrete.
 **Rejected:** Keeping 5 pills (would crowd the hero). Adding a separate "Traction" section (overkill for a dev tool with no external users).
 
+
+### 2026-04-05
+
+### 2026-04-05 -- Job Market Pulse: no case study page, dashboard is the case study
+**Decision:** Job Market Pulse gets a homepage card on harshit.ai but NO dedicated /work/ case study page. The "View Project" button links directly to pulse.harshit.ai. Narrative blocks are built into the dashboard itself.
+**Why:** The dashboard IS the artifact. Data choices, chart design, annotations, and H-1B tracker all speak for themselves. Adding a case study page would just describe what the visitor can already see. Every other case study page exists because the product alone doesn't tell the full PM story — this one does.
+**Rejected:** Building a /work/job-market-pulse case study page. Would take 2-3 hours with no additional signal for recruiters.
+

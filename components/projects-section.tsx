@@ -224,6 +224,35 @@ const projects: ProjectData[] = [
     githubLink: "https://github.com/harshitleads/pm-salary-quest",
     caseStudyLink: "/work/pm-salary-ace",
   },
+  {
+    id: "job-market-pulse",
+    title: "Job Market Pulse",
+    tagline: "The labor market, visualized",
+    tags: ["Live Product", "AI Tools"],
+    problem: {
+      short: "Job market data is scattered across government sites, ugly portals, and paywalled reports. Nobody has a clean, real-time view of what is actually happening.",
+      full: "The US labor market generates rich data every month through JOLTS, BLS, and USCIS. But accessing it means navigating government PDFs, ad-heavy aggregator sites, and fragmented H-1B portals. For job seekers, founders, and PMs, there is no single clean dashboard that shows job openings, layoffs, hiring trends, and H-1B sponsorship data in one place.",
+    },
+    solution: {
+      short: "A real-time dashboard pulling from FRED API, DOL, and USCIS. Labor market trends, H-1B sponsor rankings, PM salary ranges, and approval rates in one view.",
+      full: "A data dashboard that pulls from the FRED API (Federal Reserve Economic Data), Department of Labor LCA filings, and USCIS H-1B employer data. Shows job openings, unemployment, hires, quits, and layoffs from 2021 to present. Includes an H-1B tracker with company lookup, top sponsors, PM role salary ranges, and approval trends. Data refreshes every 24 hours.",
+    },
+    keyInsight: "The best dashboard is the one where you do not need a legend to understand what you are looking at. Every chart tells one story, every annotation explains why that moment matters.",
+    differentiation: [
+      "FRED API + DOL + USCIS data combined in one dashboard",
+      "H-1B company lookup with PM-specific salary and filing data",
+      "Narrative blocks between charts explain the data decisions",
+      "Live · FRED data refreshes every 24 hours",
+    ],
+    traction: "Live · 4 Data Sources · Real-time FRED API",
+    images: [
+      { src: "/images/pulse-hero.png", label: "Dashboard Overview" },
+    ],
+    galleryIncludesHero: true,
+    imagePosition: "object-top",
+    liveDemoLink: "https://pulse.harshit.ai",
+    caseStudyLink: "https://pulse.harshit.ai",
+  },
 ];
 
 const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];
