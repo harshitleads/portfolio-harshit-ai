@@ -61,9 +61,14 @@ Homepage project cards show ONLY "View Project" as the single CTA. No GitHub, no
 - Cross-page nav: bubble uses usePathname + useRouter to navigate from /work/* pages to homepage embed
 - Subtitle: "15 / 30 min . Google Meet" on both bubble and contact card
 
-## Known Issues and Backlog
-- Custom domain explainable.harshit.ai not yet configured in Vercel
-- Eval Studio case study page needs mockup screenshots
+## Pending Work
+- Eval Studio: take 4 mockup screenshots (landing, config, running, results) and add to case study page using ScreenshotGallery component. Save as /public/images/eval-studio-landing.png, eval-studio-config.png, eval-studio-running.png, eval-studio-results.png
+- Eval Studio: update favicon and OG image for eval.harshit.ai (separate repo)
+- Explainable AI: add mockup screenshots to case study page (images exist at /public/images/explainable-*.jpg but ScreenshotGallery not wired up on the page)
+- Explainable AI: configure custom domain explainable.harshit.ai in Vercel
+- All READMEs: humanize copy (review for AI-sounding language)
+- PM Salary Ace: paste updated README to GitHub web editor
+- claude-code-bridge: build case study page on harshit.ai
 
 ## Completed Work
 - 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px
@@ -72,3 +77,6 @@ Homepage project cards show ONLY "View Project" as the single CTA. No GitHub, no
 - 2026-04-04: Removed GitHub/Try It from homepage cards (View Project only)
 - 2026-04-04: Eval Studio image position set to object-[center_30%]
 - 2026-04-04: Traction pill casing standardized to Sentence Case across all cards
+- 2026-04-04: Dear Her repo made public, renamed to dear-her, description/website/topics set, CLAUDE.md + decisions.md + README created
+- 2026-04-04: All GitHub READMEs updated with case study links as single source of truth
+- 2026-04-04: Eval Studio GitHub description/website/topics re-added after rename wiped them
