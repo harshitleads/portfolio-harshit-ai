@@ -44,7 +44,7 @@ function Body({ children }: { children: React.ReactNode }) {
 
 const sidebarStats = [
   { value: "3 Hrs", label: "Shipped in", sublabel: "Concept to shipped" },
-  { value: "336", label: "Questions", sublabel: "Across 5 tiers", icon: <Layers size={14} className="text-emerald-400/70" /> },
+  { value: "336", label: "Questions", sublabel: "Across 5 tiers", icon: <Layers size={20} className="text-emerald-400/70" /> },
   { value: "49%", label: "Activation Rate", showProgressBar: true, progressValue: 49 },
   { value: "V2", label: "Live" },
 ];

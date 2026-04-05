@@ -176,7 +176,7 @@ const projects: ProjectData[] = [
     ],
     traction: "Multi-provider / Judge Council / Cost Tracking / Live",
     images: [
-      { src: "/images/placeholder-eval-studio.png", label: "Eval Studio" },
+      { src: "/images/eval-studio-hero.png", label: "Eval Studio" },
     ],
     imagePosition: "object-center",
     liveDemoLink: "https://eval.harshit.ai",

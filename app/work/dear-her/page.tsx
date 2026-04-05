@@ -34,7 +34,7 @@ const sidebarStats = [
     value: "10",
     label: "Countries",
     sublabel: "Zero paid distribution",
-    icon: <Globe size={14} className="text-emerald-400/70" />,
+    icon: <Globe size={20} className="text-emerald-400/70" />,
   },
   { value: "$0", label: "Paid Distribution" },
 ];
