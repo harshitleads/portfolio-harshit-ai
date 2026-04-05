@@ -130,3 +130,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Explainable AI is the only portfolio project with the full PM lifecycle: research > design > working prototype. Button order should tell that story. The PDF research doc is the star PM deliverable and deserves the primary position. Other projects keep their current button labels since they don't have this three-deliverable progression.
 **Rejected:** Relabeling buttons across all five projects. Only Explainable AI has three distinct deliverables worth narrating. Others are already clear with "Try It" / "GitHub".
 
+
+### 2026-04-05
+
+### 2026-04-05 -- Eval Studio origin story + traction pill + roadmap update
+**Decision:** Rewrote Problem section from generic "every AI team" framing to personal origin story (AI interview agent dilemma, shipped in 2 hours, validated with founders/PMs). Added "Shipped in 2 Hours" traction pill as 5th pill. Updated roadmap to 5 items with synthetic golden dataset generator as item 1.
+**Why:** Personal origin story is more compelling than generic problem statement. Shows the tool was born from a real need, not spec'd in a vacuum. "Shipped in 2 hours" signals speed and execution. Golden dataset generator is the natural next step and shows product vision beyond V1.
+**Rejected:** Redesigning Eval Studio's UI to look more polished. The "vibecoded in 2 hours" story is stronger than a pretty UI for an infra tool. Recruiters care about the architecture and thinking, not the font.
+

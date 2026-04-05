@@ -30,6 +30,7 @@ Personal portfolio site for an AI PM targeting frontier tech companies. Every pa
 - Filter logic is AND, must match all selected tags, never change this
 - All case study pages must use shared case study components, no new layout patterns
 - Traction pills: always Sentence Case
+- Sidebar icons: 24px across all case study pages
 - NEVER run git commit, git push, git reset, git checkout, or any git write commands
 - NEVER delete files unless the task spec explicitly says to delete a specific named file
 
@@ -48,9 +49,9 @@ When you make or execute a product or technical decision, append it to `docs/dec
 - Contact cards: title font-weight 500, subtitle font-weight 400 at 13px, no exclamation marks
 
 ## Case Study Page Button Standard
-1. Try It (primary green, ExternalLink icon) — for web apps with live demos
-2. GitHub (primary green if no Try It, otherwise secondary, Github icon)
-3. Back to Portfolio (secondary border, ArrowLeft icon)
+- Default: Try It (primary green) > GitHub (secondary) > Back to Portfolio (secondary)
+- Explainable AI exception: Read the Research (primary green, PDF) > Try the Prototype (secondary) > View Code (secondary) > Back to Portfolio (secondary)
+- claude-code-bridge: GitHub (primary green, no live demo) > Back to Portfolio (secondary)
 
 ## Homepage Card Standard
 Homepage project cards show ONLY "View Project" as the single CTA.
@@ -70,111 +71,63 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 
 ---
 
-## ACTIVE TASK: Fix sidebar icons + Explainable AI button progression labels
+## ACTIVE TASK: Update Eval Studio case study — origin story + traction pill + roadmap
 
-### Part 1: Fix icon alignment in CaseStudySidebar component
+### Part 1: Add "Shipped in 2 Hours" traction pill
 
-In `components/case-study/CaseStudySidebar.tsx`, find the stat card rendering. When a stat has an `icon`, the current layout uses a flex row with the icon pushed to the far right via `justify-between`. The icon floats to the top-right and looks disconnected.
-
-**Fix:** When a stat has an icon, keep the icon on the right BUT vertically center the icon with the value text using `items-center`. Also bump icon size from 20px to 24px for better visual weight.
-
-Find this block in the stats rendering:
-```tsx
-{stat.icon ? (
-  <div className="flex items-center justify-between">
-    <p className="text-xl font-bold text-slate-100">{stat.value}</p>
-    {stat.icon}
-  </div>
-) : (
-  <p className="text-xl font-bold text-slate-100">{stat.value}</p>
-)}
-```
-
-This layout is fine structurally — `items-center` is already there. The problem is the icons themselves are being passed in at size={20} from each case study page. The fix is in each page that passes icons.
-
-**Update icon sizes in ALL case study pages that use sidebar icons:**
-
-File: `app/work/eval-studio/page.tsx`
-Find sidebarStats and change all icon `size={20}` to `size={24}`:
-```tsx
-{ value: "LLM Infra", label: "Domain", icon: <Server size={24} className="text-emerald-400/70" /> },
-{ value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
-```
-
-File: `app/work/claude-code-bridge/page.tsx`
-Find sidebarStats and change all icon `size={20}` to `size={24}`:
-```tsx
-{ value: "Context Engineering", label: "Domain", icon: <GitBranch size={24} className="text-emerald-400/70" /> },
-{ value: "Shipped", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
-```
-
-File: `app/work/explainable-ai/page.tsx`
-Find sidebarStats and change all icon `size={20}` to `size={24}`:
-```tsx
-{ value: "AI Trust", label: "Domain", icon: <Shield size={24} className="text-emerald-400/70" /> },
-{ value: "Live", label: "Status", icon: <Zap size={24} className="text-emerald-400/70" /> },
-```
-
-### Part 2: Explainable AI button progression labels
-
-In `app/work/explainable-ai/page.tsx`, find the hero buttons section (the `<div className="mb-10 flex flex-wrap gap-3 mt-5">` block).
-
-Replace the current buttons with this exact order and labeling:
+In `app/work/eval-studio/page.tsx`, find the traction pills array in the hero section (the `.map(({ value, sub })` block with 4 items). Add a 5th pill:
 
 ```tsx
-<div className="mb-10 flex flex-wrap gap-3 mt-5">
-  <a
-    href="/Explainable_Coding_Assistant.pdf"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
-  >
-    Read the Research <ExternalLink className="h-4 w-4" />
-  </a>
-  <a
-    href="https://trust.harshit.ai"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
-  >
-    <ExternalLink className="h-4 w-4" />
-    Try the Prototype
-  </a>
-  <a
-    href="https://github.com/harshitleads/explainable-coding-assistant"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
-  >
-    <Github className="h-4 w-4" />
-    View Code
-  </a>
-  <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
-    <ArrowLeft className="h-4 w-4" />
-    Back to Portfolio
-  </Link>
-</div>
+{ value: "Shipped in 2 Hours", sub: "Side project" },
 ```
 
-Key changes:
-- "Read the Research" (PDF) is now the PRIMARY green button — this is the star PM deliverable
-- "Try the Prototype" is secondary — the functional implementation
-- "View Code" replaces "GitHub" — clearer label
-- "View PDF" button removed (replaced by "Read the Research" as primary)
-- Order tells the PM lifecycle story: Research → Prototype → Code
+Add it as the LAST item in the array, after the "Live" pill.
+
+### Part 2: Rewrite the Problem section with origin story
+
+In `app/work/eval-studio/page.tsx`, find section id="problem". Replace the entire content of that section with:
+
+```tsx
+<section id="problem">
+  <SectionLabel>The Problem</SectionLabel>
+  <SectionHeading>I Needed This Myself</SectionHeading>
+  <Card className="space-y-5">
+    <Body>
+      I was designing an AI interview agent and faced a dilemma: which model should power it, and what prompt would actually perform before I committed to building it into the agent pipeline? I knew the options. Going the right way was what mattered for the product.
+    </Body>
+    <Body>
+      I tried comparing outputs manually across Claude, GPT, and Gemini. It was slow, messy, and impossible to keep track of. I thought something like this should exist. So I built it as a side project and shipped Eval Studio in two hours.
+    </Body>
+    <Body>
+      When I talked to other founders and PMs building Gen AI and agentic AI products, they described the same problem. Everyone was manually iterating through models and prompts, copying outputs into spreadsheets, losing track of which version performed better. It felt productive but it was productive procrastination. No rigor, no reproducibility, no cost visibility.
+    </Body>
+  </Card>
+</section>
+```
+
+### Part 3: Update the What's Next roadmap
+
+In `app/work/eval-studio/page.tsx`, find section id="whats-next". Replace the items array in the `ul` with these items (in this exact order):
+
+```tsx
+"Synthetic golden dataset generator: create high-precision evaluation datasets from minimal inputs, so you do not need 50 hand-labeled rows to start",
+"Demo mode with pre-loaded mock results so visitors can browse without API keys",
+"Persistent run history across sessions",
+"Batch API support for larger datasets",
+"Hybrid scoring: auto-detect exact match for structured outputs, LLM judge for open-ended",
+```
+
+The golden dataset generator is now item 1 (top of the roadmap).
 
 ### Files to modify
-- MODIFY: `app/work/eval-studio/page.tsx` — icon size 20→24
-- MODIFY: `app/work/claude-code-bridge/page.tsx` — icon size 20→24
-- MODIFY: `app/work/explainable-ai/page.tsx` — icon size 20→24 + button reorder/relabel
+- MODIFY: `app/work/eval-studio/page.tsx` — traction pill, problem section rewrite, roadmap update
 
 ### Acceptance Criteria
-- [ ] All sidebar icons are 24px across all case study pages
-- [ ] Icons are vertically centered with their stat value text
-- [ ] Explainable AI hero buttons order: Read the Research (primary) → Try the Prototype → View Code → Back to Portfolio
-- [ ] "Read the Research" is the green primary button
-- [ ] No "View PDF" button (merged into "Read the Research")
-- [ ] No other case study pages' buttons are changed
+- [ ] 5 traction pills in hero (Multi-provider, Judge Council, Cost Tracking, Live, Shipped in 2 Hours)
+- [ ] Problem section heading is "I Needed This Myself"
+- [ ] Problem section has 3 paragraphs: personal origin, shipped fast, market validation
+- [ ] No em dashes in any copy
+- [ ] What's Next has 5 items with golden dataset generator first
 - [ ] `pnpm build` passes with no errors
 
 ---
@@ -183,8 +136,7 @@ Key changes:
 - OG metadata: title is 35 chars (optimal 50-60), description text outdated
 - OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed
 - All READMEs: humanize copy (review for AI voice)
-- PM Salary Ace: paste updated README to GitHub web editor
-- Explainable AI: configure explainable.harshit.ai domain in Vercel
+- Sentinel deck (May 7 deadline)
 
 ## Completed Work
 - 2026-03-21: Calendly inline embed, floating bubble, contact copy cleanup, about section language cleanup
@@ -202,3 +154,5 @@ Key changes:
 - 2026-04-05: Homepage projects reordered: Eval Studio > claude-code-bridge > Explainable AI > Dear Her > PM Salary Ace
 - 2026-04-05: Explainable AI sidebar stats updated: Developer Tool, AI Trust (Shield), Live (Zap), Next.js + Claude
 - 2026-04-05: Explainable AI product UI redesigned: FilePanel removed, two-panel layout, confidence score enlarged
+- 2026-04-05: Sidebar icons bumped from 20px to 24px across all case study pages
+- 2026-04-05: Explainable AI buttons reordered with progression labels: Read the Research (primary) > Try the Prototype > View Code > Back to Portfolio

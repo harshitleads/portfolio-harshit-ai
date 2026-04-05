@@ -121,6 +121,7 @@ export default function EvalStudioPage() {
               { value: "Judge Council", sub: "Cross-provider scoring" },
               { value: "Cost Tracking", sub: "Per-row, per-config" },
               { value: "Live", sub: "eval.harshit.ai" },
+              { value: "Shipped in 2 Hours", sub: "Side project" },
             ].map(({ value, sub }) => (
               <div key={value} className="rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-center">
                 <p className="text-[15px] font-bold text-primary">{value}</p>
@@ -146,13 +147,16 @@ export default function EvalStudioPage() {
         {/* SECTION 1: PROBLEM */}
         <section id="problem">
           <SectionLabel>The Problem</SectionLabel>
-          <SectionHeading>Spreadsheets, Gut Feel, or Generic Benchmarks</SectionHeading>
+          <SectionHeading>I Needed This Myself</SectionHeading>
           <Card className="space-y-5">
             <Body>
-              Every AI team faces the same question: which prompt, which model, at what cost? The standard answer is spreadsheets, gut feel, or generic benchmarks that have nothing to do with the actual product.
+              I was designing an AI interview agent and faced a dilemma: which model should power it, and what prompt would actually perform before I committed to building it into the agent pipeline? I knew the options. Going the right way was what mattered for the product.
             </Body>
             <Body>
-              Existing eval tools either require significant engineering setup, test on public benchmarks that do not reflect real use cases, or lock results behind expensive SaaS plans. There is no simple way to point a tool at your own data, define your own criteria, and get a scored, reproducible result.
+              I tried comparing outputs manually across Claude, GPT, and Gemini. It was slow, messy, and impossible to keep track of. I thought something like this should exist. So I built it as a side project and shipped Eval Studio in two hours.
+            </Body>
+            <Body>
+              When I talked to other founders and PMs building Gen AI and agentic AI products, they described the same problem. Everyone was manually iterating through models and prompts, copying outputs into spreadsheets, losing track of which version performed better. It felt productive but it was productive procrastination. No rigor, no reproducibility, no cost visibility.
             </Body>
           </Card>
         </section>
@@ -299,6 +303,7 @@ export default function EvalStudioPage() {
           <Card>
             <ul className="space-y-3">
               {[
+                "Synthetic golden dataset generator: create high-precision evaluation datasets from minimal inputs, so you do not need 50 hand-labeled rows to start",
                 "Demo mode with pre-loaded mock results so visitors can browse without API keys",
                 "Persistent run history across sessions",
                 "Batch API support for larger datasets",
