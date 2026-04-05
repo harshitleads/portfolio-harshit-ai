@@ -154,3 +154,8 @@ Entries are append-only. Never edit old entries.
 **Why:** Event is now 15 min only, old copy referenced 30 min which no longer exists. Warm tone matches the portfolio voice. Bridge hero image was cropping the architecture diagram too tight at object-center.
 **Rejected:** Keeping "Google Meet" in the copy (unnecessary detail, the embed handles logistics). Using object-top for bridge image (too extreme, 20% is a subtler shift).
 
+### 2026-04-05 -- claude-code-bridge case study: traction pill + origin paragraph
+**Decision:** Replaced "Shipped / Open source" traction pill with "Shipped in 2 Hours / Built and working" (4 pills total). Added third paragraph to Problem section about building in 2 hours, saving copy-paste, and running across 6 projects.
+**Why:** "Shipped" is generic. "Shipped in 2 Hours" shows execution speed and matches the Eval Studio traction pill pattern. The third paragraph adds personal origin and daily usage proof, turning the problem section from abstract to concrete.
+**Rejected:** Keeping 5 pills (would crowd the hero). Adding a separate "Traction" section (overkill for a dev tool with no external users).
+

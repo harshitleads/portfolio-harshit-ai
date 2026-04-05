@@ -109,7 +109,7 @@ export default function ClaudeCodeBridgePage() {
           </div>
           <div className="flex flex-wrap gap-3">
             {[
-              { value: "Shipped", sub: "Open source" },
+              { value: "Shipped in 2 Hours", sub: "Built and working" },
               { value: "Context Engineering", sub: "Strategy to code" },
               { value: "Used Daily", sub: "6 projects" },
               { value: "MCP Native", sub: "Anthropic SDK" },
@@ -145,6 +145,9 @@ export default function ClaudeCodeBridgePage() {
             </Body>
             <Body>
               This is not a tooling problem. It is a context engineering problem. The decisions exist, they were made in a real conversation, but they are trapped in a chat window that your code editor cannot read.
+            </Body>
+            <Body>
+              I built claude-code-bridge in two hours to fix this for myself. It saves hours of manual copy-paste every week, reduces the errors that come from re-explaining context from memory, and keeps a clean CLAUDE.md that any AI coding agent can read automatically. The bridge runs across six active projects today.
             </Body>
           </Card>
         </section>
