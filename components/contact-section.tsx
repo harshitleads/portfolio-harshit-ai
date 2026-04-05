@@ -20,7 +20,7 @@ const contacts = [
   {
     icon: Github,
     label: "Check out my code",
-    value: "github.com/harshitleads",
+    value: "/harshitleads",
     href: "https://github.com/harshitleads",
   },
   {
