@@ -61,6 +61,34 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport (IntersectionObserver)
 - Cross-page nav: bubble uses usePathname + useRouter to navigate from /work/* pages to homepage embed
 
+---
+
+## ACTIVE TASK: Reorder projects array in projects-section.tsx
+
+### Context
+With 5 projects now live, the display order on the homepage matters. A recruiter spends 10 seconds on the first card. Lead with technically impressive, end with solid execution.
+
+### What to do
+In `components/projects-section.tsx`, reorder the objects in the `projects` array to this exact order:
+
+1. **eval-studio** (id: "eval-studio")
+2. **claude-code-bridge** (id: "claude-code-bridge")
+3. **explainable-ai** (id: "explainable-ai")
+4. **dear-her** (id: "dear-her")
+5. **pm-salary-ace** (id: "pm-salary-ace")
+
+Move the entire project objects — do NOT modify any content, just cut-paste them into the new order.
+
+### Files to modify
+- `components/projects-section.tsx` — reorder the `projects` array only
+
+### Acceptance Criteria
+- [ ] Projects render in the new order on the homepage
+- [ ] No content changes to any project object
+- [ ] `pnpm build` passes with no errors
+
+---
+
 ## Pending Work
 - OG metadata: title is 35 chars (optimal 50-60), description text outdated
 - OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed
@@ -79,4 +107,5 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - 2026-04-04: All GitHub READMEs updated with case study links
 - 2026-04-04: Eval Studio favicon and OG image added, GitHub description/website/topics set
 - 2026-04-04: Eval Studio mockup screenshots added to case study page and homepage gallery
-- 2026-04-04: claude-code-bridge case study page built (7 sections, sidebar, hero, screenshots), homepage card added, sitemap updated
+- 2026-04-04: claude-code-bridge case study page built, homepage card added, sitemap updated
+- 2026-04-04: Eval Studio imagePosition fix committed

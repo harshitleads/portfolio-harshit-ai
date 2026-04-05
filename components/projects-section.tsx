@@ -55,108 +55,6 @@ interface ProjectData {
 
 const projects: ProjectData[] = [
   {
-    id: "explainable-ai",
-    title: "Explainable AI Coding Assistant",
-    tagline: "Trust Through Transparency",
-    tags: ["Case Study", "Developer Tools"],
-    problem: {
-      short:
-        "Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption.",
-      full: "Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review, creating a \u201Ctrust tax\u201D that blocks adoption.",
-    },
-    solution: {
-      short:
-        "Calibrated confidence scores + explainable reasoning. Show developers WHY a suggestion works and WHEN to be skeptical.",
-      full: "Calibrated confidence scores + explainable reasoning = reduced verification overhead. Instead of hiding uncertainty, surface it. Show developers WHY a suggestion makes sense and WHEN to be skeptical.",
-    },
-    keyInsight:
-      "Trust isn\u2019t about being right more often; it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones.",
-    differentiation: [
-      "Explicit confidence calibration (not just autocomplete speed)",
-      "Codebase-aware reasoning (beyond generic RAG)",
-      "Legible correctness during development (not post-review)",
-    ],
-    traction: "Market research · Figma prototype · PDF case study",
-    images: [
-      { src: "/images/explainable-summary.jpg", label: "Project One-Pager" },
-      { src: "/images/explainable-1.jpg", label: "Explainable Reasoning Panel" },
-      { src: "/images/explainable-4.jpeg", label: "Low Confidence Warning (42%)" },
-      { src: "/images/explainable-2.jpg", label: "High Confidence Suggestion (87%)" },
-    ],
-    imagePosition: "object-[center_25%]",
-    pdfLink: "/Explainable_Coding_Assistant.pdf",
-    liveDemoLink: "https://trust.harshit.ai",
-    githubLink: "https://github.com/harshitleads/explainable-coding-assistant",
-    caseStudyLink: "/work/explainable-ai",
-  },
-  {
-    id: "pm-salary-ace",
-    title: "PM Salary Ace",
-    tagline: "Practice Like the Job Depends On It",
-    tags: ["Live Product", "AI Tools"],
-    problem: {
-      short:
-        "PM candidates don't know what skill level they're actually at. Generic prep doesn't map to real compensation gaps.",
-      full: "Most PM candidates underprepare because generic interview resources don't map to real compensation levels. A candidate preparing for $170K Mid-level and one targeting $350K Staff+ need fundamentally different skills, but almost no tool reflects that gap.",
-    },
-    solution: {
-      short:
-        "336 questions across 5 salary tiers. Practice what a $350K Staff+ PM actually needs, not generic frameworks.",
-      full: "A full-stack quiz platform with 336 questions mapped across 5 PM salary tiers ($130K\u2013$350K+). Key decisions: AI-generated questions required human QA before going live. Early wrong answers were too obvious, which broke the learning value. Auth is opt-in: all 5 tiers are open by default, login unlocks streak tracking and a skill radar chart. Gating higher tiers behind login killed conversions. Trust is a barrier for an unknown product.",
-    },
-    keyInsight:
-      "The hardest call was quality vs. speed. AI generation got us to 336 questions fast, but the first 125 had detectable wrong answers. We flagged them inactive and regenerated. Shipping fast was right. Shipping bad questions wasn't worth it.",
-    differentiation: [
-      "Tier-mapped questions: Junior and Staff+ require different thinking, not just harder trivia",
-      "AI-generated, human QA'd: wrong answers must force real reasoning, not guessing",
-      "No forced auth: all 5 tiers open by default, progress tracking is opt-in",
-      "Shipped in 3 Hours · 336 Questions · 49% Activation Rate · V2 Live",
-    ],
-    traction: "Shipped in 3 Hours · 336 Questions · 49% Activation Rate",
-    images: [
-      { src: "/images/pm-quiz-landing-v2.png", label: "Landing Page" },
-      { src: "/images/pm-quiz-question-v2.png", label: "Quiz UI: Question Screen" },
-      { src: "/images/pm-quiz-results-v2.png", label: "Progress Dashboard" },
-      { src: "/images/pm-quiz-custom-v2.png", label: "Custom Quiz Builder" },
-    ],
-    galleryIncludesHero: true,
-    imagePosition: "object-top",
-    liveDemoLink: "https://pmquiz.harshit.ai/",
-    githubLink: "https://github.com/harshitleads/pm-salary-quest",
-    caseStudyLink: "/work/pm-salary-ace",
-  },
-  {
-    id: "dear-her",
-    title: "Dear Her",
-    tagline: "Some feelings are too big for a text message",
-    tags: ["Live Product", "AI Tools"],
-    problem: {
-      short: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation.",
-      full: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation. Built on Women's Day as a personal gift to my mom and partner, then opened to anyone who needed it.",
-    },
-    solution: {
-      short: "Write three honest prompts about her. Claude transforms them into a beautiful animated letter she can open from any link, no login required.",
-      full: "A free web app where you answer three guided prompts about a woman in your life, and Claude transforms your raw inputs into a beautiful letter that appears typewriter-style on a warm parchment card. Fully anonymous, shareable via a unique link, no account required. Voice input lets you speak instead of type. Relationship-aware sign-offs mean a letter to a mentor reads differently from a letter to a partner.",
-    },
-    keyInsight: "The share button copies a pre-drafted message to clipboard, not just a URL. Recipients should never receive a cold link with no context. The warm message sets emotional tone before the letter is opened.",
-    differentiation: [
-      "Voice input as a friction reducer: speak your feelings instead of typing them",
-      "Relationship-aware sign-offs: mentor letters do not say 'With all my love'",
-      "Privacy first: fully anonymous, no login, no email, letters stored with hashed IPs only",
-      "59% Conversion, 10 Countries, Zero Paid Distribution",
-    ],
-    traction: "Shipped in 3 Hours · 59% Conversion · 10 Countries · Zero Paid Distribution",
-    images: [
-      { src: "/images/dear-her-landing.png", label: "Landing Page" },
-      { src: "/images/dear-her-writer-active.png", label: "Write Your Letter" },
-      { src: "/images/dear-her-letter.png", label: "Letter Output" },
-    ],
-    galleryIncludesHero: true,
-    imagePosition: "object-center",
-    liveDemoLink: "https://dearher.harshit.ai/",
-    caseStudyLink: "/work/dear-her",
-  },
-  {
     id: "eval-studio",
     title: "Eval Studio",
     tagline: "Which prompt, which model, at what cost?",
@@ -223,6 +121,108 @@ const projects: ProjectData[] = [
     imagePosition: "object-center",
     githubLink: "https://github.com/harshitleads/claude-code-bridge",
     caseStudyLink: "/work/claude-code-bridge",
+  },
+  {
+    id: "explainable-ai",
+    title: "Explainable AI Coding Assistant",
+    tagline: "Trust Through Transparency",
+    tags: ["Case Study", "Developer Tools"],
+    problem: {
+      short:
+        "Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption.",
+      full: "Developers spend hours manually verifying AI-generated code because existing tools optimize for speed over trust. When assistants can\u2019t show confidence or explain reasoning, every suggestion requires full mental review, creating a \u201Ctrust tax\u201D that blocks adoption.",
+    },
+    solution: {
+      short:
+        "Calibrated confidence scores + explainable reasoning. Show developers WHY a suggestion works and WHEN to be skeptical.",
+      full: "Calibrated confidence scores + explainable reasoning = reduced verification overhead. Instead of hiding uncertainty, surface it. Show developers WHY a suggestion makes sense and WHEN to be skeptical.",
+    },
+    keyInsight:
+      "Trust isn\u2019t about being right more often; it\u2019s about making uncertainty legible. High-confidence suggestions should be measurably more reliable than low-confidence ones.",
+    differentiation: [
+      "Explicit confidence calibration (not just autocomplete speed)",
+      "Codebase-aware reasoning (beyond generic RAG)",
+      "Legible correctness during development (not post-review)",
+    ],
+    traction: "Market research · Figma prototype · PDF case study",
+    images: [
+      { src: "/images/explainable-summary.jpg", label: "Project One-Pager" },
+      { src: "/images/explainable-1.jpg", label: "Explainable Reasoning Panel" },
+      { src: "/images/explainable-4.jpeg", label: "Low Confidence Warning (42%)" },
+      { src: "/images/explainable-2.jpg", label: "High Confidence Suggestion (87%)" },
+    ],
+    imagePosition: "object-[center_25%]",
+    pdfLink: "/Explainable_Coding_Assistant.pdf",
+    liveDemoLink: "https://trust.harshit.ai",
+    githubLink: "https://github.com/harshitleads/explainable-coding-assistant",
+    caseStudyLink: "/work/explainable-ai",
+  },
+  {
+    id: "dear-her",
+    title: "Dear Her",
+    tagline: "Some feelings are too big for a text message",
+    tags: ["Live Product", "AI Tools"],
+    problem: {
+      short: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation.",
+      full: "Most people feel things deeply about the women in their lives but never find the words to say it. The gap is not feeling. It is articulation. Built on Women's Day as a personal gift to my mom and partner, then opened to anyone who needed it.",
+    },
+    solution: {
+      short: "Write three honest prompts about her. Claude transforms them into a beautiful animated letter she can open from any link, no login required.",
+      full: "A free web app where you answer three guided prompts about a woman in your life, and Claude transforms your raw inputs into a beautiful letter that appears typewriter-style on a warm parchment card. Fully anonymous, shareable via a unique link, no account required. Voice input lets you speak instead of type. Relationship-aware sign-offs mean a letter to a mentor reads differently from a letter to a partner.",
+    },
+    keyInsight: "The share button copies a pre-drafted message to clipboard, not just a URL. Recipients should never receive a cold link with no context. The warm message sets emotional tone before the letter is opened.",
+    differentiation: [
+      "Voice input as a friction reducer: speak your feelings instead of typing them",
+      "Relationship-aware sign-offs: mentor letters do not say 'With all my love'",
+      "Privacy first: fully anonymous, no login, no email, letters stored with hashed IPs only",
+      "59% Conversion, 10 Countries, Zero Paid Distribution",
+    ],
+    traction: "Shipped in 3 Hours · 59% Conversion · 10 Countries · Zero Paid Distribution",
+    images: [
+      { src: "/images/dear-her-landing.png", label: "Landing Page" },
+      { src: "/images/dear-her-writer-active.png", label: "Write Your Letter" },
+      { src: "/images/dear-her-letter.png", label: "Letter Output" },
+    ],
+    galleryIncludesHero: true,
+    imagePosition: "object-center",
+    liveDemoLink: "https://dearher.harshit.ai/",
+    caseStudyLink: "/work/dear-her",
+  },
+  {
+    id: "pm-salary-ace",
+    title: "PM Salary Ace",
+    tagline: "Practice Like the Job Depends On It",
+    tags: ["Live Product", "AI Tools"],
+    problem: {
+      short:
+        "PM candidates don't know what skill level they're actually at. Generic prep doesn't map to real compensation gaps.",
+      full: "Most PM candidates underprepare because generic interview resources don't map to real compensation levels. A candidate preparing for $170K Mid-level and one targeting $350K Staff+ need fundamentally different skills, but almost no tool reflects that gap.",
+    },
+    solution: {
+      short:
+        "336 questions across 5 salary tiers. Practice what a $350K Staff+ PM actually needs, not generic frameworks.",
+      full: "A full-stack quiz platform with 336 questions mapped across 5 PM salary tiers ($130K\u2013$350K+). Key decisions: AI-generated questions required human QA before going live. Early wrong answers were too obvious, which broke the learning value. Auth is opt-in: all 5 tiers are open by default, login unlocks streak tracking and a skill radar chart. Gating higher tiers behind login killed conversions. Trust is a barrier for an unknown product.",
+    },
+    keyInsight:
+      "The hardest call was quality vs. speed. AI generation got us to 336 questions fast, but the first 125 had detectable wrong answers. We flagged them inactive and regenerated. Shipping fast was right. Shipping bad questions wasn't worth it.",
+    differentiation: [
+      "Tier-mapped questions: Junior and Staff+ require different thinking, not just harder trivia",
+      "AI-generated, human QA'd: wrong answers must force real reasoning, not guessing",
+      "No forced auth: all 5 tiers open by default, progress tracking is opt-in",
+      "Shipped in 3 Hours · 336 Questions · 49% Activation Rate · V2 Live",
+    ],
+    traction: "Shipped in 3 Hours · 336 Questions · 49% Activation Rate",
+    images: [
+      { src: "/images/pm-quiz-landing-v2.png", label: "Landing Page" },
+      { src: "/images/pm-quiz-question-v2.png", label: "Quiz UI: Question Screen" },
+      { src: "/images/pm-quiz-results-v2.png", label: "Progress Dashboard" },
+      { src: "/images/pm-quiz-custom-v2.png", label: "Custom Quiz Builder" },
+    ],
+    galleryIncludesHero: true,
+    imagePosition: "object-top",
+    liveDemoLink: "https://pmquiz.harshit.ai/",
+    githubLink: "https://github.com/harshitleads/pm-salary-quest",
+    caseStudyLink: "/work/pm-salary-ace",
   },
 ];
 

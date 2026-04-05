@@ -101,3 +101,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Homepage cards should be clean with one clear action. The case study page is where someone is already interested enough to dig deeper, so that is the right place for secondary actions like trying the live product or viewing the source code.
 **Rejected:** Keeping all three buttons on homepage cards (cluttered, creates decision paralysis), removing GitHub/Try It entirely (loses discoverability).
 
+
+### 2026-04-05
+
+### 2026-04-04 — Reorder homepage projects array
+**Decision:** New order: Eval Studio, claude-code-bridge, Explainable AI, Dear Her, PM Salary Ace.
+**Why:** Lead with technically impressive (infra, MCP/context engineering), end with execution proof. Explainable AI has a strong case study but its live app UI is rough — sits behind polished projects, ahead of consumer apps.
+**Rejected:** Alphabetical, chronological, or keeping Explainable AI at #2. App quality matters when recruiters click through.
+
