@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Shield, Zap } from "lucide-react";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
 import Image from "next/image";
@@ -26,10 +26,10 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 }
 
 const sidebarStats = [
-  { value: "Case Study", label: "Type" },
-  { value: "Developer Tools", label: "Domain" },
-  { value: "Prototype", label: "Status", sublabel: "Figma stage" },
-  { value: "3", label: "Deliverables", sublabel: "Research, Figma, PDF" },
+  { value: "Developer Tool", label: "Type" },
+  { value: "AI Trust", label: "Domain", icon: <Shield size={20} className="text-emerald-400/70" /> },
+  { value: "Live", label: "Status", icon: <Zap size={20} className="text-emerald-400/70" /> },
+  { value: "Next.js + Claude", label: "Stack" },
 ];
 
 const sidebarSections = [

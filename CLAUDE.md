@@ -55,37 +55,18 @@ When you make or execute a product or technical decision, append it to `docs/dec
 ## Homepage Card Standard
 Homepage project cards show ONLY "View Project" as the single CTA.
 
+## Homepage Project Order (canonical)
+1. eval-studio
+2. claude-code-bridge
+3. explainable-ai
+4. dear-her
+5. pm-salary-ace
+
 ## Calendly Integration
 - Embed URL: https://calendly.com/harshit-harshit/15min (with hide_gdpr_banner=1)
 - Premium expired: renders with default Calendly theme. Accepted, do not hack around it.
 - Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport (IntersectionObserver)
 - Cross-page nav: bubble uses usePathname + useRouter to navigate from /work/* pages to homepage embed
-
----
-
-## ACTIVE TASK: Reorder projects array in projects-section.tsx
-
-### Context
-With 5 projects now live, the display order on the homepage matters. A recruiter spends 10 seconds on the first card. Lead with technically impressive, end with solid execution.
-
-### What to do
-In `components/projects-section.tsx`, reorder the objects in the `projects` array to this exact order:
-
-1. **eval-studio** (id: "eval-studio")
-2. **claude-code-bridge** (id: "claude-code-bridge")
-3. **explainable-ai** (id: "explainable-ai")
-4. **dear-her** (id: "dear-her")
-5. **pm-salary-ace** (id: "pm-salary-ace")
-
-Move the entire project objects — do NOT modify any content, just cut-paste them into the new order.
-
-### Files to modify
-- `components/projects-section.tsx` — reorder the `projects` array only
-
-### Acceptance Criteria
-- [ ] Projects render in the new order on the homepage
-- [ ] No content changes to any project object
-- [ ] `pnpm build` passes with no errors
 
 ---
 
@@ -109,3 +90,4 @@ Move the entire project objects — do NOT modify any content, just cut-paste th
 - 2026-04-04: Eval Studio mockup screenshots added to case study page and homepage gallery
 - 2026-04-04: claude-code-bridge case study page built, homepage card added, sitemap updated
 - 2026-04-04: Eval Studio imagePosition fix committed
+- 2026-04-05: Explainable AI sidebar stats updated: Developer Tool, AI Trust (Shield), Live (Zap), Next.js + Claude

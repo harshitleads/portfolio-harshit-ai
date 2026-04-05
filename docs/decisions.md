@@ -109,3 +109,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Lead with technically impressive (infra, MCP/context engineering), end with execution proof. Explainable AI has a strong case study but its live app UI is rough — sits behind polished projects, ahead of consumer apps.
 **Rejected:** Alphabetical, chronological, or keeping Explainable AI at #2. App quality matters when recruiters click through.
 
+
+### 2026-04-05
+
+### 2026-04-04 -- Update Explainable AI sidebar stats
+**Decision:** Change sidebar from "Prototype / Figma stage / 3 Deliverables" to "Developer Tool / AI Trust / Live / Next.js + Claude". Added Shield and Zap icons.
+**Why:** The product is live at trust.harshit.ai. Sidebar saying "Prototype" and "Figma stage" undercuts the narrative that this went from design to working product. The case study tells the full story; the sidebar should reflect current state.
+**Rejected:** Keeping "Case Study" as type. Changed to "Developer Tool" to match the domain and be consistent with Explainable AI's positioning alongside claude-code-bridge.
+
