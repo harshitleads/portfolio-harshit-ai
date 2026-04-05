@@ -44,44 +44,8 @@ When you make or execute a product or technical decision, append it to `docs/dec
 **Rejected:** What alternatives were considered and why they lost.
 ```
 
----
-
-## ACTIVE TASK: Build Job Market Pulse case study page
-
-The full task spec is at: `docs/pulse-task-spec.md`. Read that file and execute it with these overrides:
-
-### IMPORTANT OVERRIDES (read before executing the task spec):
-
-1. **SKIP Part 2 entirely.** The homepage card for job-market-pulse is ALREADY in the projects array in `components/projects-section.tsx`. Do NOT add a duplicate. Instead, find the existing job-market-pulse entry and update its `caseStudyLink` from `"https://pulse.harshit.ai"` to `"/work/job-market-pulse"`.
-
-2. **Execute Part 1** (case study page) exactly as spec'd.
-
-3. **Execute Part 3** (sitemap update) exactly as spec'd.
-
-4. **Execute Part 4** (install recharts) exactly as spec'd.
-
-5. **Create all files listed** in the task spec:
-   - `app/work/job-market-pulse/page.tsx`
-   - `components/case-study/PulsePreviewChart.tsx`
-   - `public/data/fred-snapshot.json`
-
-### Acceptance Criteria
-- [ ] Case study page renders at /work/job-market-pulse
-- [ ] Recharts chart renders with hover tooltips (Job Openings + Unemployment Rate)
-- [ ] Chart reads from /data/fred-snapshot.json
-- [ ] Chart has dark theme (dark bg, emerald #00c896 + amber #f59e0b lines)
-- [ ] "Explore the Dashboard" links to https://pulse.harshit.ai
-- [ ] No GitHub button on the page
-- [ ] Existing homepage card caseStudyLink updated to "/work/job-market-pulse"
-- [ ] No duplicate homepage card created
-- [ ] Sitemap updated
-- [ ] No em dashes, traction pills in Sentence Case
-- [ ] pnpm build passes
-
----
-
 ## Pending Work
-- Screenshots for pulse case study (pulse-hero.png, pulse-h1b.png, pulse-chart.png)
+- Screenshots for pulse case study (pulse-h1b.png, pulse-chart.png still needed)
 - All READMEs: humanize copy
 - Sentinel pitch deck (May 7, separate chat)
 - Batch: floating portfolio popup on all sub-sites
@@ -97,4 +61,4 @@ The full task spec is at: `docs/pulse-task-spec.md`. Read that file and execute 
 - 2026-04-05: Eval Studio origin story, competitive landscape, roadmap
 - 2026-04-05: Calendly copy, bridge traction pill, OG metadata
 - 2026-04-05: Job Market Pulse shipped at pulse.harshit.ai
-- 2026-04-05: Job Market Pulse homepage card added (6th in array, links to pulse.harshit.ai)
+- 2026-04-05: Job Market Pulse case study page with embedded Recharts chart, homepage card, sitemap
