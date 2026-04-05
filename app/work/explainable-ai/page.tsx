@@ -113,22 +113,14 @@ export default async function ExplainableAIPage() {
             product study on what happens when you add the missing layer, and an
             honest look at what that layer can and cannot tell you.
           </p>
-          <div className="flex flex-wrap gap-3 mt-5">
-            <a
-              href="/Explainable_Coding_Assistant.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium border border-foreground/20 rounded-full px-4 py-1.5 hover:bg-foreground/5 transition-colors"
-            >
-              View Full PDF
-            </a>
+          <div className="mb-10 flex flex-wrap gap-3 mt-5">
             <a
               href="https://trust.harshit.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
             >
-              Try It <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              Try It <ExternalLink className="h-4 w-4" />
             </a>
             <a
               href="https://github.com/harshitleads/explainable-coding-assistant"
@@ -136,8 +128,21 @@ export default async function ExplainableAIPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
             >
-              GitHub <Github className="h-4 w-4" />
+              <Github className="h-4 w-4" />
+              GitHub
             </a>
+            <a
+              href="/Explainable_Coding_Assistant.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+            >
+              View PDF
+            </a>
+            <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Portfolio
+            </Link>
           </div>
         </div>
       </section>

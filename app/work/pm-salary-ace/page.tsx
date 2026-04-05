@@ -103,9 +103,11 @@ export default function PMSalaryAcePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
             >
-              GitHub <Github className="h-4 w-4" />
+              <Github className="h-4 w-4" />
+              GitHub
             </a>
             <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
+              <ArrowLeft className="h-4 w-4" />
               Back to Portfolio
             </Link>
           </div>

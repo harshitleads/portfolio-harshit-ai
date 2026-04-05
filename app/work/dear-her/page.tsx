@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Globe } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Globe } from "lucide-react";
 import { DeviceSplitBar } from "./device-split-bar";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
@@ -83,7 +83,17 @@ export default function DearHerPage() {
             >
               Try It <ExternalLink className="h-4 w-4" />
             </a>
+            <a
+              href="https://github.com/harshitleads/dear-her"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+            >
+              <Github className="h-4 w-4" />
+              GitHub
+            </a>
             <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
+              <ArrowLeft className="h-4 w-4" />
               Back to Portfolio
             </Link>
           </div>
