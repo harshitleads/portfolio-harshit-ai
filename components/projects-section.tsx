@@ -118,7 +118,7 @@ const projects: ProjectData[] = [
       { src: "/images/claude-bridge-claudemd.png", label: "CLAUDE.md in Action" },
     ],
     galleryIncludesHero: true,
-    imagePosition: "object-[center_20%]",
+    imagePosition: "object-center",
     githubLink: "https://github.com/harshitleads/claude-code-bridge",
     caseStudyLink: "/work/claude-code-bridge",
   },

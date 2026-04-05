@@ -71,11 +71,11 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 
 ---
 
-## ACTIVE TASK: Two quick fixes — Calendly copy + bridge hero image
+## ACTIVE TASK: Three fixes — Calendly copy + bridge hero image + bridge case study updates
 
 ### Fix 1: Update Calendly copy across all surfaces
 
-The Calendly event is staying at 15 min. Update all display copy to reflect this with a warm, approachable tone.
+The Calendly event is staying at 15 min. Update all display copy.
 
 **In `components/contact-section.tsx`:**
 Find the text that currently says "15 / 30 min" (or similar duration text near the Calendly card). Replace it with:
@@ -84,36 +84,64 @@ Find the text that currently says "15 / 30 min" (or similar duration text near t
 Quick intro call · 15 min · we can go over if we're on a roll :)
 ```
 
-This exact copy. It should replace whatever the current subtitle/description text is on the Calendly contact card. Keep the smiley.
+This exact copy including the smiley.
 
 **In `components/calendly-bubble.tsx`:**
-Find any duration copy (likely "15 / 30 min" or "15 min"). Update to match:
+Find any duration copy (likely "15 / 30 min" or "15 min"). Update to:
 
 ```
 15 min · we can go over if we're on a roll :)
 ```
 
-Or if the bubble has a shorter format, at minimum update "15 / 30 min" to "15 min". Use your judgment on how much fits in the bubble without breaking the layout.
+Or if the bubble has a shorter format, at minimum update "15 / 30 min" to "15 min". Use judgment on what fits.
 
 Note: The Calendly embed URL does NOT change. Only update display copy.
 
 ### Fix 2: Zoom out claude-code-bridge hero image on homepage
 
-In `components/projects-section.tsx`, find the claude-code-bridge project object. The `imagePosition` is currently `"object-center"` which crops the architecture diagram too tight.
+In `components/projects-section.tsx`, find the claude-code-bridge project object. Change `imagePosition` from `"object-center"` to `"object-[center_20%]"` to shift the crop point upward and show more of the architecture loop.
 
-Change `imagePosition` to `"object-[center_20%]"` — this shifts the crop point upward to show more of the full architecture loop.
+### Fix 3: claude-code-bridge case study — add traction pill + enhance problem section
 
-If after visual inspection this still crops too much, try `"object-[center_10%]"` instead.
+In `app/work/claude-code-bridge/page.tsx`:
+
+**Add "Shipped in 2 Hours" traction pill.** Find the traction pills array in the hero (the `.map(({ value, sub })` block). Add a 5th pill as the FIRST item (before "Shipped"):
+
+```tsx
+{ value: "Shipped in 2 Hours", sub: "Built and working" },
+```
+
+So the full array becomes:
+```tsx
+{ value: "Shipped in 2 Hours", sub: "Built and working" },
+{ value: "Context Engineering", sub: "Strategy to code" },
+{ value: "Used Daily", sub: "6 projects" },
+{ value: "MCP Native", sub: "Anthropic SDK" },
+```
+
+Remove the old `{ value: "Shipped", sub: "Open source" }` pill since "Shipped in 2 Hours" replaces it with more signal.
+
+**Enhance the Problem section.** Find section id="problem". Add a third Body paragraph after the existing two:
+
+```tsx
+<Body>
+  I built claude-code-bridge in two hours to fix this for myself. It saves hours of manual copy-paste every week, reduces the errors that come from re-explaining context from memory, and keeps a clean CLAUDE.md that any AI coding agent can read automatically. The bridge runs across six active projects today.
+</Body>
+```
 
 ### Files to modify
 - MODIFY: `components/contact-section.tsx` — Calendly duration copy
 - MODIFY: `components/calendly-bubble.tsx` — Calendly duration copy if present
 - MODIFY: `components/projects-section.tsx` — claude-code-bridge imagePosition
+- MODIFY: `app/work/claude-code-bridge/page.tsx` — traction pill + problem section paragraph
 
 ### Acceptance Criteria
 - [ ] Contact card shows "Quick intro call · 15 min · we can go over if we're on a roll :)"
 - [ ] Calendly bubble duration copy updated (no "30 min" anywhere)
 - [ ] claude-code-bridge homepage card shows more of the architecture diagram
+- [ ] claude-code-bridge case study has 4 traction pills: "Shipped in 2 Hours", "Context Engineering", "Used Daily", "MCP Native"
+- [ ] claude-code-bridge problem section has 3 paragraphs (third one about building in 2 hours, saving copy-paste, 6 projects)
+- [ ] No em dashes in any copy
 - [ ] `pnpm build` passes with no errors
 
 ---
