@@ -146,3 +146,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Shows market awareness and clear differentiation. A PM who can articulate why their product exists relative to funded alternatives demonstrates product sense. The competitive landscape also validates that the problem space is real (Promptfoo was acquired by OpenAI for this exact category).
 **Rejected:** Including more competitors (DeepEval, Inspect AI, W&B Weave). Six is enough to make the point without overwhelming the page. Also rejected putting this on the homepage card — too detailed for a card, belongs in the case study deep dive.
 
+
+### 2026-04-05
+
+### 2026-04-05 -- Calendly copy update and bridge hero image zoom
+**Decision:** Updated Calendly duration copy from "15 / 30 min" to warm single-duration copy ("Quick intro call · 15 min · we can go over if we're on a roll :)") on contact card and bubble. Changed claude-code-bridge homepage card imagePosition from object-center to object-[center_20%] to show more of the architecture diagram.
+**Why:** Event is now 15 min only, old copy referenced 30 min which no longer exists. Warm tone matches the portfolio voice. Bridge hero image was cropping the architecture diagram too tight at object-center.
+**Rejected:** Keeping "Google Meet" in the copy (unnecessary detail, the embed handles logistics). Using object-top for bridge image (too extreme, 20% is a subtler shift).
+

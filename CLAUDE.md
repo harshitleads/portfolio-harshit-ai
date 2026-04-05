@@ -69,6 +69,55 @@ Homepage project cards show ONLY "View Project" as the single CTA.
 - Floating bubble: 7s reappearance after dismiss, auto-hides when embed is in viewport (IntersectionObserver)
 - Cross-page nav: bubble uses usePathname + useRouter to navigate from /work/* pages to homepage embed
 
+---
+
+## ACTIVE TASK: Two quick fixes — Calendly copy + bridge hero image
+
+### Fix 1: Update Calendly copy across all surfaces
+
+The Calendly event is staying at 15 min. Update all display copy to reflect this with a warm, approachable tone.
+
+**In `components/contact-section.tsx`:**
+Find the text that currently says "15 / 30 min" (or similar duration text near the Calendly card). Replace it with:
+
+```
+Quick intro call · 15 min · we can go over if we're on a roll :)
+```
+
+This exact copy. It should replace whatever the current subtitle/description text is on the Calendly contact card. Keep the smiley.
+
+**In `components/calendly-bubble.tsx`:**
+Find any duration copy (likely "15 / 30 min" or "15 min"). Update to match:
+
+```
+15 min · we can go over if we're on a roll :)
+```
+
+Or if the bubble has a shorter format, at minimum update "15 / 30 min" to "15 min". Use your judgment on how much fits in the bubble without breaking the layout.
+
+Note: The Calendly embed URL does NOT change. Only update display copy.
+
+### Fix 2: Zoom out claude-code-bridge hero image on homepage
+
+In `components/projects-section.tsx`, find the claude-code-bridge project object. The `imagePosition` is currently `"object-center"` which crops the architecture diagram too tight.
+
+Change `imagePosition` to `"object-[center_20%]"` — this shifts the crop point upward to show more of the full architecture loop.
+
+If after visual inspection this still crops too much, try `"object-[center_10%]"` instead.
+
+### Files to modify
+- MODIFY: `components/contact-section.tsx` — Calendly duration copy
+- MODIFY: `components/calendly-bubble.tsx` — Calendly duration copy if present
+- MODIFY: `components/projects-section.tsx` — claude-code-bridge imagePosition
+
+### Acceptance Criteria
+- [ ] Contact card shows "Quick intro call · 15 min · we can go over if we're on a roll :)"
+- [ ] Calendly bubble duration copy updated (no "30 min" anywhere)
+- [ ] claude-code-bridge homepage card shows more of the architecture diagram
+- [ ] `pnpm build` passes with no errors
+
+---
+
 ## Pending Work
 - OG metadata: title is 35 chars (optimal 50-60), description text outdated
 - OG image: 725KB, WhatsApp recommends < 600KB. Re-export at 70% JPG quality if needed

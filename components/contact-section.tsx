@@ -120,7 +120,7 @@ export function ContactSection() {
                 If it&apos;s easier, pick a time directly
               </p>
               <p className="text-[13px] font-normal text-slate-400">
-                15 / 30 min · Google Meet
+                Quick intro call · 15 min · we can go over if we're on a roll :)
               </p>
             </div>
           </div>
