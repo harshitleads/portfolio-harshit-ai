@@ -316,28 +316,6 @@ function ProjectCard({
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
               </Link>
             )}
-            {project.liveDemoLink && (
-              <a
-                href={project.liveDemoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Try It
-              </a>
-            )}
-            {project.githubLink && (
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
-              >
-                <Github className="h-4 w-4" />
-                GitHub
-              </a>
-            )}
           </div>
         </div>
       </div>

@@ -93,3 +93,11 @@ Entries are append-only. Never edit old entries.
 **Why:** Eval Studio is the highest-signal project for frontier AI PM roles. It demonstrates LLM evals fluency, judge council architecture, cost tracking, and multi-provider integration. The case study needed to be on the portfolio to complete the positioning story.
 **Rejected:** Waiting for screenshots before building the page (delays shipping, placeholder is acceptable for now).
 
+
+### 2026-04-05
+
+### 2026-04-04 -- GitHub and Try It buttons on case study pages only, not homepage cards
+**Decision:** Remove GitHub and Try It buttons from homepage project cards. Keep only "View Project" as the single CTA. Move GitHub and Try It links to the case study page hero sections instead.
+**Why:** Homepage cards should be clean with one clear action. The case study page is where someone is already interested enough to dig deeper, so that is the right place for secondary actions like trying the live product or viewing the source code.
+**Rejected:** Keeping all three buttons on homepage cards (cluttered, creates decision paralysis), removing GitHub/Try It entirely (loses discoverability).
+

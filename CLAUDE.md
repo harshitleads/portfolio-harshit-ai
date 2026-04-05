@@ -72,5 +72,5 @@ This applies to every Claude session touching this project, not just the CTO cha
 ## Completed Work
 - 2026-03-21: Calendly inline embed, floating bubble, contact copy cleanup, about section language cleanup, philosophy modal copy
 - 2026-04-03: Calendly bubble fixes, stats reframed, guardrails added
-- 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px, traction pills fixed, GitHub/live demo buttons added, GitHub in contact section
-- 2026-04-04: Eval Studio card image set to object-[center_30%], OG metadata added to case study page, favicon confirmed present
+- 2026-04-04: Eval Studio case study page, homepage card, sitemap, sidebar icons 20px, traction pills fixed, GitHub in contact section
+- 2026-04-04: Homepage cards simplified to "View Project" only. GitHub buttons added to PM Salary Ace + Explainable AI case study heroes. Eval Studio image position set to object-[center_30%]. OG metadata on Eval Studio page.

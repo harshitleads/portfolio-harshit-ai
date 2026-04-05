@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Layers } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Layers } from "lucide-react";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
 import { ScreenshotGallery } from "@/components/case-study/ScreenshotGallery";
@@ -96,6 +96,14 @@ export default function PMSalaryAcePage() {
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
             >
               Try It <ExternalLink className="h-4 w-4" />
+            </a>
+            <a
+              href="https://github.com/harshitleads/pm-salary-quest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+            >
+              GitHub <Github className="h-4 w-4" />
             </a>
             <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
               Back to Portfolio
