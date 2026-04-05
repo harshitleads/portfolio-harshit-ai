@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, FlaskConical, Server, BarChart3, Zap } from "lucide-react";
+import { ArrowLeft, ExternalLink, FlaskConical, Github, Server, BarChart3, Zap } from "lucide-react";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyLayout } from "@/components/case-study/CaseStudyLayout";
 
@@ -98,7 +98,8 @@ export default function EvalStudioPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
             >
-              GitHub <ExternalLink className="h-4 w-4" />
+              <Github className="h-4 w-4" />
+              GitHub
             </a>
             <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary">
               Back to Portfolio
