@@ -1,70 +1,114 @@
-# CLAUDE.md
+# Sentinel One-Pager — Context
 
-## Vision and Mission
-Personal portfolio site for an AI PM targeting frontier tech companies.
+## What This Is
+UC Berkeley MEng IEOR Capstone Spring 2026 — Project 234, AgentOps / Sentinel.
+Fung Institute one-pager submission.
 
-## Current Stack
-- Next.js (App Router), TypeScript, Tailwind CSS, Vercel, pnpm
-- Recharts (for embedded charts on case study pages)
-- Repo: harshitleads/harshit.ai, Domain: harshit.ai
+**Team:** Harshit Sharma, Idris Houir Alami, Yuejia Zeng
+**Advisor:** Dr. Lee Fleming
+**File naming:** 234_AgentOps_ProjectOne-Pager_2026.pdf
 
-## Code Rules
-- No em dashes anywhere in copy
-- No placeholder content in production
-- Gmail compose links only, never mailto links
-- Filter logic is AND, must match all selected tags
-- All case study pages must use shared case study components
-- Traction pills: always Sentence Case, Sidebar icons: 24px
-- NEVER run git commit/push/reset/checkout
-- NEVER delete files unless task spec explicitly names the file
+---
 
-## Architecture
-- `/` — homepage with anchor nav and filter system
-- `/work/eval-studio` — Eval Studio case study
-- `/work/claude-code-bridge` — claude-code-bridge case study
-- `/work/explainable-ai` — Explainable AI case study
-- `/work/dear-her` — Dear Her case study
-- `/work/pm-salary-ace` — PM Salary Ace case study
-- `/work/job-market-pulse` — Job Market Pulse case study (embedded Recharts chart)
-- `components/projects-section.tsx` — ProjectData interface, projects array, filter system
-- `components/case-study/` — shared components (CaseStudySidebar, ScreenshotGallery, CaseStudyLayout)
-- `components/case-study/PulsePreviewChart.tsx` — client component, Recharts, reads /data/fred-snapshot.json
-- `public/data/fred-snapshot.json` — static FRED data snapshot (Jan 2021 - Feb 2025)
+## Status: FINALIZING IN GOOGLE SLIDES
 
-## Homepage Project Order
-1. eval-studio 2. claude-code-bridge 3. explainable-ai 4. dear-her 5. pm-salary-ace 6. job-market-pulse
+Harshit is editing the PPTX in Google Slides. All content/image fixes are applied.
 
-## Case Study Button Standards
-- Default: Try It (primary) > GitHub (secondary) > Back to Portfolio
-- Explainable AI: Read the Research (primary) > Try the Prototype > View Code > Back to Portfolio
-- claude-code-bridge: GitHub (primary) > Back to Portfolio
-- Job Market Pulse: Explore the Dashboard (primary, ExternalLink) > Back to Portfolio. No GitHub.
+---
 
-## Calendly
-- URL: calendly.com/harshit-harshit/15min (hide_gdpr_banner=1)
-- Copy: "Quick intro call · 15 min · we can go over if we're on a roll :)"
+## Fung Institute Spec
+- Size: 8.5" x 11" portrait
+- Margins: at least 0.5" all around
+- Format: PDF
+- Fonts: Georgia + Lucida Grande (Mac) / Lucida Sans (PC)
+- Two logos, same size: UC Berkeley Engineering + Fung Institute MEng
+- File: 234_AgentOps_ProjectOne-Pager_2026.pdf
+- Nothing smaller than 10pt
 
-## Pending Work
-- Screenshots for pulse case study: pulse-h1b.png, pulse-chart.png (pulse-hero.png exists)
-- All READMEs: humanize copy (review for AI voice)
-- Sentinel pitch deck (May 7, separate chat)
-- Batch: floating portfolio popup on all sub-sites (eval, trust, dearher, pmquiz, pulse)
+---
+
+## Final Content
+
+**Title:** Catching AI Agent Failures Before They Ship
+**Subtitle:** CI/CD-style reliability testing for multi-step, tool-using AI agent systems
+
+**Objective (2 sentences):**
+When AI agents break after an update, teams rarely notice until it is too late. Sentinel is a testing layer that catches failures before they reach users.
+
+**Problem:** AI agents break silently when code changes. No warning. No alert. Users are the first to notice.
+
+**Solution:** Sentinel runs automated checks after every update, comparing AI behavior before and after. Ship with confidence.
+
+**Why Sentinel Wins:**
+- Regression CI — Automated behavior checks on every release. Catch regressions before they ship.
+- Open and Self-Hostable — Works with existing tools. Self-hostable. No vendor lock-in.
+- Cost and Safety Guardrails — Controls test costs and flags unsafe AI outputs automatically.
+
+**Market:** TAM $100M-$520M, SAM $50M-$90M, SOM $0.5M-$27M
+
+**Customer Discovery (6+ interviews):**
+- AI Startup Founder (Vachi AI) — Built manual eval from scratch. No existing tool solves this.
+- Venture Investor (500 Global) — Sees gap across 10+ portfolio companies.
+
+**Methodology:** Customer Discovery + Market Sizing + Competitive Analysis + Revenue Strategy + VC Pitch
+
+**Footer:** UC Berkeley MEng IEOR 2026 | Team 234
+
+---
+
+## Design Decisions (locked)
+
+- Background: #f5f4f0 beige
+- Cards: white (#ffffff) on beige
+- Section headers: #003262 navy pills, rounded corners
+- All rectangles: rounded corners (~6pt radius)
+- Gold accent borders on "Why Sentinel Wins" cards
+- Red left border on Problem card, green on Solution card
+- Navy left border on Objective and Customer Discovery cards
+- Methodology banner: dark navy #0f2744 with gold label
+- Logos: processed to white-on-transparent for navy header bar
+- Value chain: REMOVED (saves space, info is implicit)
+- Competitive positioning: SVG chart (editable version provided as separate SVG)
+- TAM/SAM/SOM: Gemini-generated concentric circles image (corrected $50M-$90M)
+- Story illustration: Gemini-generated 3-panel stick figure
+
+---
+
+## Font Sizes (10pt minimum)
+
+- Title: 18-20pt Georgia Bold
+- Subtitle: 11pt Lucida Grande Italic
+- Section headers: 10pt Lucida Grande Bold, ALL CAPS
+- Objective/card labels: 10pt Lucida Grande Bold
+- Body text: 12pt Georgia
+- Card titles: 11pt Lucida Grande Bold
+- Card body: 11pt Georgia
+- Footer/methodology: 10pt Lucida Grande
+- Header names: 10pt Lucida Grande
+
+---
+
+## Image Assets
+
+All images processed and embedded in the PPTX:
+- Berkeley Engineering logo — white on transparent (processed from original blue)
+- Fung MEng logo — white+gold on transparent (black bg removed)
+- Story illustration — Gemini-generated 3-panel (v1 works → new capability → silent failure)
+- TAM/SAM/SOM — Gemini-generated concentric circles (corrected SAM: $50M-$90M)
+- Competitive positioning — SVG rendered to PNG (LangSmith, OpenAI Evals, TruLens, Sentinel)
+
+---
 
 ## Completed Work
-- 2026-04-04: Eval Studio case study page, homepage card, sitemap
-- 2026-04-04: All hero buttons standardized, homepage cards View Project only
-- 2026-04-04: Traction pills Sentence Case, Dear Her repo public + README
-- 2026-04-04: All GitHub READMEs updated with case study links
-- 2026-04-04: Eval Studio favicon, OG image, mockup screenshots
-- 2026-04-04: claude-code-bridge case study page, homepage card, sitemap
-- 2026-04-04: Eval Studio imagePosition fix
-- 2026-04-05: Homepage reordered (6 projects)
-- 2026-04-05: Explainable AI: sidebar stats (Live), UI redesign (two-panel), progression buttons
-- 2026-04-05: Sidebar icons 24px across all case study pages
-- 2026-04-05: Eval Studio: origin story, "Shipped in 2 Hours" pill, 6-competitor landscape, golden dataset roadmap
-- 2026-04-05: Calendly copy: "Quick intro call · 15 min · we can go over if we're on a roll :)"
-- 2026-04-05: claude-code-bridge: "Shipped in 2 Hours" pill, problem section enhanced, imagePosition reverted
-- 2026-04-05: OG metadata and image compression completed
-- 2026-04-05: Hero "Currently" copy updated
-- 2026-04-05: Job Market Pulse shipped at pulse.harshit.ai
-- 2026-04-05: Job Market Pulse case study page with embedded Recharts chart, homepage card, sitemap
+
+- Built full HTML one-pager from scratch with base64-embedded images
+- Processed logos to white-on-transparent for navy header
+- Fixed SAM from $900M to $90M using new Gemini image
+- Trimmed objective from 3 sentences to 2
+- Removed value chain row
+- Created editable SVG competitive positioning chart
+- Built editable PPTX (8.5x11 portrait) with all objects movable
+- Applied rounded corners to all card shapes
+- Matched old HTML design exactly, then applied all fixes
+- Provided both fixed HTML and editable PPTX to Harshit
+- Finalized title: "Catching AI Agent Failures Before They Ship"
