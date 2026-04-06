@@ -20,7 +20,7 @@ const journeyCards = [
   {
     icon: Rocket,
     heading: "WHERE I\u2019M GOING",
-    text: "Building on the path to AGI. Where models are powerful but reliability is everything. Hard problems, high stakes.",
+    text: "Making AI systems reliable enough to trust in production. Where models are powerful but reliability is everything. Hard problems, high stakes.",
     delay: 200,
   },
 ];
