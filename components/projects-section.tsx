@@ -58,7 +58,7 @@ const projects: ProjectData[] = [
     id: "eval-studio",
     title: "Eval Studio",
     tagline: "Which prompt, which model, at what cost?",
-    tags: ["Live Product", "Evals"],
+    tags: ["Live Product", "Evals", "AI Tools", "Developer Tools"],
     problem: {
       short:
         "AI teams pick prompts and models using spreadsheets, gut feel, or generic benchmarks that have nothing to do with their actual product.",
@@ -94,7 +94,7 @@ const projects: ProjectData[] = [
     id: "claude-code-bridge",
     title: "claude-code-bridge",
     tagline: "Context compounds. It never resets.",
-    tags: ["Case Study", "Developer Tools"],
+    tags: ["Live Product", "Developer Tools", "AI Tools"],
     problem: {
       short: "Every time you switch from Claude to Cursor, context is lost. You re-explain decisions, repeat constraints, and rebuild mental state from scratch.",
       full: "You use Claude to think through architecture and product decisions. Then you switch to Cursor to build. The moment you switch, the context is gone. You re-explain what was decided, repeat the constraints, and hope you remember what you agreed on. This is not a tooling problem. It is a context engineering problem.",
@@ -126,7 +126,7 @@ const projects: ProjectData[] = [
     id: "explainable-ai",
     title: "Explainable AI Coding Assistant",
     tagline: "Trust Through Transparency",
-    tags: ["Case Study", "Developer Tools"],
+    tags: ["Case Study", "Developer Tools", "AI Tools"],
     problem: {
       short:
         "Developers waste hours verifying AI suggestions because tools optimize for speed, not trust, creating a \u201Ctrust tax\u201D that blocks adoption.",
@@ -161,7 +161,7 @@ const projects: ProjectData[] = [
     id: "job-market-pulse",
     title: "Job Market Pulse",
     tagline: "The labor market, visualized",
-    tags: ["Live Product", "AI Tools"],
+    tags: ["Live Product", "Analytics"],
     problem: {
       short: "Job market data is scattered across government sites, ugly portals, and paywalled reports. Nobody has a clean, real-time view of what is actually happening.",
       full: "The US labor market generates rich data every month through JOLTS, BLS, and USCIS. But accessing it means navigating government PDFs, ad-heavy aggregator sites, and fragmented H-1B portals. For job seekers, founders, and PMs, there is no single clean dashboard that shows job openings, layoffs, hiring trends, and H-1B sponsorship data in one place.",
@@ -256,7 +256,7 @@ const projects: ProjectData[] = [
 ];
 
 const CONTENT_TYPE_FILTERS = ["Case Study", "Live Product", "Teardown", "Research"];
-const DOMAIN_FILTERS = ["AI Tools", "Evals", "Developer Tools", "Productivity"];
+const DOMAIN_FILTERS = ["AI Tools", "Evals", "Developer Tools", "Analytics", "Productivity"];
 
 /* ------------------------------------------------------------------ */
 /* ProjectCard                                                          */
