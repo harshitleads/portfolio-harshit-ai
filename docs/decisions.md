@@ -173,30 +173,7 @@ Entries are append-only. Never edit old entries.
 **Rejected:** Keeping the external-only link. Having a case study page is consistent with other projects and gives recruiters the PM narrative they expect.
 
 
-### 2026-04-07
-
-## 2026-04-07 — Sentinel One-Pager Final Build
-
-**What was built:** Complete one-pager for Fung Institute submission (234_AgentOps_ProjectOne-Pager_2026.pdf)
-
-**Stack:** Pure HTML/CSS + inline SVG. No external images for charts. WeasyPrint for PDF generation. Story illustration (3-panel stick figure) embedded as base64 PNG.
-
-**Key decisions:**
-- All charts (competitive positioning, TAM/SAM/SOM) built as inline SVG — eliminates image whitespace issues entirely
-- TAM/SAM/SOM rendered as semicircle arcs with TAM label above arc (navy on beige), SAM/SOM text inside their respective bands
-- Competitive positioning: scatter plot SVG, Sentinel as gold circle with label to the right, no overlap
-- Value chain: pure HTML flexbox, no image dependency
-- Page locked to 8.5x11 via @page CSS rule with 0.5in margins — spec compliant
-- Beige background (#f5f4f0), navy section headers with rounded corners, white cards
-- Georgia for title, Helvetica for body — matches Fung spec exactly
-- No em dashes anywhere in document
-
-**Correct numbers:** SAM = $50M-$90M (not $900M), TAM = $100M-$520M, SOM = $0.5M-$27M
-
-**Submission filename:** 234_AgentOps_ProjectOne-Pager_2026.pdf
-
-
-### 2026-04-07
+### 2026-04-06
 
 ## 2026-04-06: Sentinel One-Pager Final Decisions
 
@@ -223,4 +200,27 @@ Entries are append-only. Never edit old entries.
 
 **Format: editable PPTX chosen over HTML→PDF workflow.**
 - Why: HTML-to-PDF via Chrome print was unreliable (border sizing, page overflow). PPTX in Google Slides gives Harshit direct drag-and-drop control.
+
+
+### 2026-04-07
+
+## 2026-04-07 — Sentinel One-Pager Final Build
+
+**What was built:** Complete one-pager for Fung Institute submission (234_AgentOps_ProjectOne-Pager_2026.pdf)
+
+**Stack:** Pure HTML/CSS + inline SVG. No external images for charts. WeasyPrint for PDF generation. Story illustration (3-panel stick figure) embedded as base64 PNG.
+
+**Key decisions:**
+- All charts (competitive positioning, TAM/SAM/SOM) built as inline SVG — eliminates image whitespace issues entirely
+- TAM/SAM/SOM rendered as semicircle arcs with TAM label above arc (navy on beige), SAM/SOM text inside their respective bands
+- Competitive positioning: scatter plot SVG, Sentinel as gold circle with label to the right, no overlap
+- Value chain: pure HTML flexbox, no image dependency
+- Page locked to 8.5x11 via @page CSS rule with 0.5in margins — spec compliant
+- Beige background (#f5f4f0), navy section headers with rounded corners, white cards
+- Georgia for title, Helvetica for body — matches Fung spec exactly
+- No em dashes anywhere in document
+
+**Correct numbers:** SAM = $50M-$90M (not $900M), TAM = $100M-$520M, SOM = $0.5M-$27M
+
+**Submission filename:** 234_AgentOps_ProjectOne-Pager_2026.pdf
 
