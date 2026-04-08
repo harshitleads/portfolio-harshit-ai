@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, Maximize2, ExternalLink } from "lucide-react";
+import { X, Maximize2, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Screenshot {
   src: string;
@@ -21,17 +21,39 @@ export function ScreenshotGallery({
   liveUrl,
   liveLabel,
 }: ScreenshotGalleryProps) {
-  const [openSrc, setOpenSrc] = useState<string | null>(null);
-  const openImg = screenshots.find((s) => s.src === openSrc) ?? null;
+  const [lightboxIdx, setLightboxIdx] = useState(-1);
+  const isOpen = lightboxIdx >= 0;
+  const current = isOpen ? screenshots[lightboxIdx] : null;
+
+  const goPrev = useCallback(() => {
+    setLightboxIdx((i) => (i - 1 + screenshots.length) % screenshots.length);
+  }, [screenshots.length]);
+
+  const goNext = useCallback(() => {
+    setLightboxIdx((i) => (i + 1) % screenshots.length);
+  }, [screenshots.length]);
+
+  const close = useCallback(() => setLightboxIdx(-1), []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, close, goPrev, goNext]);
 
   return (
     <>
       <div className="grid gap-4 sm:grid-cols-2">
-        {screenshots.map(({ src, alt, caption }) => (
+        {screenshots.map(({ src, alt, caption }, idx) => (
           <button
             key={src}
             type="button"
-            onClick={() => setOpenSrc(src)}
+            onClick={() => setLightboxIdx(idx)}
             className="group glass-card overflow-hidden rounded-xl text-left"
           >
             <div className="relative overflow-hidden">
@@ -66,39 +88,85 @@ export function ScreenshotGallery({
         </div>
       )}
 
-      {openImg && (
+      {current && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.92)" }}
-          onClick={() => setOpenSrc(null)}
+          onClick={close}
           role="dialog"
           aria-modal="true"
-          aria-label={openImg.alt}
+          aria-label={current.alt}
         >
+          {/* Close */}
           <button
             type="button"
-            onClick={() => setOpenSrc(null)}
+            onClick={(e) => { e.stopPropagation(); close(); }}
             className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
           </button>
+
+          {/* Prev / Next */}
+          {screenshots.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </>
+          )}
+
+          {/* Image */}
           <div
             className="flex max-h-[90vh] max-w-[92vw] items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={openImg.src}
-              alt={openImg.alt}
+              src={current.src}
+              alt={current.alt}
               width={1600}
               height={1100}
               className="max-h-[90vh] max-w-[92vw] rounded-lg object-contain"
               priority
             />
           </div>
-          <p className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm">
-            {openImg.caption}
-          </p>
+
+          {/* Bottom bar: caption + dots */}
+          <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2">
+            <p className="rounded-full bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm">
+              {current.caption}
+            </p>
+            {screenshots.length > 1 && (
+              <div className="flex gap-2">
+                {screenshots.map((s, i) => (
+                  <button
+                    key={s.src}
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setLightboxIdx(i); }}
+                    className={`h-2 w-2 rounded-full transition-all ${
+                      lightboxIdx === i
+                        ? "scale-125 bg-primary"
+                        : "bg-white/30 hover:bg-white/60"
+                    }`}
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </>
