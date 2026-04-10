@@ -224,3 +224,34 @@ Entries are append-only. Never edit old entries.
 
 **Submission filename:** 234_AgentOps_ProjectOne-Pager_2026.pdf
 
+
+### 2026-04-10
+
+### 2026-04-10 -- Floating Case Study Bubble on all sub-sites
+**Decision:** Add a floating bottom-right popup on all 5 sub-sites linking to their respective case study pages on harshit.ai. Copy: "See the product thinking behind this" + "How I built [Product Name]". Targets hiring managers.
+**Why:** Products are live but recruiters landing on them have no path to the portfolio case study. A floating bubble is non-intrusive, mirrors the existing CalendlyBubble pattern on harshit.ai, and creates a discovery funnel from product -> PM thinking.
+**Rejected:** Header link (too subtle, users skip headers), banner (too intrusive, blocks content), footer link (nobody scrolls to footer on a tool).
+
+### 2026-04-10 -- Differentiated reappear delays by product type
+**Decision:** After dismissal, bubble reappears at different intervals by product type: 7s for developer tools (Eval Studio, Explainable AI), 15s for passive dashboards (Job Market Pulse), 30s for consumer apps (Dear Her, PM Salary Ace).
+**Why:** Consumer app users are in a flow state (writing a letter, taking a quiz). Interrupting every 7 seconds is hostile UX. Developer tools are scan-and-leave, so faster reappear is fine.
+**Rejected:** Uniform 7s across all sites (too aggressive for consumer). Uniform 30s (too slow for dev tools where visits are short).
+
+### 2026-04-10 -- Theme-matched bubble colors per site
+**Decision:** Each bubble matches its host app's color palette: green for Eval Studio, indigo for Explainable AI, emerald for Job Market Pulse, rose/pink for Dear Her, violet for PM Salary Ace.
+**Why:** A generic dark bubble on Dear Her's pink gradient would look jarring. Theme-matching keeps the popup feeling native, not bolted on.
+**Rejected:** Uniform harshit.ai branding across all bubbles (breaks visual coherence of each sub-site).
+
+
+### 2026-04-10
+
+### 2026-04-10 -- Lovable deployment model clarified
+**Decision:** Lovable does NOT auto-deploy from GitHub pushes. GitHub sync is one-way (Lovable → GitHub). To deploy Cursor changes to Lovable-hosted sites, you must open the Lovable editor and click Publish → Update manually.
+**Why:** Both Dear Her and PM Salary Ace went down because clicking "Update" in Lovable pulled in stale Cursor changes + Lovable's security fixes all at once, causing a build failure. This was not documented anywhere in our workflow.
+**Rejected:** Assuming GitHub push = auto-deploy (wrong for Lovable). Moving Lovable apps to Vercel (too much migration work for 5.5 weeks left).
+
+### 2026-04-10 -- Rolled back Lovable security fixes on both consumer apps
+**Decision:** Force-pushed Dear Her to commit 6952138 and PM Salary Ace to commit d355345, reverting all Lovable security fix commits that broke production.
+**Why:** Both apps were showing blank pages in production. The security fixes introduced Supabase RPC type errors and possibly other breaking changes. Apps were working fine without them. Can re-apply security fixes later through Lovable's editor with careful testing.
+**Rejected:** Debugging individual security fix commits (too slow, apps are down in production).
+
