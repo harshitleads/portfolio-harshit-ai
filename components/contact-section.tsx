@@ -27,7 +27,7 @@ const contacts = [
     icon: FileText,
     label: "Grab my resume",
     value: "HarshitS_Resume.pdf",
-    href: "/Resume_Harshit_Sharma.pdf",
+    href: "/Harshit_Sharma_Resume.pdf",
     download: true
   },
 ];

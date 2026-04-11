@@ -44,8 +44,8 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="/Resume_Harshit_Sharma.pdf"
-            //download="Resume_Harshit_Sharma.pdf"
+            href="/Harshit_Sharma_Resume.pdf"
+            //download="Harshit_Sharma_Resume.pdf"
             className="rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-[15px] font-medium text-primary transition-colors hover:bg-primary/20"
           >
             Resume
@@ -55,8 +55,8 @@ export function Navbar() {
         {/* Mobile: resume + toggle */}
         <div className="flex items-center gap-3 md:hidden">
           <a
-            href="/Resume_Harshit_Sharma.pdf"
-            download="Resume_Harshit_Sharma.pdf"
+            href="/Harshit_Sharma_Resume.pdf"
+            download="Harshit_Sharma_Resume.pdf"
             className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-1.5 text-[13px] font-medium text-primary transition-colors hover:bg-primary/20"
           >
             Resume
