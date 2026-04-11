@@ -255,3 +255,21 @@ Entries are append-only. Never edit old entries.
 **Why:** Both apps were showing blank pages in production. The security fixes introduced Supabase RPC type errors and possibly other breaking changes. Apps were working fine without them. Can re-apply security fixes later through Lovable's editor with careful testing.
 **Rejected:** Debugging individual security fix commits (too slow, apps are down in production).
 
+
+### 2026-04-11
+
+### 2026-04-10 -- Persistent bubbles, no dismiss
+**Decision:** All case study bubbles and the CalendlyBubble on harshit.ai are now persistent — always visible, no dismiss button, no timers. Right-aligned on mobile (not full-width).
+**Why:** The bubbles are tiny and non-blocking. Dismiss + reappear logic added complexity without value. A recruiter should always see the path to the case study.
+**Rejected:** Dismissable with 7s/15s/30s reappear (unnecessary complexity, bubbles don't block content).
+
+### 2026-04-10 -- Lovable deployment pipeline documented
+**Decision:** Lovable does NOT auto-deploy from GitHub pushes. .env must stay in the repo for Lovable apps. After any Cursor push, must click Publish → Update in Lovable editor. This is now in all Lovable project CLAUDE.md files.
+**Why:** Both Dear Her and PM Salary Ace went down because: (1) .env was removed from git on April 5, (2) Lovable's build reads env vars from .env at build time, (3) first Publish since April 5 caused blank pages. Root cause: .env removal + no separate env var config in Lovable.
+**Rejected:** Hardcoding Supabase keys in client.ts (unnecessary — .env in repo is fine since anon keys are public by design). Moving to Vercel (too much migration work).
+
+### 2026-04-10 -- Lovable security fixes reverted
+**Decision:** Rolled back both Dear Her (to 41144ab) and PM Salary Ace (to e84f730) to pre-April-5 state, losing Lovable's security fix commits. Will re-apply security fixes later through Lovable's editor with careful testing.
+**Why:** The security fixes combined with .env removal and stale unpublished changes caused cascading build failures. Getting apps back online was the priority.
+**Rejected:** Debugging individual security fix commits (too slow when apps are down).
+
