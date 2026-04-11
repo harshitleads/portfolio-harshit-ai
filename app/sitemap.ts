@@ -9,18 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://harshit.ai/work/pm-salary-ace',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://harshit.ai/work/explainable-ai',
-      lastModified: new Date('2026-03-16'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: 'https://harshit.ai/work/eval-studio',
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -33,8 +21,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: 'https://harshit.ai/work/explainable-ai',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: 'https://harshit.ai/work/job-market-pulse',
-      lastModified: new Date('2026-04-05'),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://harshit.ai/work/dear-her',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://harshit.ai/work/pm-salary-ace',
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },

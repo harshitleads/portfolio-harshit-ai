@@ -13,6 +13,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://harshit.ai"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Harshit Sharma | AI Product Manager",
   icons: {
     icon: [
