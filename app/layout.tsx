@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://harshit.ai"),
+  metadataBase: new URL("https://www.harshit.ai"),
   alternates: {
     canonical: "/",
   },
@@ -32,11 +32,11 @@ export const metadata: Metadata = {
     title: "Harshit Sharma | AI Product Manager",
     description:
       "Bridging engineering depth with product vision. Building the next generation of AI-powered tools at the frontier.",
-    url: "https://harshit.ai",
+    url: "https://www.harshit.ai",
     siteName: "Harshit Sharma",
     images: [
       {
-        url: "https://harshit.ai/images/og-image.jpg",
+        url: "https://www.harshit.ai/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Harshit Sharma — AI Product Manager",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Harshit Sharma | AI Product Manager",
     description:
       "Bridging engineering depth with product vision. Building the next generation of AI-powered tools at the frontier.",
-    images: ["https://harshit.ai/images/og-image.jpg"],
+    images: ["https://www.harshit.ai/images/og-image.jpg"],
   },
 };
 
