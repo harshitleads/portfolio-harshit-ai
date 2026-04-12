@@ -1,8 +1,11 @@
-# harshit.ai — Portfolio Website
+# CLAUDE.md
 
-## Stack
+## Vision and Mission
+Personal portfolio site for an AI PM targeting frontier tech companies.
+
+## Current Stack
 - Next.js (App Router), TypeScript, Tailwind CSS, Vercel, pnpm
-- Repo: harshitleads/harshit.ai
+- Repo: harshitleads/harshit.ai, Domain: harshit.ai
 
 ## Code Rules
 - No em dashes anywhere in copy
@@ -14,19 +17,52 @@
 - NEVER run git commit/push/reset/checkout
 - NEVER delete files unless task spec explicitly names the file
 
-## Components
-- `components/projects-section.tsx` — homepage project cards + lightbox
-- `components/case-study/ScreenshotGallery.tsx` — case study page image gallery
-- `components/case-study/CaseStudySidebar.tsx` — shared sidebar
-- `components/case-study/CaseStudyLayout.tsx` — shared layout wrapper
-- `components/calendly-bubble.tsx` — persistent floating Calendly CTA (rendered in app/layout.tsx, hides when Calendly embed is in view)
+## Homepage Project Order
+1. eval-studio
+2. claude-code-bridge
+3. explainable-ai
+4. dear-her
+5. pm-salary-ace
+6. job-market-pulse
 
-## Completed Work
-- ScreenshotGallery lightbox: arrows, keyboard nav, dot indicators
-- 2026-04-10: CalendlyBubble made persistent, case study bubbles on all 5 sub-sites
-- 2026-04-10: Homepage reorder, tag audit, GitHub pins — all done
+## Case Study Button Standards
+- Default: Try It (primary) > GitHub (secondary) > Back to Portfolio
+- Explainable AI: Read the Research (primary) > Try the Prototype > View Code > Back to Portfolio
+- claude-code-bridge: GitHub (primary) > Back to Portfolio
+- Job Market Pulse: Explore the Dashboard (primary, ExternalLink) > Back to Portfolio. No GitHub.
+
+## Calendly
+- URL: calendly.com/harshit-harshit/15min (hide_gdpr_banner=1)
+- Copy: "Quick intro call · 15 min · we can go over if we're on a roll :)"
+- Bubble component: `components/calendly-bubble.tsx`, rendered globally in `app/layout.tsx`
+- Bubble behavior: cross-page nav via useRouter, closes overlays before navigating, X dismiss, 7s reappearance, IntersectionObserver auto-hide
+- Embed container: `id="calendly-embed"` in `components/contact-section.tsx`
+
+## Decision Logging
+When you make or execute a product or technical decision, append it to `docs/decisions.md` in this format:
+```
+### YYYY-MM-DD — Short title
+**Decision:** What was decided.
+**Why:** The reasoning.
+**Rejected:** What alternatives were considered and why they lost.
+```
 
 ## Pending Work
-- Eval Studio: demo mode or walkthrough video (highest priority — product unusable without API keys for recruiters)
-- Explainable AI: walkthrough video or pre-loaded example
-- README humanization across all repos
+- Screenshots for pulse case study (pulse-h1b.png, pulse-chart.png still needed)
+- All READMEs: humanize copy
+- Sentinel pitch deck (May 7, separate chat)
+- Batch: floating portfolio popup on all sub-sites
+
+## Completed Work
+- 2026-03-21: Calendly inline embed, floating bubble, contact copy cleanup, about section language cleanup
+- 2026-04-03: Calendly bubble fixes (cross-page nav, scroll target, 7s reappearance, IntersectionObserver, GDPR banner hidden)
+- 2026-04-04: Eval Studio case study page, homepage card, sitemap
+- 2026-04-04: All hero buttons standardized, homepage cards View Project only
+- 2026-04-04: claude-code-bridge case study page, homepage card
+- 2026-04-05: Homepage reordered, sidebar icons 24px
+- 2026-04-05: Explainable AI sidebar stats, UI redesign, progression buttons
+- 2026-04-05: Eval Studio origin story, competitive landscape, roadmap
+- 2026-04-05: Calendly copy, bridge traction pill, OG metadata
+- 2026-04-05: Job Market Pulse shipped at pulse.harshit.ai
+- 2026-04-05: Job Market Pulse case study page with embedded Recharts chart, homepage card, sitemap
+- 2026-04-12: Calendly bubble regression fix (restored cross-page nav, overlay cleanup, X dismiss, 7s reappearance)
